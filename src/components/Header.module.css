@@ -4,11 +4,11 @@
   justify-content: space-between;
   align-items: center;
 }
-.logo {
+.logoHeader {
   width: 211px;
   height: 68px;
 }
-.nav {
+.navHeader {
   width: 309px;
   height: 34px;
   display: flex;
@@ -40,11 +40,11 @@
   .header {
     margin: 20px 35px 0 35px;
   }
-  .logo {
+  .logoheader {
     width: 47%;
     height: 10%;
   }
-  .nav {
+  .navHeader {
     width: 50%;
   }
   .navHome,
@@ -58,7 +58,7 @@
   .header {
     margin: 20px 35px 0 35px;
   }
-  .logo {
+  .logoHeader {
     width: 27%;
     height: 8%;
   }

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import Lodgings from '../data/logements.json'
 import CssCard from './Card.module.css'
+import { Link } from 'react-router-dom'
 
 Card.propTypes = {
   key: PropTypes.string,
@@ -15,14 +16,16 @@ function Card() {
   return (
     <div className={CssCard.cardBackground}>
       {lodgings.map((lodging) => (
-        <div key={lodging.id} className={CssCard.card}>
-          <img
-            src={lodging.cover}
-            alt={lodging.title}
-            className={CssCard.cover}
-          />
-          <div className={CssCard.title}>{lodging.title}</div>
-        </div>
+        <Link to={`/lodgings/${lodging.id}`} key={lodging.id}>
+          <div key={lodging.id} className={CssCard.card}>
+            <img
+              src={lodging.cover}
+              alt={lodging.title}
+              className={CssCard.cover}
+            />
+            <div className={CssCard.title}>{lodging.title}</div>
+          </div>
+        </Link>
       ))}
     </div>
   )

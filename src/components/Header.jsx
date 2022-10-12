@@ -5,8 +5,8 @@ import CssHeader from './Header.module.css'
 function Header() {
   return (
     <header className={CssHeader.header}>
-      <img src={Logo} alt="Logo de Kasa" className={CssHeader.logo} />
-      <nav className={CssHeader.nav}>
+      <img src={Logo} alt="Logo de Kasa" className={CssHeader.logoHeader} />
+      <nav className={CssHeader.navHeader}>
         <Link to="/" className={CssHeader.navHome}>
           Accueil
         </Link>
