@@ -1,19 +1,40 @@
 import React from 'react'
 import CssBanner from './Banner.module.css'
-import bannerImg from '../assets/banhome.jpg'
+import { useLocation } from 'react-router-dom'
+import homeBannerImg from '../assets/banhome.jpg'
+import aboutBannerImg from '../assets/banabout.jpg'
 
 function Banner() {
+  const path = useLocation().pathname // on utilise ce hook pour savoir ou l'on se trouve, sur quelle page, afin de pouvoir afficher la bannière appropriée
+  const location = path.split('/')[1]
+
   return (
-    <section className={CssBanner.banner}>
-      <div className={CssBanner.imgContainer}>
-        <img
-          src={bannerImg}
-          alt="cote rocheuse bord de mer"
-          className={CssBanner.img}
-        />
-        <h1 className={CssBanner.title}>Chez vous, partout et ailleurs</h1>
-      </div>
-    </section>
+    // on utilise ici une condition ternaire avec :
+    <div>
+      {location === '' ? ( // on demande si l'on se trouve sur la page d'accueil alors on affiche ceci
+        <section className={CssBanner.banner}>
+          <div className={CssBanner.imgContainer}>
+            <img
+              src={homeBannerImg}
+              alt="cote rocheuse bord de mer"
+              className={CssBanner.img}
+            />
+            <h1 className={CssBanner.title}>Chez vous, partout et ailleurs</h1>
+          </div>
+        </section>
+      ) : (
+        // si on ne se trouve pas sur la page d'accueil alors on affiche cela
+        <section className={CssBanner.banner}>
+          <div className={CssBanner.imgContainer}>
+            <img
+              src={aboutBannerImg}
+              alt="chaine de montagnes enneigée"
+              className={CssBanner.img}
+            />
+          </div>
+        </section>
+      )}
+    </div>
   )
 }
 
