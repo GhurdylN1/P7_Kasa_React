@@ -55,14 +55,11 @@ const Lodging = () => {
               />
             </div> */}
             <div className={CssLodgings.diaporama}>
-              {' '}
-              {/* test affichage carrousel, mais la console indique une erreur: Warning: Each child in a list should have a unique "key" prop. */}
               {dataLodging.pictures.map((pictures, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <img
                       className={CssLodgings.imgLodging}
-                      key={index}
                       src={pictures}
                       alt="logement"
                     />

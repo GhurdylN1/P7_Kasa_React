@@ -35,7 +35,7 @@ const About = () => {
             </p>
           </div>
           <div>
-            <h2>Responsabilité</h2>
+            <h2>Sécurité</h2>
             <p>
               La sécurité est la priorité de Kasa. Aussi bien pour nos hôtes que
               pour les voyageurs, chaque logement correspond aux critères de
