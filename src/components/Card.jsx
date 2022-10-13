@@ -16,7 +16,7 @@ function Card() {
   return (
     <div className={CssCard.cardBackground}>
       {lodgings.map((lodging) => (
-        <Link to={`/lodgings/${lodging.id}`} key={lodging.id}>
+        <Link key={lodging.id} to={`/lodgings/${lodging.id}`}>
           <div key={lodging.id} className={CssCard.card}>
             <img
               src={lodging.cover}
