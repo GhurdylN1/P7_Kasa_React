@@ -47,28 +47,7 @@ const Lodging = () => {
       {dataLodging && (
         <section>
           <div>
-            {/* <div>
-              <img
-                src={dataLodging.cover}
-                alt="logement"
-                height={300}
-                width={375}
-              />
-            </div> */}
             <Slideshow data={dataLodging.pictures} />
-            {/* <div className={CssLodgings.diaporama}>
-              {dataLodging.pictures.map((pictures, index) => {
-                return (
-                  <div key={index}>
-                    <img
-                      className={CssLodgings.imgLodging}
-                      src={pictures}
-                      alt="logement"
-                    />
-                  </div>
-                )
-              })}
-            </div> */}
             <div>
               <h2>{dataLodging.title}</h2>
               <p>{dataLodging.location}</p>

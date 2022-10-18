@@ -4,6 +4,7 @@ import Logo from '../assets/logoFooter.svg'
 import CssFooter from './Footer.module.css'
 
 function Footer() {
+  // meme principe pour Banner ici, mais pour afficher un footer different suivant ou l'on se trouve.
   const path = useLocation().pathname
   const location = path.split('/')[1]
 

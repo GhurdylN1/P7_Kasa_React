@@ -23,14 +23,6 @@
   .textFooter {
     font-size: 12px;
   }
-
-  .footerAbout {
-    background-color: #000000;
-    height: 209px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 /*Media queries pour tablettes*/
@@ -46,7 +38,7 @@
   }
 }
 
-/*Faire en sorte que le footer reste toujours en bas de page sur la page "A propos" à partir des écrans 2k et 4k*/
+/* Faire en sorte que le footer reste toujours en bas de page sur la page "A propos" à partir des écrans 2k et 4k */
 @media screen and (min-width: 1921px) and (min-height: 1081px) {
   .footerAbout {
     position: absolute;
