@@ -1,5 +1,5 @@
 .header {
-  margin: 30px 50px 0 50px;
+  margin: 30px 100px 0 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +38,7 @@
 /*Media queries pour mobiles*/
 @media screen and (max-width: 480px) {
   .header {
-    margin: 20px 35px 0 35px;
+    margin: 20px 20px 0 20px;
   }
   .logoHeader {
     width: 47%;
@@ -54,9 +54,9 @@
 }
 
 /*Media queries pour tablettes*/
-@media screen and (min-width: 481px) and (max-width: 768px) {
+@media screen and (min-width: 481px) and (max-width: 830px) {
   .header {
-    margin: 20px 35px 0 35px;
+    margin: 20px 20px 0 20px;
   }
   .logoHeader {
     width: 27%;

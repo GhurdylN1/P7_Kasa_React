@@ -5,7 +5,8 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Error404 from './Error404'
 import jsonData from '../data/logements.json'
-import CssLodgings from './Lodgings.module.css'
+// import CssLodgings from './Lodgings.module.css'
+import Slideshow from '../components/Slideshow'
 
 const Lodging = () => {
   const data = jsonData // importation des données du fichier logements.json
@@ -54,7 +55,8 @@ const Lodging = () => {
                 width={375}
               />
             </div> */}
-            <div className={CssLodgings.diaporama}>
+            <Slideshow data={dataLodging.pictures} />
+            {/* <div className={CssLodgings.diaporama}>
               {dataLodging.pictures.map((pictures, index) => {
                 return (
                   <div key={index}>
@@ -66,7 +68,7 @@ const Lodging = () => {
                   </div>
                 )
               })}
-            </div>
+            </div> */}
             <div>
               <h2>{dataLodging.title}</h2>
               <p>{dataLodging.location}</p>

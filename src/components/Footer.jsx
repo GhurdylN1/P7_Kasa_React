@@ -1,13 +1,30 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import Logo from '../assets/logoFooter.svg'
 import CssFooter from './Footer.module.css'
 
 function Footer() {
+  const path = useLocation().pathname
+  const location = path.split('/')[1]
+
   return (
-    <footer className={CssFooter.footer}>
-      <img src={Logo} alt="Logo Kasa" className={CssFooter.logoFooter} />
-      <p className={CssFooter.textFooter}>© 2020 Kasa. All rights reserved</p>
-    </footer>
+    <>
+      {location === 'about' ? (
+        <footer className={CssFooter.footerAbout}>
+          <img src={Logo} alt="Logo Kasa" className={CssFooter.logoFooter} />
+          <p className={CssFooter.textFooter}>
+            © 2020 Kasa. All rights reserved
+          </p>
+        </footer>
+      ) : (
+        <footer className={CssFooter.footer}>
+          <img src={Logo} alt="Logo Kasa" className={CssFooter.logoFooter} />
+          <p className={CssFooter.textFooter}>
+            © 2020 Kasa. All rights reserved
+          </p>
+        </footer>
+      )}
+    </>
   )
 }
 

@@ -1,5 +1,5 @@
 .cardBackground {
-  margin: 30px 60px 30px 60px;
+  margin: 30px 100px 30px 100px;
   padding: 60px;
   gap: 30px;
   background-color: #f7f7f7;
@@ -14,7 +14,6 @@
   border-radius: 10px;
   display: flex;
   justify-content: left;
-  align-items: left;
   margin-bottom: 30px;
   background: linear-gradient(180deg, #ff6060 30%, #863939 100%);
 }
@@ -65,7 +64,7 @@
 
 @media screen and (min-width: 481px) and (max-width: 830px) {
   .cardBackground {
-    margin: 15px 30px 15px 30px;
+    margin: 15px 20px 15px 20px;
     padding: 20px;
   }
 

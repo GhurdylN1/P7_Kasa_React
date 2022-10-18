@@ -1,5 +1,5 @@
 .banner {
-  margin: 30px 60px 30px 60px;
+  margin: 30px 100px 30px 100px;
 }
 .imgContainer {
   width: 100%;
@@ -52,7 +52,7 @@
 
 @media screen and (min-width: 481px) and (max-width: 830px) {
   .banner {
-    margin: 15px 30px 15px 30px;
+    margin: 15px 20px 15px 20px;
   }
   .imgContainer {
     display: flex;
