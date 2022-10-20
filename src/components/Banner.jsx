@@ -13,7 +13,7 @@ function Banner() {
     <div>
       {location === '' ? ( // on demande si l'on se trouve sur la page d'accueil alors on affiche ceci
         <section className={CssBanner.banner}>
-          <div className={CssBanner.imgContainer}>
+          <div className={CssBanner.imgContainerHome}>
             <img
               src={homeBannerImg}
               alt="cote rocheuse bord de mer"

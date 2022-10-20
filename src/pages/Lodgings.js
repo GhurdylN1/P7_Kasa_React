@@ -12,7 +12,7 @@ const Lodging = () => {
   const data = jsonData // importation des données du fichier logements.json
   const urlId = useParams().id // récupération de l'id dans l'url
   const [dataLodging, setdataLodging] = useState({
-    // state des données que l'on voudra manipuler
+    // state des données que l'on voudra observer et afficher
     id: '',
     title: '',
     cover: '',
@@ -26,7 +26,7 @@ const Lodging = () => {
   })
 
   useEffect(() => {
-    // manipulation des données du state
+    // obervation des données du state
     const pushDataLodging = async () => {
       let found = data.find((host) => host.id === urlId) // comparaison de l'id des données avec celui de l'url
       await setdataLodging(found) // afin de récuperer les données associées à l'id

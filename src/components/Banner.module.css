@@ -1,7 +1,8 @@
 .banner {
   margin: 30px 100px 30px 100px;
 }
-.imgContainer {
+.imgContainer,
+.imgContainerHome {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -30,13 +31,19 @@
   .banner {
     margin: 15px 20px 15px 20px;
   }
-  .imgContainer {
-    display: flex;
+
+  .imgContainerHome {
     justify-content: left;
-    align-items: center;
     border-radius: 10px;
     height: 111px;
   }
+
+  .imgContainer {
+    justify-content: left;
+    border-radius: 10px;
+    height: 223px;
+  }
+
   .img {
     border-radius: 10px;
     height: 100%;
@@ -54,10 +61,9 @@
   .banner {
     margin: 15px 20px 15px 20px;
   }
-  .imgContainer {
-    display: flex;
+  .imgContainer,
+  .imgContainerHome {
     justify-content: left;
-    align-items: center;
     border-radius: 10px;
     height: 111px;
   }

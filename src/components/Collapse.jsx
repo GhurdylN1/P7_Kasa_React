@@ -10,7 +10,12 @@ function Collapse({ title, text }) {
     <div className={CssCollapse.collapseContainer}>
       <div className={CssCollapse.title} onClick={() => setArrowUp(false)}>
         {title}
-        <img src={Arrow} className={CssCollapse.iconUp} alt="" />
+        <img
+          src={Arrow}
+          className={CssCollapse.iconUp}
+          alt="arrow up"
+          role="button"
+        />
       </div>
       <div className={CssCollapse.text}>{text}</div>
     </div>
@@ -18,7 +23,12 @@ function Collapse({ title, text }) {
     <div className={CssCollapse.collapseContainer}>
       <div className={CssCollapse.title} onClick={() => setArrowUp(true)}>
         {title}
-        <img src={Arrow} className={CssCollapse.iconDown} alt="" />
+        <img
+          src={Arrow}
+          className={CssCollapse.iconDown}
+          alt="arrow down"
+          role="button"
+        />
       </div>
     </div>
   )

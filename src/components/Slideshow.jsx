@@ -25,12 +25,14 @@ const Slideshow = (data) => {
           <img
             src={Arrow}
             alt="left arrow"
+            role="button"
             className={CssSlide.leftArrow}
             onClick={previousImg}
           />
           <img
             src={Arrow}
             alt="right arrow"
+            role="button"
             className={CssSlide.rightArrow}
             onClick={nextImg}
           />
