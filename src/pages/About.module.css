@@ -1,0 +1,21 @@
+.collapseAboutContainer {
+  margin: 30px 208px 30px 208px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Media queries pour mobiles*/
+@media screen and (max-width: 480px) {
+  .collapseAboutContainer {
+    margin: 15px;
+  }
+}
+
+/*Media queries pour tablettes*/
+@media screen and (min-width: 481px) and (max-width: 830px) {
+  .collapseAboutContainer {
+    margin: 15px 20px 15px 20px;
+  }
+}

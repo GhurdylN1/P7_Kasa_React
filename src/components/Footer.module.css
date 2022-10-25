@@ -30,12 +30,6 @@
   .textFooter {
     font-size: 16px;
   }
-  /* Faire en sorte que le footer reste toujours en bas de page sur la page A propos uniquement*/
-  .footerAbout {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
 }
 
 /* Faire en sorte que le footer reste toujours en bas de page sur la page "A propos" et "logement" à partir des écrans 2k et 4k */

@@ -5,8 +5,11 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Error404 from './Error404'
 import jsonData from '../data/logements.json'
-// import CssLodgings from './Lodgings.module.css'
+import CssLodgings from './Lodgings.module.css'
 import Slideshow from '../components/Slideshow'
+import Collapse from '../components/Collapse'
+import StarFull from '../assets/fullstar.png'
+import StarEmpty from '../assets/emptystar.png'
 
 const Lodging = () => {
   const data = jsonData // importation des données du fichier logements.json
@@ -39,6 +42,15 @@ const Lodging = () => {
     return <Error404 />
   }
 
+  const rateStar = []
+  for (let s = 1; s <= 5; s++) {
+    if (s <= dataLodging.rating) {
+      rateStar[s] = true
+    } else {
+      rateStar[s] = false
+    }
+  }
+
   const name = dataLodging.host.name.split(' ') // on sépare le nom du prénom dans les données
 
   return (
@@ -46,41 +58,52 @@ const Lodging = () => {
       <Header />
       {dataLodging && (
         <section>
-          <div>
-            <Slideshow data={dataLodging.pictures} />
-            <div>
-              <h2>{dataLodging.title}</h2>
-              <p>{dataLodging.location}</p>
-            </div>
-            <div>
-              <ul>
-                {dataLodging.tags.map((tags, index) => {
-                  return <li key={index}>{tags}</li>
-                })}
-              </ul>
-            </div>
-            <div>
-              <div>
-                <p>
-                  {name[0]} {name[1]}{' '}
-                  {/* le prénom à un index de 0 et le nom de 1, grace à la séparation déclarée précedement*/}
-                </p>
-                <div>
-                  <img src={dataLodging.host.picture} alt="hebergeur" />
-                </div>
+          <Slideshow data={dataLodging.pictures} />
+          <div className={CssLodgings.hostContainer}>
+            <div className={CssLodgings.leftContainer}>
+              <div className={CssLodgings.title}>{dataLodging.title}</div>
+              <div className={CssLodgings.location}>{dataLodging.location}</div>
+              <div className={CssLodgings.tagsContainer}>
+                {dataLodging.tags.map((tags) => (
+                  <div className={CssLodgings.tag} key={tags + urlId}>
+                    {tags}
+                  </div>
+                ))}
               </div>
             </div>
-            <div>
-              <h1> Noté {dataLodging.rating} étoiles sur 5 </h1>
+            <div className={CssLodgings.rightContainer}>
+              <div className={CssLodgings.hostInfos}>
+                <div className={CssLodgings.hostName}>
+                  {name[0]} <br></br> {name[1]}
+                </div>
+                <div className={CssLodgings.pictContainer}>
+                  <img
+                    className={CssLodgings.hostPicture}
+                    src={dataLodging.host.picture}
+                    alt="hebergeur"
+                  />
+                </div>
+              </div>
+              <div className={CssLodgings.starsContainer}>
+                {rateStar.map((stars, index) => (
+                  <img
+                    className={CssLodgings.starPicture}
+                    src={stars ? StarFull : StarEmpty}
+                    alt={stars ? 'red star' : 'grey star'}
+                    key={stars + urlId + index}
+                  />
+                ))}
+              </div>
             </div>
-            <div>
-              <h3>{dataLodging.description}</h3>
-              <ul>
-                {dataLodging.equipments.map((equipement, index) => {
-                  return <li key={index}>{equipement}</li>
-                })}
-              </ul>
-            </div>
+          </div>
+          <div className={CssLodgings.collapseHostContainer}>
+            <Collapse title="Description" text={dataLodging.description} />
+            <Collapse
+              title="Équipements"
+              text={dataLodging.equipments.map((equipement, index) => (
+                <div key={index}>{equipement}</div>
+              ))}
+            />
           </div>
         </section>
       )}

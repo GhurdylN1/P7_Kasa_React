@@ -10,15 +10,15 @@ function Footer() {
 
   return (
     <>
-      {location === 'about' ? (
-        <footer className={CssFooter.footerAbout}>
+      {location === '' ? (
+        <footer className={CssFooter.footer}>
           <img src={Logo} alt="Logo Kasa" className={CssFooter.logoFooter} />
           <p className={CssFooter.textFooter}>
             © 2020 Kasa. All rights reserved
           </p>
         </footer>
       ) : (
-        <footer className={CssFooter.footer}>
+        <footer className={CssFooter.footerAbout}>
           <img src={Logo} alt="Logo Kasa" className={CssFooter.logoFooter} />
           <p className={CssFooter.textFooter}>
             © 2020 Kasa. All rights reserved

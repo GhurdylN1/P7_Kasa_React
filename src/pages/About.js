@@ -3,13 +3,14 @@ import Header from '../components/Header'
 import Banner from '../components/Banner'
 import Footer from '../components/Footer'
 import Collapse from '../components/Collapse'
+import CssAbout from './About.module.css'
 
 const About = () => {
   return (
     <div>
       <Header />
       <Banner />
-      <section>
+      <section className={CssAbout.collapseAboutContainer}>
         <Collapse
           title="Fiabilité"
           text="Les annonces postées sur Kasa garantissent une fiabilité totale.

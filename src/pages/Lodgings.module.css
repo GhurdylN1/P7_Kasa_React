@@ -1,12 +1,172 @@
-.diaporama {
+.hostContainer {
   display: flex;
-  justify-content: space-around;
-  flex-flow: row wrap;
+  margin: 32px 64px 32px 64px;
 }
 
-.imgLodging {
-  margin: 5px 10px 5px 10px;
-  padding: 10px;
-  height: 150px;
-  width: 250px;
+.leftContainer {
+  width: 80%;
+  margin-left: 36px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 142.6%;
+  color: #ff6060;
+}
+.location {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 142.6%;
+  color: #ff6060;
+}
+.tagsContainer {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  background: #ff6060;
+  border-radius: 10px;
+  width: 15%;
+  height: 25px;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  color: #ffffff;
+}
+.rightContainer {
+  margin-right: 36px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.hostInfos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hostName {
+  font-size: 18px;
+  line-height: 142.6%;
+  display: flex;
+  text-align: right;
+  color: #ff6060;
+  padding-right: 10px;
+}
+
+.pictContainer {
+  background: #c4c4c4;
+  width: 64px;
+  height: 64px;
+  border-radius: 90%;
+}
+.hostPicture {
+  width: 64px;
+  height: 64px;
+  border-radius: 90%;
+  object-fit: cover;
+}
+
+.starsContainer {
+  height: 36px;
+  margin-top: 20px;
+  display: flex;
+}
+
+.starPicture {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+}
+
+.collapseHostContainer {
+  margin: 32px 100px 32px 100px;
+  display: flex;
+  gap: 76px;
+  width: auto;
+}
+
+/*Media queries pour mobiles et tablettes*/
+@media screen and (max-width: 830px) {
+  .hostContainer {
+    margin: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .leftContainer {
+    width: 100%;
+    margin-left: 0;
+  }
+  .title {
+    font-size: 18px;
+  }
+  .location {
+    font-size: 14px;
+  }
+  .tagsContainer {
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 16.5px;
+  }
+  .tag {
+    margin-right: 10px;
+    border-radius: 5px;
+    width: 30%;
+    height: 18px;
+    font-size: 10px;
+    margin-top: 0.5rem;
+  }
+  .rightContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .hostInfos {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .hostName {
+    font-size: 12px;
+    width: 50%;
+  }
+  .pictContainer {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hostPicture {
+    width: 32px;
+    height: 32px;
+  }
+  .starsContainer {
+    width: 98px;
+    height: 18px;
+    margin-top: 0px;
+    margin-right: 0;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .starPicture {
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+  }
+
+  .collapseHostContainer {
+    margin: 20px;
+    flex-direction: column;
+    gap: 0px;
+  }
 }
