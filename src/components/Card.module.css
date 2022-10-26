@@ -62,7 +62,7 @@
   margin: 25px 0px 0px 185px;
   padding: 5px 10px;
   transform: rotate(15deg);
-  animation: shake 200ms ease-in-out 6 1s;
+  animation: shake 100ms ease-in-out 6 1s;
 }
 
 @keyframes shake {
