@@ -87,10 +87,10 @@ const Lodging = () => {
               <div className={CssLodgings.starsContainer}>
                 {rateStar.map((stars, index) => (
                   <img
+                    key={stars + urlId + index}
                     className={CssLodgings.starPicture}
                     src={stars ? StarFull : StarEmpty}
                     alt={stars ? 'red star' : 'grey star'}
-                    key={stars + urlId + index}
                   />
                 ))}
               </div>

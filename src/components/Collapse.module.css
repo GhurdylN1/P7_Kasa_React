@@ -51,7 +51,7 @@
 @keyframes appear {
   from {
     opacity: 0;
-    line-height: 25px;
+    line-height: 185%;
   }
 
   to {
