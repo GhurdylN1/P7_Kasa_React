@@ -13,6 +13,12 @@ Card.propTypes = {
 function Card() {
   const [lodgings] = useState(Lodgings)
 
+  // trouver comment afficher un tag "best choice" uniquement sur les cartes des logements notés 5étoiles
+  // const filteredRatings = lodgings.filter(
+  //   (rateNumber) => rateNumber.rating === '5'
+  // )
+  // console.log(filteredRatings)
+
   return (
     <div className={CssCard.cardBackground}>
       {lodgings.map((lodging) => (
@@ -24,6 +30,7 @@ function Card() {
               className={CssCard.cover}
             />
             <div className={CssCard.title}>{lodging.title}</div>
+            {/* <div className={CssCard.topHost}>Best Choice</div> */}
           </div>
         </Link>
       ))}
