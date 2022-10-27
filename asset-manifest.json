@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/P7_Kasa_React/static/css/main.761eb087.css",
+    "main.css": "/P7_Kasa_React/static/css/main.2df64a01.css",
     "main.js": "/P7_Kasa_React/static/js/main.d0ec2fd7.js",
     "static/media/banabout.jpg": "/P7_Kasa_React/static/media/banabout.3827f97bdcef0854551d.jpg",
     "static/media/banhome.jpg": "/P7_Kasa_React/static/media/banhome.053687a54587bf187cfc.jpg",
@@ -8,11 +8,11 @@
     "static/media/logoFooter.svg": "/P7_Kasa_React/static/media/logoFooter.ee689fd9409d1b5a898b4247819d8a00.svg",
     "index.html": "/P7_Kasa_React/index.html",
     "static/media/arrowIcon.svg": "/P7_Kasa_React/static/media/arrowIcon.b052dd29e3a2bab76700eee79e133c37.svg",
-    "main.761eb087.css.map": "/P7_Kasa_React/static/css/main.761eb087.css.map",
+    "main.2df64a01.css.map": "/P7_Kasa_React/static/css/main.2df64a01.css.map",
     "main.d0ec2fd7.js.map": "/P7_Kasa_React/static/js/main.d0ec2fd7.js.map"
   },
   "entrypoints": [
-    "static/css/main.761eb087.css",
+    "static/css/main.2df64a01.css",
     "static/js/main.d0ec2fd7.js"
   ]
 }
