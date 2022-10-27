@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.31d66820.css",
-    "main.js": "/static/js/main.fc0a5085.js",
-    "static/media/banabout.jpg": "/static/media/banabout.3827f97bdcef0854551d.jpg",
-    "static/media/banhome.jpg": "/static/media/banhome.053687a54587bf187cfc.jpg",
-    "static/media/logoHeader.svg": "/static/media/logoHeader.28bcdc5933dc39a590d83eb2133ce13c.svg",
-    "static/media/logoFooter.svg": "/static/media/logoFooter.ee689fd9409d1b5a898b4247819d8a00.svg",
-    "index.html": "/index.html",
-    "static/media/arrowIcon.svg": "/static/media/arrowIcon.b052dd29e3a2bab76700eee79e133c37.svg",
-    "main.31d66820.css.map": "/static/css/main.31d66820.css.map",
-    "main.fc0a5085.js.map": "/static/js/main.fc0a5085.js.map"
+    "main.css": "/P7_Kasa_React/static/css/main.31d66820.css",
+    "main.js": "/P7_Kasa_React/static/js/main.68134b8a.js",
+    "static/media/banabout.jpg": "/P7_Kasa_React/static/media/banabout.3827f97bdcef0854551d.jpg",
+    "static/media/banhome.jpg": "/P7_Kasa_React/static/media/banhome.053687a54587bf187cfc.jpg",
+    "static/media/logoHeader.svg": "/P7_Kasa_React/static/media/logoHeader.28bcdc5933dc39a590d83eb2133ce13c.svg",
+    "static/media/logoFooter.svg": "/P7_Kasa_React/static/media/logoFooter.ee689fd9409d1b5a898b4247819d8a00.svg",
+    "index.html": "/P7_Kasa_React/index.html",
+    "static/media/arrowIcon.svg": "/P7_Kasa_React/static/media/arrowIcon.b052dd29e3a2bab76700eee79e133c37.svg",
+    "main.31d66820.css.map": "/P7_Kasa_React/static/css/main.31d66820.css.map",
+    "main.68134b8a.js.map": "/P7_Kasa_React/static/js/main.68134b8a.js.map"
   },
   "entrypoints": [
     "static/css/main.31d66820.css",
-    "static/js/main.fc0a5085.js"
+    "static/js/main.68134b8a.js"
   ]
 }
