@@ -7,10 +7,10 @@ function Header() {
     <header className={CssHeader.header}>
       <img src={Logo} alt="Logo de Kasa" className={CssHeader.logoHeader} />
       <nav className={CssHeader.navHeader}>
-        <Link to="/" className={CssHeader.navHome}>
+        <Link to="/P7_Kasa_React" className={CssHeader.navHome}>
           Accueil
         </Link>
-        <Link to="/about" className={CssHeader.navAbout}>
+        <Link to="/P7_Kasa_React/about" className={CssHeader.navAbout}>
           A Propos
         </Link>
       </nav>

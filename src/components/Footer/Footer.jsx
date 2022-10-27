@@ -10,7 +10,7 @@ function Footer() {
 
   return (
     <>
-      {location === '' ? (
+      {location === 'P7_Kasa_React' ? (
         <footer className={CssFooter.footer}>
           <img src={Logo} alt="Logo Kasa" className={CssFooter.logoFooter} />
           <p className={CssFooter.textFooter}>
