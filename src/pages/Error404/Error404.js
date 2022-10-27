@@ -1,6 +1,6 @@
 import React from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import Footer from '../../components/Footer/Footer'
+import Header from '../../components/Header/Header'
 import { Link } from 'react-router-dom'
 import Css404 from './Error404.module.css'
 

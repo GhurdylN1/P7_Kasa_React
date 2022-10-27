@@ -1,8 +1,8 @@
 import React from 'react'
 import CssBanner from './Banner.module.css'
 import { useLocation } from 'react-router-dom'
-import homeBannerImg from '../assets/banhome.jpg'
-import aboutBannerImg from '../assets/banabout.jpg'
+import homeBannerImg from '../../assets/banhome.jpg'
+import aboutBannerImg from '../../assets/banabout.jpg'
 
 function Banner() {
   const path = useLocation().pathname // on utilise ce hook pour savoir ou l'on se trouve, sur quelle page, afin de pouvoir afficher la bannière appropriée

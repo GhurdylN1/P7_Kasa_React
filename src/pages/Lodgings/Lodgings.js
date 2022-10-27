@@ -1,15 +1,15 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import Error404 from './Error404'
-import jsonData from '../data/logements.json'
+import Footer from '../../components/Footer/Footer'
+import Header from '../../components/Header/Header'
+import Error404 from '../Error404/Error404'
+import jsonData from '../../data/logements.json'
 import CssLodgings from './Lodgings.module.css'
-import Slideshow from '../components/Slideshow'
-import Collapse from '../components/Collapse'
-import StarFull from '../assets/fullstar.png'
-import StarEmpty from '../assets/emptystar.png'
+import Slideshow from '../../components/Slideshow/Slideshow'
+import Collapse from '../../components/Collapse/Collapse'
+import StarFull from '../../assets/fullstar.png'
+import StarEmpty from '../../assets/emptystar.png'
 
 const Lodging = () => {
   const data = jsonData // importation des données du fichier logements.json

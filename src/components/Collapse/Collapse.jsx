@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import CssCollapse from './Collapse.module.css'
-import Arrow from '../assets/arrowIcon.svg'
+import Arrow from '../../assets/arrowIcon.svg'
 
 function Collapse({ title, text }) {
   const [arrowUp, setArrowUp] = useState(false)

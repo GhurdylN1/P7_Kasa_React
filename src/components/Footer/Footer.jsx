@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import Logo from '../assets/logoFooter.svg'
+import Logo from '../../assets/logoFooter.svg'
 import CssFooter from './Footer.module.css'
 
 function Footer() {

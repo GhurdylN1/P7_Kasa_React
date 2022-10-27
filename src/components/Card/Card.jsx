@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
-import Lodgings from '../data/logements.json'
+import Lodgings from '../../data/logements.json'
 import CssCard from './Card.module.css'
 import { Link } from 'react-router-dom'
 

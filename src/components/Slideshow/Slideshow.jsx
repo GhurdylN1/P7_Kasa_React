@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import CssSlide from './Slideshow.module.css'
-import Arrow from '../assets/arrowIcon.svg'
+import Arrow from '../../assets/arrowIcon.svg'
 
 const Slideshow = (data) => {
   const [currentIndex, setCurrentIndex] = useState(0)

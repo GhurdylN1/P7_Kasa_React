@@ -183,3 +183,10 @@
     gap: 0px;
   }
 }
+
+/*pour ecrans 2k et 4k*/
+@media screen and (min-width: 1921px) and (min-height: 1081px) {
+  .tag {
+    width: 8%;
+  }
+}
