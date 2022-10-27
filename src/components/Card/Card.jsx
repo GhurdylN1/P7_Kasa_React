@@ -25,7 +25,7 @@ function Card() {
                 className={CssCard.cover}
               />
               <div className={CssCard.title}>{lodging.title}</div>
-              {lodging.rating > 4 && (
+              {lodging.rating > 4 && ( // affichage du tag "meilleur choix" uniquement sur les logements notés 5 étoiles
                 <div className={CssCard.topHost}>✔ Meilleur Choix</div>
               )}
             </div>
