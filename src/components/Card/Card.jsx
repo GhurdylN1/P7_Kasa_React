@@ -15,9 +15,9 @@ function Card() {
 
   // trouver comment afficher un tag "Meilleur Choix" uniquement sur les cartes des logements notés 5 étoiles
   // récupération des logements notés 5 étoiles
-  const filteredTopRatings = lodgings.filter(
-    (rateNumber) => rateNumber.rating === '5'
-  )
+  // const filteredTopRatings = lodgings.filter(
+  //   (rateNumber) => rateNumber.rating === '5'
+  // )
   // console.log(filteredTopRatings)
 
   // récupération des id uniquements (des logements notés 5 étoiles)
@@ -25,15 +25,15 @@ function Card() {
   // console.log(topRatingsId)
 
   // récupération des logements notés moins de 5 étoiles
-  const filteredRatings = lodgings.filter(
-    (rateNumber) => rateNumber.rating < '5'
-  )
+  // const filteredRatings = lodgings.filter(
+  //   (rateNumber) => rateNumber.rating < '5'
+  // )
   // console.log(filteredRatings)
 
   return (
     <>
       <div className={CssCard.cardBackground}>
-        {filteredTopRatings.map((lodging) => (
+        {lodgings.map((lodging) => (
           <Link key={lodging.id} to={`/lodgings/${lodging.id}`}>
             <div key={lodging.id} className={CssCard.card}>
               <img
@@ -42,19 +42,9 @@ function Card() {
                 className={CssCard.cover}
               />
               <div className={CssCard.title}>{lodging.title}</div>
-              <div className={CssCard.topHost}>✔ Meilleur Choix</div>
-            </div>
-          </Link>
-        ))}
-        {filteredRatings.map((lodging) => (
-          <Link key={lodging.id} to={`/lodgings/${lodging.id}`}>
-            <div key={lodging.id} className={CssCard.card}>
-              <img
-                src={lodging.cover}
-                alt={lodging.title}
-                className={CssCard.cover}
-              />
-              <div className={CssCard.title}>{lodging.title}</div>
+              {lodging.rating > 4 && (
+                <div className={CssCard.topHost}>✔ Meilleur Choix</div>
+              )}
             </div>
           </Link>
         ))}
@@ -62,5 +52,38 @@ function Card() {
     </>
   )
 }
+
+//   return (
+//     <>
+//       <div className={CssCard.cardBackground}>
+//         {filteredTopRatings.map((lodging) => (
+//           <Link key={lodging.id} to={`/lodgings/${lodging.id}`}>
+//             <div key={lodging.id} className={CssCard.card}>
+//               <img
+//                 src={lodging.cover}
+//                 alt={lodging.title}
+//                 className={CssCard.cover}
+//               />
+//               <div className={CssCard.title}>{lodging.title}</div>
+//               <div className={CssCard.topHost}>✔ Meilleur Choix</div>
+//             </div>
+//           </Link>
+//         ))}
+//         {filteredRatings.map((lodging) => (
+//           <Link key={lodging.id} to={`/lodgings/${lodging.id}`}>
+//             <div key={lodging.id} className={CssCard.card}>
+//               <img
+//                 src={lodging.cover}
+//                 alt={lodging.title}
+//                 className={CssCard.cover}
+//               />
+//               <div className={CssCard.title}>{lodging.title}</div>
+//             </div>
+//           </Link>
+//         ))}
+//       </div>
+//     </>
+//   )
+// }
 
 export default Card
