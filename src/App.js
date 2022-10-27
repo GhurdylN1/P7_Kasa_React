@@ -12,7 +12,7 @@ function App() {
         <Route path="/P7_Kasa_React/" element={<Home />} />
         <Route path="/P7_Kasa_React/lodgings/:id" element={<Lodging />} />
         <Route path="/P7_Kasa_React/about" element={<About />} />
-        <Route path="/P7_Kasa_React/*" element={<Error404 />} />
+        <Route path="/*" element={<Error404 />} />
       </Routes>
     </div>
   )
