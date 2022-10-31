@@ -6,19 +6,19 @@ import CssFooter from './Footer.module.css'
 function Footer() {
   // meme principe pour Banner ici, mais pour afficher un footer different suivant ou l'on se trouve.
   const path = useLocation().pathname
-  const location = path.split('/')[1]
+  const location = path.split('/P7_Kasa_React/')[1]
 
   return (
     <>
-      {location === 'P7_Kasa_React' ? (
-        <footer className={CssFooter.footer}>
+      {location === 'about' ? (
+        <footer className={CssFooter.footerAbout}>
           <img src={Logo} alt="Logo Kasa" className={CssFooter.logoFooter} />
           <p className={CssFooter.textFooter}>
             © 2020 Kasa. All rights reserved
           </p>
         </footer>
       ) : (
-        <footer className={CssFooter.footerAbout}>
+        <footer className={CssFooter.footer}>
           <img src={Logo} alt="Logo Kasa" className={CssFooter.logoFooter} />
           <p className={CssFooter.textFooter}>
             © 2020 Kasa. All rights reserved
