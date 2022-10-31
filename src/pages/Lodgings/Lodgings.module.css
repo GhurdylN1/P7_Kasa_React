@@ -184,6 +184,13 @@
   }
 }
 
+/*pour ipad*/
+@media screen and (min-width: 810px) and (min-height: 1080px) {
+  .tag {
+    width: 20%;
+  }
+}
+
 /*pour ecrans 2k et 4k*/
 @media screen and (min-width: 1921px) and (min-height: 1081px) {
   .tag {

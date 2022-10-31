@@ -45,8 +45,9 @@
     height: 47px;
   }
   .navHeader {
-    width: 140px;
-    height: 17px;
+    width: 155px;
+    height: 21px;
+    text-transform: uppercase;
   }
   .navHome,
   .navAbout {

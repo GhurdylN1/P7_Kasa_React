@@ -78,6 +78,14 @@
   }
 }
 
+/*pour ipad*/
+@media screen and (min-width: 810px) and (min-height: 1080px) {
+  .imgContainer {
+    width: 100%;
+    height: 225px;
+  }
+}
+
 /*pour ecran 2k*/
 @media screen and (min-width: 2540px) and (min-height: 1440px) {
   .imgContainer {
