@@ -1,0 +1,30 @@
+.cardBackground {
+  margin-top: 22px;
+  padding: 60px;
+  gap: 30px;
+  background-color: #f7f7f7;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+}
+@media (min-width: 768px) {
+  .cardBackground {
+    margin-top: 44px;
+  }
+}
+
+/*Media queries pour mobiles*/
+@media screen and (max-width: 480px) {
+  .cardBackground {
+    padding: 0;
+    background-color: transparent;
+  }
+}
+
+/*Media queries pour tablettes*/
+@media screen and (min-width: 481px) and (max-width: 830px) {
+  .cardBackground {
+    padding: 20px;
+  }
+}

@@ -1,13 +1,3 @@
-.cardBackground {
-  margin: 30px 100px 30px 100px;
-  padding: 60px;
-  gap: 30px;
-  background-color: #f7f7f7;
-  border-radius: 25px;
-  display: flex;
-  justify-content: space-around;
-  flex-flow: row wrap;
-}
 .card {
   width: 340px;
   height: 340px;
@@ -77,13 +67,9 @@
 /*Media queries pour mobiles*/
 
 @media screen and (max-width: 480px) {
-  .cardBackground {
-    margin: 10px 5px;
-    padding: 0;
-    background-color: transparent;
-  }
   .card {
-    width: 335px;
+    width: 100%;
+    max-width: 335px;
     height: 255px;
     margin-bottom: 0px;
   }
@@ -97,11 +83,6 @@
 /*Media queries pour tablettes*/
 
 @media screen and (min-width: 481px) and (max-width: 830px) {
-  .cardBackground {
-    margin: 15px 20px 15px 20px;
-    padding: 20px;
-  }
-
   .card {
     margin-bottom: 0px;
   }

@@ -1,5 +1,5 @@
 .header {
-  margin: 30px 100px 0 100px;
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,11 +35,14 @@
   margin-left: 20%;
 }
 
+@media (min-width: 768px) {
+  .header {
+    margin-top: 40px;
+  }
+}
+
 /*Media queries pour mobiles*/
 @media screen and (max-width: 480px) {
-  .header {
-    margin: 20px 20px 0 20px;
-  }
   .logoHeader {
     width: 145px;
     height: 47px;
@@ -57,10 +60,6 @@
 
 /*Media queries pour tablettes*/
 @media screen and (min-width: 481px) and (max-width: 830px) {
-  .header {
-    margin: 20px 20px 0 20px;
-  }
-
   .navHome,
   .navAbout {
     font-size: 16px;

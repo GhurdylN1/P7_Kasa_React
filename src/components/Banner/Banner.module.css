@@ -1,5 +1,5 @@
 .banner {
-  margin: 30px 100px 30px 100px;
+  margin-top: 16px;
 }
 .imgContainer,
 .imgContainerHome {
@@ -35,13 +35,14 @@
   }
 }
 
-/*Media queries pour mobiles*/
-
-@media screen and (max-width: 480px) {
+@media (min-width: 768px) {
   .banner {
-    margin: 15px 20px 15px 20px;
+    margin-top: 64px;
   }
+}
 
+/*Media queries pour mobiles*/
+@media screen and (max-width: 480px) {
   .imgContainerHome {
     justify-content: left;
     border-radius: 10px;
@@ -68,9 +69,6 @@
 /*Media queries pour tablettes*/
 
 @media screen and (min-width: 481px) and (max-width: 830px) {
-  .banner {
-    margin: 15px 20px 15px 20px;
-  }
   .imgContainer,
   .imgContainerHome {
     justify-content: left;
