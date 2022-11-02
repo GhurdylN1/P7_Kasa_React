@@ -1,5 +1,6 @@
 .footer {
   margin-top: 40px;
+  color: #ffffff;
 }
 
 .footer,
@@ -12,10 +13,10 @@
 }
 
 .logoFooter {
+  height: 104px;
   padding-top: 64px;
 }
 .textFooter {
-  color: #ffffff;
   margin: 0;
   padding-top: 40px;
   padding-bottom: 20px;

@@ -16,6 +16,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+a {
+  color: inherit;
+}
+
 .mainContainer {
   display: flex;
   flex-direction: column;
