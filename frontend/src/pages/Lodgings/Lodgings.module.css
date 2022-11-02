@@ -4,6 +4,12 @@
   animation: appear 1.5s;
 }
 
+.hostContainerProfile {
+  display: flex;
+  margin-top: 32px;
+  animation: appear 1.5s;
+}
+
 .leftContainer {
   width: 80%;
 }
@@ -108,6 +114,11 @@
 @media screen and (max-width: 830px) {
   .hostContainer {
     flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .hostContainerProfile {
     justify-content: space-between;
     align-items: flex-start;
   }
