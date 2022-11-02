@@ -27,7 +27,6 @@ body {
   padding-right: 20px;
   width: 100%;
   flex-grow: 1;
-  /* max-width: 335px; */
 }
 
 @media (min-width: 640px) {
