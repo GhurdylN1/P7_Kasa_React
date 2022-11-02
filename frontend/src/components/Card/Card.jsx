@@ -5,11 +5,7 @@ import React from 'react'
 
 function Card({ id, cover, title, rating }) {
   return (
-    <Link
-      className={CssCard.linkCard}
-      key={id}
-      to={`/P7_Kasa_React/lodgings/${id}`}
-    >
+    <Link className={CssCard.linkCard} key={id} to={`/lodgings/${id}`}>
       <div key={id} className={CssCard.card}>
         <img src={cover} alt={title} className={CssCard.cover} />
         <div className={CssCard.title}>{title}</div>

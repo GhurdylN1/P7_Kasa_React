@@ -6,12 +6,12 @@ import aboutBannerImg from '../../assets/banabout.jpg'
 
 function Banner() {
   const path = useLocation().pathname // on utilise ce hook pour savoir ou l'on se trouve, sur quelle page, afin de pouvoir afficher la bannière appropriée
-  const location = path.split('/P7_Kasa_React')[1]
+  const location = path.split('/')[1]
 
   return (
     // on utilise ici une condition ternaire avec :
     <div>
-      {location === '/about' ? ( // on demande si l'on se trouve sur la page d'accueil alors on affiche ceci
+      {location === 'about' ? ( // on demande si l'on se trouve sur la page d'accueil alors on affiche ceci
         <section className={CssBanner.banner}>
           <div className={CssBanner.imgContainer}>
             <img

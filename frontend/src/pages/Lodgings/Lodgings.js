@@ -77,7 +77,7 @@ const Lodging = () => {
               </div>
               <div className={CssLodgings.rightContainer}>
                 <Link
-                  to={`/P7_Kasa_React/profile/${dataLodging.host.name}`}
+                  to={`/profile/${dataLodging.host.name}`}
                   className={CssLodgings.hostInfos}
                 >
                   <div className={CssLodgings.hostName}>
