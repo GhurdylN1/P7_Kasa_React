@@ -4,7 +4,7 @@ const express = require('express');
 const helmet = require("helmet");
 const mongoose = require('mongoose');
 
-const sauceRoutes = require('./routes/sauce');
+const logementRoutes = require('./routes/logement');
 const userRoutes = require('./routes/user');
 
 //connexion à la base de donnée MongoDB avec le package Mongoose et Dotenv
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-app.use('/api/sauces', sauceRoutes);
+app.use('/api/logements', logementRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

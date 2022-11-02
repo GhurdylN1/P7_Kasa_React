@@ -1,6 +1,7 @@
 .cardBackground {
   margin-top: 22px;
   padding: 60px;
+  padding-bottom: 30px;
   gap: 30px;
   background-color: #f7f7f7;
   border-radius: 25px;

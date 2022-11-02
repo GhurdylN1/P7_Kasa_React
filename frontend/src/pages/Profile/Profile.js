@@ -26,19 +26,45 @@ const Profile = () => {
           <section>
             <br></br>
             <br></br>
-            <div className={CssLodgings.rightContainer}>
-              <div className={CssLodgings.hostInfos}>
-                <div className={CssLodgings.hostName}>
-                  {name[0]} <br></br> {name[1]}
+            <div className={CssLodgings.hostContainer}>
+              <div className={CssLodgings.leftContainer}>
+                <div className={CssLodgings.title}>
+                  Bonjour, je m'appelle {name[0]} :
                 </div>
-                <div className={CssLodgings.pictContainer}>
-                  <img
-                    className={CssLodgings.hostPicture}
-                    src={lodging.host.picture}
-                    alt="hebergeur"
-                  />
+                <div className={CssLodgings.hostName}>
+                  ✔ Membre depuis Juin 2022
+                </div>
+                <br></br>
+                <div className={CssLodgings.location}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
                 </div>
               </div>
+              <div className={CssLodgings.rightContainer}>
+                <div className={CssLodgings.hostInfos}>
+                  <div className={CssLodgings.hostName}>
+                    {name[0]} <br></br> {name[1]}
+                  </div>
+                  <div className={CssLodgings.pictContainer}>
+                    <img
+                      className={CssLodgings.hostPicture}
+                      src={lodging.host.picture}
+                      alt="hebergeur"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br></br>
+            <br></br>
+            <div className={CssLodgings.location}>
+              Voici ce que {name[0]} vous propose :
             </div>
           </section>
         )}
