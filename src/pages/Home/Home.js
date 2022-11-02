@@ -7,10 +7,8 @@ import lodgingsService from '../../services/lodgingsService'
 
 const Home = () => {
   return (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}
-    >
-      <div className="container" style={{ flexGrow: 1 }}>
+    <div className="mainContainer">
+      <div className="container">
         <Header />
         <Banner />
         <Cards data={lodgingsService.getAll()} />

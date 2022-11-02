@@ -1,13 +1,11 @@
 .hostContainer {
   display: flex;
   margin-top: 32px;
-  /* margin: 32px 64px 32px 64px; */
   animation: appear 1.5s;
 }
 
 .leftContainer {
   width: 80%;
-  /* margin-left: 36px; */
 }
 
 .title {
@@ -43,7 +41,6 @@
   color: #ffffff;
 }
 .rightContainer {
-  /* margin-right: 36px; */
   width: 20%;
   display: flex;
   flex-direction: column;
@@ -92,7 +89,6 @@
 
 .collapseHostContainer {
   margin-top: 32px;
-  /* margin: 32px 100px 32px 100px; */
   display: flex;
   gap: 76px;
   width: auto;

@@ -55,10 +55,8 @@ const Lodging = () => {
   const name = dataLodging.host.name.split(' ') // on sépare le nom du prénom dans les données
 
   return (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}
-    >
-      <div className="container" style={{ flexGrow: 1 }}>
+    <div className="mainContainer">
+      <div className="container">
         <Header />
         {dataLodging && (
           <section>
