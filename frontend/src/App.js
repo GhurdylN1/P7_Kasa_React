@@ -10,10 +10,10 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/P7_Kasa_React/" element={<Home />} />
-        <Route path="/P7_Kasa_React/lodgings/:id" element={<Lodging />} />
-        <Route path="/P7_Kasa_React/profile/:name" element={<Profile />} />
-        <Route path="/P7_Kasa_React/about" element={<About />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/lodgings/:id" element={<Lodging />} />
+        <Route path="/profile/:name" element={<Profile />} />
+        <Route path="/about" element={<About />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
     </div>
