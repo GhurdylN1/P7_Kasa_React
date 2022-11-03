@@ -7,7 +7,7 @@ const multer = require('../middleware/multer-config');
 const logementCtrl = require('../controllers/logement');
 
 router.post('/', auth, multer, logementCtrl.createLogement);
-router.post("/:id/like", auth, logementCtrl.voteLogement);
+// router.post("/:id/like", auth, logementCtrl.voteLogement);
 router.put('/:id', auth, multer, logementCtrl.modifyLogement);
 router.delete('/:id', auth, logementCtrl.deleteLogement);
 router.get('/:id', auth, logementCtrl.getOneLogement);
