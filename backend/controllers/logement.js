@@ -5,6 +5,7 @@ const sanitize = require('mongo-sanitize'); // se proteger des injections divers
 // création des logements
 
 exports.createLogement = (req, res, next) => {
+  console.log(req.body.logement)
   const logementObject = JSON.parse(sanitize(req.body.logement)); // exemple d'utilisation de sanitize
   delete logementObject._id;
   delete logementObject._userId;

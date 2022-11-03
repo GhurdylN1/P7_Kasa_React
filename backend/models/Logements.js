@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
 
-const logementsSchema = mongoose.Schema({
-    // ce sera l'id de l'user qui crée le logement ou l'id du logement => lodgingId à rajouter ? 
+const logementsSchema = mongoose.Schema({ 
     userId: { type: String, required: true },
     title: { type: String, required: true },
     cover: { type: String, required: true },
     pictures : { type: [String], },
     description: { type: String, required: true },
-    rating: { type: Number, default: 0 },
+    // note moyenne
+    averageRating: { type: Number, default: 0 },
+    // note par utilisateur
+    userRatings: [{
+        userId: { type: String, required: true },
+        rating: { type: Number, required: true },
+     }],
     location : { type: String, required: true },
     equipements: { type: [String], },
     tags: { type: [String], }
@@ -19,7 +24,6 @@ const logementsSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model('Logement', logementsSchema);
-
 
 // schema d'apres le ficher logements.json
 // host est déplacé dans le model profile
