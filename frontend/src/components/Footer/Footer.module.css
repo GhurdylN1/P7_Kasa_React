@@ -1,9 +1,5 @@
 .footer {
   margin-top: 40px;
-}
-
-.footer,
-.footerAbout {
   background-color: #000000;
   height: 209px;
   display: flex;
@@ -33,23 +29,5 @@
 @media screen and (min-width: 481px) and (max-width: 830px) {
   .textFooter {
     font-size: 16px;
-  }
-}
-
-/*Faire en sorte que le footer reste toujours en bas de page sur la page "A propos" et "logement" pour ipad*/
-@media screen and (min-width: 810px) and (min-height: 1080px) {
-  .footerAbout {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
-}
-
-/* Faire en sorte que le footer reste toujours en bas de page sur la page "A propos" et "logement" à partir des écrans 2k et 4k */
-@media screen and (min-width: 1921px) and (min-height: 1081px) {
-  .footerAbout {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
   }
 }
