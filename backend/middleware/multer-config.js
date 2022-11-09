@@ -28,9 +28,9 @@ const uploadImg = multer({
             return callback(new Error('Format de fichier non autorisé'))
         }
     },
-    // on limite la taille du fichier image à 500ko
+    // on limite la taille du fichier image à 1mo
     limits: {
-        fileSize: 500000
+        fileSize: 1000000
     },
 })
 module.exports = uploadImg.single('image');

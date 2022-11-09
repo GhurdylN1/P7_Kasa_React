@@ -29,6 +29,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.use('/api/logements', logementRoutes);
+app.use('/api/users', userRoutes); // test axios
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

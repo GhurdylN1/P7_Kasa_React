@@ -1,9 +1,10 @@
 import React from 'react'
 import Banner from '../../components/Banner/Banner'
-import Cards from '../../components/Cards/Cards'
+// import Cards from '../../components/Cards/Cards'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
-import lodgingsService from '../../services/lodgingsService'
+import GetAllLogements from '../../components/GetAllLogements'
+// import lodgingsService from '../../services/lodgingsService'
 
 const Home = () => {
   return (
@@ -11,7 +12,8 @@ const Home = () => {
       <div className="container">
         <Header />
         <Banner />
-        <Cards data={lodgingsService.getAll()} />
+        {/* <Cards data={lodgingsService.getAll()} /> */}
+        <GetAllLogements /> {/*test axios*/}
       </div>
       <Footer />
     </div>

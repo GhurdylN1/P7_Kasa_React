@@ -45,3 +45,17 @@ exports.login = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
+
+// affichage des users pour test axios
+
+exports.getOneUser = (req, res, next) => {
+    User.findOne({ _id : req.params.id })
+    .then(User => res.status(200).json(User))
+    .catch(error => res.status(404).json({ error }));
+  };
+
+  exports.getAllUsers = (req, res, next) => {
+    User.find()
+    .then(Users => res.status(200).json(Users))
+    .catch(error => res.status(400).json({ error }));
+    };

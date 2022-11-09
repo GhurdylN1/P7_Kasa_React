@@ -25,6 +25,7 @@
   font-size: 18px;
   line-height: 1.3;
   color: #ff6060;
+  animation: appear 1.5s; /* test pour la page profil, a supprimer plus tard */
 }
 .tagsContainer {
   display: flex;
