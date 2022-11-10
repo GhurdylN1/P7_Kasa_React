@@ -14,5 +14,6 @@ router.delete('/:id', auth, logementCtrl.deleteLogement);
 // router.get('/', auth, logementCtrl.getAllLogements);
 router.get('/:id', logementCtrl.getOneLogement); // pour le test axios sans l'auth
 router.get('/', logementCtrl.getAllLogements); // pour le test axios sans l'auth
+router.get('/byUserId/:userId', logementCtrl.getAllLogementsByUserId); // pour le test axios sans l'auth 
 
 module.exports = router;

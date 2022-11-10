@@ -92,6 +92,12 @@ exports.createLogement = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
     };
 
+  exports.getAllLogementsByUserId = (req, res, next) => {
+    Logement.find({ userId : req.params.userId })
+    .then(logements => res.status(200).json(logements))
+    .catch(error => res.status(400).json({ error }));
+    };
+
 
 // Fonctionalité Likes et Dislikes (à modifier pour le systeme de notation a étoiles)
 

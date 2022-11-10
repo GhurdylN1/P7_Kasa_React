@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import Error404 from '../Error404/Error404'
-import api from '../../api/logementApiTest'
+import lodgingsService from '../../services/lodgingsService'
+import usersService from '../../services/usersService'
 import CssLodgings from './Lodgings.module.css'
 import Slideshow from '../../components/Slideshow/Slideshow'
 import Collapse from '../../components/Collapse/Collapse'
@@ -12,6 +13,8 @@ import { Link } from 'react-router-dom'
 
 function Lodging() {
   const urlId = useParams().id // récupération de l'id dans l'url
+  const [loading, setLoading] = useState(true)
+  const [error404, setError404] = useState(false)
   const [dataLodging, setdataLodging] = useState({
     // state des données que l'on voudra observer et afficher
     _id: '',
@@ -32,9 +35,13 @@ function Lodging() {
     // obervation des données du state
     const pushDataLodging = async () => {
       try {
-        const response = await api.get(`/api/logements/${urlId}`)
-        setdataLodging(response.data)
+        // const response = await api.get(`/api/logements/${urlId}`)
+        const response = await lodgingsService.getByLodgingId(urlId)
+        setLoading(false)
+        setdataLodging(response)
       } catch (err) {
+        setLoading(false)
+        setError404(true)
         if (err.response) {
           // not in the 200 response range
           console.log(err.response.data)
@@ -61,8 +68,9 @@ function Lodging() {
   useEffect(() => {
     const pushDataUser = async () => {
       try {
-        const response = await api.get(`/api/users/${idUser}`)
-        setdataUser(response.data)
+        // const response = await api.get(`/api/users/${idUser}`)
+        const response = await usersService.getUserById(idUser)
+        setdataUser(response)
       } catch (err) {
         if (err.response) {
           // not in the 200 response range
@@ -77,7 +85,7 @@ function Lodging() {
     pushDataUser()
   }, [idUser])
 
-  if (dataLodging._id !== urlId) {
+  if (error404 && !loading) {
     // on retourne la page Error404 si l'id de l'url ne se trouve pas dans les données de l'api
     return <Error404 />
   }

@@ -5,11 +5,13 @@ import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import Error404 from '../Error404/Error404'
 import CssLodgings from '../Lodgings/Lodgings.module.css'
-import api from '../../api/logementApiTest'
+import usersService from '../../services/usersService'
 import GetUserLogements from '../../components/GetUserLogements'
 
 function UserProfile() {
   const urlUserId = useParams().id
+  const [loading, setLoading] = useState(true)
+  const [error404, setError404] = useState(false)
   const [dataUser, setdataUser] = useState({
     _id: '',
     email: '',
@@ -22,9 +24,13 @@ function UserProfile() {
   useEffect(() => {
     const pushDataUser = async () => {
       try {
-        const response = await api.get(`/api/users/${urlUserId}`)
-        setdataUser(response.data)
+        // const response = await api.get(`/api/users/${urlUserId}`)
+        const response = await usersService.getUserById(urlUserId)
+        setLoading(false)
+        setdataUser(response)
       } catch (err) {
+        setLoading(false)
+        setError404(true)
         if (err.response) {
           // not in the 200 response range
           console.log(err.response.data)
@@ -38,7 +44,7 @@ function UserProfile() {
     pushDataUser()
   }, [urlUserId])
 
-  if (dataUser._id !== urlUserId) {
+  if (error404 && !loading) {
     // on retourne la page Error404 si les données son incorrectes
     return <Error404 />
   }

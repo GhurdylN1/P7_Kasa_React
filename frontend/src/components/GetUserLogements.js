@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import api from '../api/logementApiTest'
+// import api from '../api/logementApiTest'
+import lodgingsService from '../services/lodgingsService'
 import CssCard from '../components/Cards/Cards.module.css'
 import Card from './Card/Card'
 
@@ -13,8 +14,9 @@ function GetUserLogements() {
   useEffect(() => {
     const UserLogements = async () => {
       try {
-        const response = await api.get('/api/logements')
-        setUserLogements(response.data)
+        // const response = await api.get('/api/logements')
+        const response = await lodgingsService.getByUserID(urlUserId)
+        setUserLogements(response)
       } catch (err) {
         if (err.response) {
           // not in the 200 response range
@@ -28,17 +30,17 @@ function GetUserLogements() {
     }
 
     UserLogements()
-  }, [])
+  }, [urlUserId])
 
-  console.log(userLogements)
-  const filteredLogement = userLogements.filter(
-    (element) => element.userId === urlUserId
-  )
-  console.log(filteredLogement)
+  // console.log(userLogements)
+  // const filteredLogement = userLogements.filter(
+  //   (element) => element.userId === urlUserId
+  // )
+  // console.log(filteredLogement)
 
   return (
     <div className={CssCard.cardBackground}>
-      {filteredLogement.map(({ _id, cover, title }) => (
+      {userLogements.map(({ _id, cover, title }) => (
         <Card key={_id} id={_id} cover={cover} title={title} />
       ))}
     </div>

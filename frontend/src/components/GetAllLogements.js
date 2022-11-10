@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import api from '../api/logementApiTest'
 import CssCard from '../components/Cards/Cards.module.css'
+import lodgingsService from '../services/lodgingsService'
 import Card from './Card/Card'
 
 function GetAllLogements() {
@@ -10,8 +10,9 @@ function GetAllLogements() {
   useEffect(() => {
     const GetLogements = async () => {
       try {
-        const response = await api.get('/api/logements')
-        setLogements(response.data)
+        const response = await lodgingsService.getAll()
+        setLogements(response)
+        console.log(response)
       } catch (err) {
         if (err.response) {
           // not in the 200 response range
