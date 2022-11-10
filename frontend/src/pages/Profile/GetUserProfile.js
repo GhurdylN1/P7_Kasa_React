@@ -6,9 +6,10 @@ import Header from '../../components/Header/Header'
 import Error404 from '../Error404/Error404'
 import CssLodgings from '../Lodgings/Lodgings.module.css'
 import api from '../../api/logementApiTest'
+import GetUserLogements from '../../components/GetUserLogements'
 
 function UserProfile() {
-  const idUser = useParams().id
+  const urlUserId = useParams().id
   const [dataUser, setdataUser] = useState({
     _id: '',
     email: '',
@@ -21,7 +22,7 @@ function UserProfile() {
   useEffect(() => {
     const pushDataUser = async () => {
       try {
-        const response = await api.get(`/api/users/${idUser}`)
+        const response = await api.get(`/api/users/${urlUserId}`)
         setdataUser(response.data)
       } catch (err) {
         if (err.response) {
@@ -35,9 +36,9 @@ function UserProfile() {
       }
     }
     pushDataUser()
-  }, [idUser])
+  }, [urlUserId])
 
-  if (dataUser._id !== idUser) {
+  if (dataUser._id !== urlUserId) {
     // on retourne la page Error404 si les données son incorrectes
     return <Error404 />
   }
@@ -83,8 +84,14 @@ function UserProfile() {
             <div className={CssLodgings.location}>
               Voici ce que {name[0]} vous propose :
             </div>
+            <br />
+            <div className={CssLodgings.location}>
+              Pour contacter {name[0]} :{' '}
+              <a href={`mailto:${dataUser.email}`}> envoyer un email </a>
+            </div>
           </section>
         )}
+        <GetUserLogements />
       </div>
       <Footer />
     </div>
