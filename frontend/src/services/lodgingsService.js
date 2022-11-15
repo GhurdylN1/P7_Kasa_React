@@ -1,4 +1,4 @@
-import api from '../api/logementApiTest'
+import api from '../api/ApiKasaMongoDB'
 // import Lodgings from '../data/logements.json'
 
 const lodgingsService = {

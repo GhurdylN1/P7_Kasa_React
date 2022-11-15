@@ -1,4 +1,4 @@
-import api from '../api/logementApiTest'
+import api from '../api/ApiKasaMongoDB'
 
 const usersService = {
   getUserById: async (_id) => {

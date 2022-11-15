@@ -7,11 +7,13 @@ import About from './pages/About/About'
 import Error404 from './pages/Error404/Error404'
 import Profile from './pages/Profile/GetUserProfile' // tes axios
 // import Profile from './pages/Profile/Profile'
+import SignUp from './pages/SignUp'
 
 function App() {
   return (
     <div>
       <Routes>
+        <Route path="/P7_Kasa_React/signup/" element={<SignUp />} />
         <Route path="/P7_Kasa_React/" element={<Home />} />
         <Route path="/P7_Kasa_React/lodgings/:id" element={<Lodging />} />
         <Route path="/P7_Kasa_React/profile/:id" element={<Profile />} />{' '}
