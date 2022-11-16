@@ -11,7 +11,7 @@ function Banner() {
   return (
     // on utilise ici une condition ternaire avec :
     <div>
-      {location === '/about' ? ( // on demande si l'on se trouve sur la page d'accueil alors on affiche ceci
+      {location === '/about' ? ( // on demande si l'on se trouve sur la page a propos alors on affiche ceci
         <section className={CssBanner.banner}>
           <div className={CssBanner.imgContainer}>
             <img
@@ -22,7 +22,7 @@ function Banner() {
           </div>
         </section>
       ) : (
-        // si on ne se trouve pas sur la page d'accueil alors on affiche cela
+        // si on ne se trouve pas sur la page a propos alors on affiche cela
         <section className={CssBanner.banner}>
           <div className={CssBanner.imgContainerHome}>
             <img

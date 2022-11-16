@@ -8,7 +8,9 @@ import axios from '../api/ApiKasaMongoDB'
 
 const EMAIL_REGEX = /^[a-zA-Z0-9-_.]+@{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,4}$/
 const PASSWORD_REGEX =
-  /^(?!.* )(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{2}(?=.*[!@#$%]).{6,15}$/
+  /^(?!.* )(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]{2})(?=.*[!@#$%]).{6,15}$/
+
+const SIGNUP_URL = '/api/auth/signup/'
 
 const SignUp = () => {
   const userRef = useRef()
@@ -57,7 +59,7 @@ const SignUp = () => {
     }
     try {
       const response = await axios.post(
-        '/api/auth/signup/',
+        SIGNUP_URL,
         JSON.stringify({ email, password }),
         {
           headers: { 'Content-Type': 'application/json' },
@@ -89,7 +91,10 @@ const SignUp = () => {
             <div className={SignUpCSS.sectionSignUp}>
               <h1> Compte créé ! </h1>
               <p>
-                <Link to="/P7_Kasa_React/login/"> Se connecter </Link>
+                <Link className={SignUpCSS.aReg} to="/P7_Kasa_React/">
+                  {' '}
+                  Se connecter{' '}
+                </Link>
               </p>
             </div>
           </div>
@@ -246,9 +251,11 @@ const SignUp = () => {
               </form>
               <p>
                 Vous avez déjà un compte ?<br />
-                <span className="line">
-                  {/*put router link here*/}
-                  <Link to="/P7_Kasa_React/login/"> Se connecter </Link>
+                <span className={SignUpCSS.line}>
+                  <Link className={SignUpCSS.aReg} to="/P7_Kasa_React/">
+                    {' '}
+                    Se connecter{' '}
+                  </Link>
                 </span>
               </p>
             </div>

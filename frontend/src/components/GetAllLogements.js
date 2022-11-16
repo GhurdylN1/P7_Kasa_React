@@ -12,7 +12,6 @@ function GetAllLogements() {
       try {
         const response = await lodgingsService.getAll()
         setLogements(response)
-        console.log(response)
       } catch (err) {
         if (err.response) {
           // not in the 200 response range
