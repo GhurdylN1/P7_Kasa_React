@@ -1,4 +1,5 @@
 const dotenv = require('dotenv').config('../.env');
+const cors = require('cors');
 
 const express = require('express');
 const helmet = require("helmet");
@@ -19,12 +20,33 @@ const path = require('path');
 
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
-  });
+const corsOptions ={
+  origin:'http://localhost:3000', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+//     next();
+//   });
+
+// test pour l'auth mais ne fonctionne pas
+// app.use((req, res, next) => {
+//   const corsWhitelist = [
+//       'http://localhost:3000/P7_Kasa_React/',
+//   ];
+//   if (corsWhitelist.includes(req.headers.origin)) {
+//       res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+//       res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+//       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+//   }
+
+//   next();
+// });
 
 app.use(express.json());
 

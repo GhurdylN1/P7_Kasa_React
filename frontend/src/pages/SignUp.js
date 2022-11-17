@@ -63,11 +63,10 @@ const SignUp = () => {
         JSON.stringify({ email, password }),
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: false,
         }
       )
       console.log(response.data)
-      console.log(JSON.stringify(response))
+      // console.log(JSON.stringify(response))
       setSuccess(true)
       // effacer le formulaire
     } catch (err) {
@@ -111,7 +110,7 @@ const SignUp = () => {
               <h1>Créer un compte</h1>
               <form onSubmit={handleSubmit}>
                 <label htmlFor="email">
-                  Email:
+                  Email :
                   <span
                     className={validEMail ? SignUpCSS.valid : SignUpCSS.hide}
                   >
@@ -150,7 +149,7 @@ const SignUp = () => {
                 </p>
 
                 <label htmlFor="password">
-                  Mot de passe:
+                  Mot de passe :
                   <span
                     className={validPassword ? SignUpCSS.valid : SignUpCSS.hide}
                   >

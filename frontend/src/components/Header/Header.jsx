@@ -22,7 +22,7 @@ function Header() {
               Accueil
             </Link>
             <Link to="/P7_Kasa_React/about" className={CssHeader.navAbout}>
-              A Propos
+              À propos
             </Link>
           </nav>
         </>
@@ -32,7 +32,7 @@ function Header() {
             Accueil
           </Link>
           <Link to="/P7_Kasa_React/about" className={CssHeader.navAbout}>
-            A Propos
+            À propos
           </Link>
         </nav>
       )}

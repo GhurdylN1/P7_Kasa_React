@@ -36,14 +36,11 @@ const Login = () => {
         LOGIN_URL,
         JSON.stringify({ email, password }),
         {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: false,
+          headers: { 'Content-Type': 'application/json' }, // le rajouter a l'intercepteur
         }
       )
-      console.log(JSON.stringify(response?.data))
-      //   const accessToken = response?.data?.accessToken
-      //   const roles = response?.data?.roles
-      //   setAuth({ email, password, roles, accessToken })
+      console.log(response?.data)
+
       const token = response?.data?.token
       const userId = response?.data?.userId
       setAuth({ email, password, userId, token })
@@ -90,7 +87,7 @@ const Login = () => {
               </p>
               <h1>Se Connecter</h1>
               <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">Email :</label>
                 <input
                   type="text"
                   id="email"
@@ -100,7 +97,7 @@ const Login = () => {
                   value={email}
                   required
                 />
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">Mot de passe :</label>
                 <input
                   type="password"
                   id="password"
