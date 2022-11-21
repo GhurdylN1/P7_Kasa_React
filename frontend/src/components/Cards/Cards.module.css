@@ -8,7 +8,20 @@
   display: flex;
   justify-content: space-around;
   flex-flow: row wrap;
+  color: #ff6060;
+  animation: appear 1.5s;
 }
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @media (min-width: 768px) {
   .cardBackground {
     margin-top: 44px;

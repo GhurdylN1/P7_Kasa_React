@@ -27,7 +27,6 @@ function GetAllLogements() {
     GetLogements()
   }, [])
 
-  // test avec le composant card
   return (
     <div className={CssCard.cardBackground}>
       {logements.map(({ _id, cover, title }) => (
@@ -35,20 +34,6 @@ function GetAllLogements() {
       ))}
     </div>
   )
-
-  // premier test d'affichage des logements sans css
-  //   return (
-  //     <div>
-  //       {logements.map(({ _id, title, description, location, cover }) => (
-  //         <div key={_id}>
-  //           <img src={cover} alt="appartement" width="300px"></img>
-  //           <div>{title}</div>
-  //           <div>{description}</div>
-  //           <div>{location}</div>
-  //         </div>
-  //       ))}
-  //     </div>
-  //   )
 }
 
 export default GetAllLogements

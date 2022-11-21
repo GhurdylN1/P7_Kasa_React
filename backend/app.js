@@ -28,25 +28,11 @@ const corsOptions ={
 app.use(cors(corsOptions));
 
 // app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+//     res.setHeader('Access-Control-Allow-Origin', '*');
 //     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
 //     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 //     next();
 //   });
-
-// test pour l'auth mais ne fonctionne pas
-// app.use((req, res, next) => {
-//   const corsWhitelist = [
-//       'http://localhost:3000/P7_Kasa_React/',
-//   ];
-//   if (corsWhitelist.includes(req.headers.origin)) {
-//       res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-//       res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-//       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-//   }
-
-//   next();
-// });
 
 app.use(express.json());
 

@@ -40,9 +40,15 @@ function GetUserLogements() {
 
   return (
     <div className={CssCard.cardBackground}>
-      {userLogements.map(({ _id, cover, title }) => (
-        <Card key={_id} id={_id} cover={cover} title={title} />
-      ))}
+      {userLogements.length === 0 ? (
+        <h3> Vos logements s'afficheront ici </h3>
+      ) : (
+        <>
+          {userLogements.map(({ _id, cover, title }) => (
+            <Card key={_id} id={_id} cover={cover} title={title} />
+          ))}
+        </>
+      )}
     </div>
   )
 }

@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 import axios from '../api/ApiKasaMongoDB'
 
 const EMAIL_REGEX = /^[a-zA-Z0-9-_.]+@{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,4}$/
+const USERNAME_REGEX =
+  /^[A-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ][A-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ'0-9-_ ]{2,}$/
 const PASSWORD_REGEX =
   /^(?!.* )(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]{2})(?=.*[!@#$%]).{6,15}$/
 
@@ -15,6 +17,10 @@ const SIGNUP_URL = '/api/auth/signup/'
 const SignUp = () => {
   const userRef = useRef()
   const errRef = useRef()
+
+  const [userName, setUserName] = useState('')
+  const [valideUserName, setValidUserName] = useState(false)
+  const [userNameFocus, setUserNameFocus] = useState(false)
 
   const [email, setEmail] = useState('')
   const [validEMail, setValidEmail] = useState(false)
@@ -36,6 +42,10 @@ const SignUp = () => {
   }, [])
 
   useEffect(() => {
+    setValidUserName(USERNAME_REGEX.test(userName))
+  }, [userName])
+
+  useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email))
   }, [email])
 
@@ -50,17 +60,19 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const fullName = userName // pour corespondre au champ fullName attendu par le Backend
     // si le bouton est activé par un hack
     const v1 = EMAIL_REGEX.test(email)
-    const v2 = PASSWORD_REGEX.test(password)
-    if (!v1 || !v2) {
+    const v2 = USERNAME_REGEX.test(userName)
+    const v3 = PASSWORD_REGEX.test(password)
+    if (!v1 || !v2 || !v3) {
       setErrMsg('Invalid Entry')
       return
     }
     try {
       const response = await axios.post(
         SIGNUP_URL,
-        JSON.stringify({ email, password }),
+        JSON.stringify({ email, fullName, password }),
         {
           headers: { 'Content-Type': 'application/json' },
         }
@@ -146,6 +158,56 @@ const SignUp = () => {
                   }
                 >
                   ⚠ Exemple test@test.com
+                </p>
+
+                <label htmlFor="username">
+                  Nom d'utilisateur :
+                  <span
+                    className={
+                      valideUserName ? SignUpCSS.valid : SignUpCSS.hide
+                    }
+                  >
+                    ✔
+                  </span>
+                  <span
+                    className={
+                      valideUserName || !userName
+                        ? SignUpCSS.hide
+                        : SignUpCSS.invalid
+                    }
+                  >
+                    ❌
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  ref={userRef}
+                  autoComplete="off"
+                  onChange={(e) => setUserName(e.target.value)}
+                  value={userName}
+                  required
+                  aria-invalid={
+                    valideUserName ? SignUpCSS.false : SignUpCSS.true
+                  }
+                  aria-describedby="uidnote"
+                  onFocus={() => setUserNameFocus(true)}
+                  onBlur={() => setUserNameFocus(false)}
+                />
+                <p
+                  id="uidnote"
+                  className={
+                    userNameFocus && userName && !valideUserName
+                      ? SignUpCSS.instructions
+                      : SignUpCSS.offscreen
+                  }
+                >
+                  ⚠ 3 lettres minimum.
+                  <br />
+                  Doit commencer par une lettre.
+                  <br />
+                  Lettres, chiffres, <span aria-label="underscore">_</span>{' '}
+                  <span aria-label="hyphen">-</span> et espaces acceptés.
                 </p>
 
                 <label htmlFor="password">

@@ -10,6 +10,7 @@ import CssLodgings from './Lodgings.module.css'
 import Slideshow from '../../components/Slideshow/Slideshow'
 import Collapse from '../../components/Collapse/Collapse'
 import { Link } from 'react-router-dom'
+import defaultPicture from '../../assets/defaultProfilePict.png'
 
 function Lodging() {
   const urlId = useParams().id // récupération de l'id dans l'url
@@ -90,6 +91,12 @@ function Lodging() {
     return <Error404 />
   }
 
+  // on veut afficher une image de profil par défault si l'utilisateur n'en as pas encore.
+  const avatarImage =
+    dataUser.profilePict !== undefined && dataUser.profilePict !== null
+      ? `${dataUser.profilePict}`
+      : defaultPicture
+
   return (
     <div className="mainContainer">
       <div className="container">
@@ -115,7 +122,7 @@ function Lodging() {
                   <div className={CssLodgings.pictContainer}>
                     <img
                       className={CssLodgings.hostPicture}
-                      src={dataUser.profilePict}
+                      src={avatarImage}
                       alt="hebergeur"
                     />
                   </div>

@@ -7,6 +7,7 @@ import Error404 from '../Error404/Error404'
 import CssLodgings from '../Lodgings/Lodgings.module.css'
 import usersService from '../../services/usersService'
 import GetUserLogements from '../../components/GetUserLogements'
+import defaultPicture from '../../assets/defaultProfilePict.png'
 
 function UserProfile() {
   const urlUserId = useParams().id
@@ -49,7 +50,14 @@ function UserProfile() {
     return <Error404 />
   }
 
-  const name = dataUser.fullName.split(' ') // on sépare le nom du prénom dans les données
+  // on sépare le nom du prénom dans les données
+  const name = dataUser.fullName.split(' ')
+
+  // on veut afficher une image de profil par défault si l'utilisateur n'en as pas encore.
+  const avatarImage =
+    dataUser.profilePict !== undefined && dataUser.profilePict !== null
+      ? `${dataUser.profilePict}`
+      : defaultPicture
 
   return (
     <div className="mainContainer">
@@ -73,7 +81,7 @@ function UserProfile() {
                   <div className={CssLodgings.pictContainer}>
                     <img
                       className={CssLodgings.hostPicture}
-                      src={dataUser.profilePict}
+                      src={avatarImage}
                       alt="hebergeur"
                     />
                   </div>
@@ -83,21 +91,28 @@ function UserProfile() {
             <br></br>
             <div>
               <div className={CssLodgings.location}>
-                {dataUser.hostDescription}
+                {dataUser.hostDescription !== undefined &&
+                dataUser.hostDescription !== null ? (
+                  dataUser.hostDescription
+                ) : (
+                  <p> {name[0]} n'a pas encore rempli sa présentation </p>
+                )}
               </div>
             </div>
             <br></br>
             <div className={CssLodgings.location}>
               Voici ce que {name[0]} vous propose :
             </div>
-            <br />
-            <div className={CssLodgings.location}>
-              Pour contacter {name[0]} :{' '}
-              <a href={`mailto:${dataUser.email}`}> envoyer un email </a>
-            </div>
           </section>
         )}
         <GetUserLogements />
+        <br />
+        <section>
+          <div className={CssLodgings.location}>
+            Pour contacter {name[0]} :{' '}
+            <a href={`mailto:${dataUser.email}`}> envoyer un email </a>
+          </div>
+        </section>
       </div>
       <Footer />
     </div>

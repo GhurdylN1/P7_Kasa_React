@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 const LOGIN_URL = '/api/auth/login/'
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext)
+  const { auth, setAuth } = useContext(AuthContext)
 
   const userRef = useRef()
   const errRef = useRef()
@@ -59,6 +59,8 @@ const Login = () => {
     }
   }
 
+  const userId = auth.userId // récupération de l'userId pour la redirection vers la page de profil utilisateur
+
   return (
     <div className="mainContainer">
       <div className="container">
@@ -68,9 +70,12 @@ const Login = () => {
             <div className={LoginCSS.sectionSignUp}>
               <h1> Connexion réussie </h1>
               <p>
-                <Link className={LoginCSS.aReg} to="/P7_Kasa_React/home">
+                <Link
+                  className={LoginCSS.aReg}
+                  to={`/P7_Kasa_React/profile/${userId}`}
+                >
                   {' '}
-                  Bonne visite !{' '}
+                  Votre Profil{' '}
                 </Link>
               </p>
             </div>
