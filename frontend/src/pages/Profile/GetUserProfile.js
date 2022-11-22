@@ -7,9 +7,14 @@ import Error404 from '../Error404/Error404'
 import CssLodgings from '../Lodgings/Lodgings.module.css'
 import usersService from '../../services/usersService'
 import GetUserLogements from '../../components/GetUserLogements'
-import defaultPicture from '../../assets/defaultProfilePict.png'
+import defaultUserPicture from '../../assets/defaultProfilePict.png'
+import AuthContext from '../../context/AuthProvider'
+import { useContext } from 'react'
 
 function UserProfile() {
+  // le token et l'userId restent présent tant qu'on ne rafraichit pas la page
+  const { auth } = useContext(AuthContext)
+
   const urlUserId = useParams().id
   const [loading, setLoading] = useState(true)
   const [error404, setError404] = useState(false)
@@ -57,7 +62,9 @@ function UserProfile() {
   const avatarImage =
     dataUser.profilePict !== undefined && dataUser.profilePict !== null
       ? `${dataUser.profilePict}`
-      : defaultPicture
+      : defaultUserPicture
+
+  console.log(auth.userId, auth.token)
 
   return (
     <div className="mainContainer">
@@ -91,6 +98,7 @@ function UserProfile() {
             <br></br>
             <div>
               <div className={CssLodgings.location}>
+                {/* On affiche un message different si l'utilisateur n'a pas encore de présentation */}
                 {dataUser.hostDescription !== undefined &&
                 dataUser.hostDescription !== null ? (
                   dataUser.hostDescription

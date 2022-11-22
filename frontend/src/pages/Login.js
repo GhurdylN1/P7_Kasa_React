@@ -39,6 +39,7 @@ const Login = () => {
           headers: { 'Content-Type': 'application/json' }, // le rajouter a l'intercepteur
         }
       )
+      console.log('-------> userId et token')
       console.log(response?.data)
 
       const token = response?.data?.token
@@ -68,14 +69,13 @@ const Login = () => {
         {success ? (
           <div className={LoginCSS.bgSection}>
             <div className={LoginCSS.sectionSignUp}>
-              <h1> Connexion réussie </h1>
+              <h1>Connexion réussie !</h1>
               <p>
                 <Link
                   className={LoginCSS.aReg}
                   to={`/P7_Kasa_React/profile/${userId}`}
                 >
-                  {' '}
-                  Votre Profil{' '}
+                  Aller sur votre profil
                 </Link>
               </p>
             </div>
