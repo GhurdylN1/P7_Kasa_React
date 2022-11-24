@@ -13,6 +13,8 @@ function Header() {
 
   const signOut = () => {
     setAuth({})
+    console.log('----> userId et token supprimés du contexte')
+    console.log(auth.data)
   }
 
   const urlId = useParams().id // récupération de l'id dans l'url
@@ -26,11 +28,12 @@ function Header() {
       {(location === '/home' && auth.token && auth.userId) ||
       (location === '/about' && auth.token && auth.userId) ||
       (location === `/profile/${urlId}` && auth.token && auth.userId) ||
-      (location === `/lodgings/${urlId}` && auth.token && auth.userId) ? (
+      (location === `/lodgings/${urlId}` && auth.token && auth.userId) ||
+      (location === '/formlogement' && auth.token && auth.userId) ? (
         <>
           <nav className={CssHeader.navHeader}>
             <Link
-              to="/P7_Kasa_React/"
+              to="/P7_Kasa_React"
               className={CssHeader.navHome}
               onClick={signOut}
             >
@@ -46,7 +49,7 @@ function Header() {
             </Link>
           </nav>
         </>
-      ) : location === '/' ? (
+      ) : location === '' || location === '/' ? (
         <>
           <nav className={CssHeader.navHeader}>
             <Link to="/P7_Kasa_React/home" className={CssHeader.navHome}>
@@ -60,7 +63,7 @@ function Header() {
       ) : (
         <>
           <nav className={CssHeader.navHeader}>
-            <Link to="/P7_Kasa_React/" className={CssHeader.navHome}>
+            <Link to="/P7_Kasa_React" className={CssHeader.navHome}>
               Se connecter
             </Link>
           </nav>

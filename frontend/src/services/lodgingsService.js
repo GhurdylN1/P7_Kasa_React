@@ -1,22 +1,81 @@
 import api from '../api/ApiKasaMongoDB'
 // import Lodgings from '../data/logements.json'
 
-const lodgingsService = {
-  getAll: async () => {
-    return (await api.get('/api/logements')).data
-  },
+// test interceptor axios qui fonctionne mais useEffect en boucle infinie si on ne laisse pas un array vide [] (et dans les autres composants)
 
-  getByUserID: async (userId) => {
-    return (await api.get(`api/logements/byUserId/${userId}`)).data
-  },
+import { useContext, useEffect } from 'react'
+import AuthContext from '../context/AuthProvider'
 
-  getByLodgingId: async (_id) => {
-    return (await api.get(`api/logements/${_id}`)).data
-  },
+const useLodgingsService = () => {
+  const { auth } = useContext(AuthContext)
+
+  useEffect(() => {
+    const requestIntercept = api.interceptors.request.use(
+      (config) => {
+        // console.log('auth.token', auth.token)
+        if (auth.token) {
+          config.headers['Authorization'] = `Bearer ${auth.token}`
+        }
+        return config
+      },
+      (error) => Promise.reject(error)
+    )
+
+    const responseIntercept = api.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        const prevRequest = error?.config
+        if (error?.response?.status === 403 && !prevRequest?.sent) {
+          prevRequest.sent = true
+          return api(prevRequest)
+        }
+        return Promise.reject(error)
+      }
+    )
+
+    return () => {
+      api.interceptors.request.eject(requestIntercept)
+      api.interceptors.response.eject(responseIntercept)
+    }
+  }, [])
+
+  const lodgingsService = {
+    getAll: async () => {
+      return (await api.get('/api/logements')).data
+    },
+
+    getByUserID: async (userId) => {
+      return (await api.get(`api/logements/byUserId/${userId}`)).data
+    },
+
+    getByLodgingId: async (_id) => {
+      return (await api.get(`api/logements/${_id}`)).data
+    },
+  }
+
+  return lodgingsService
 }
 
-export default lodgingsService
+export default useLodgingsService
 
+// avant test interceptor axios
+// const lodgingsService = {
+//   getAll: async () => {
+//     return (await api.get('/api/logements')).data
+//   },
+
+//   getByUserID: async (userId) => {
+//     return (await api.get(`api/logements/byUserId/${userId}`)).data
+//   },
+
+//   getByLodgingId: async (_id) => {
+//     return (await api.get(`api/logements/${_id}`)).data
+//   },
+// }
+
+// export default lodgingsService
+
+// avant le backend
 // const lodgingsService = {
 //   getAll: () => {
 //     return Lodgings

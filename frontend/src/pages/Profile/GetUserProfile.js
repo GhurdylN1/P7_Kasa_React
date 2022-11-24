@@ -5,15 +5,19 @@ import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import Error404 from '../Error404/Error404'
 import CssLodgings from '../Lodgings/Lodgings.module.css'
-import usersService from '../../services/usersService'
+import useUsersService from '../../services/usersService'
+// import usersService from '../../services/usersService'
 import GetUserLogements from '../../components/GetUserLogements'
 import defaultUserPicture from '../../assets/defaultProfilePict.png'
 import AuthContext from '../../context/AuthProvider'
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 
 function UserProfile() {
   // le token et l'userId restent présent tant qu'on ne rafraichit pas la page
   const { auth } = useContext(AuthContext)
+
+  const usersService = useUsersService() // pour test interceptor axios
 
   const urlUserId = useParams().id
   const [loading, setLoading] = useState(true)
@@ -48,7 +52,7 @@ function UserProfile() {
       }
     }
     pushDataUser()
-  }, [urlUserId])
+  }, []) // array vide sinon boucle infinie
 
   if (error404 && !loading) {
     // on retourne la page Error404 si les données son incorrectes
@@ -113,6 +117,18 @@ function UserProfile() {
             </div>
           </section>
         )}
+        <section>
+          {urlUserId === auth.userId && (
+            <>
+              <br />
+              <Link to="/P7_Kasa_React/formlogement">
+                <h3>Créer un logement</h3>
+              </Link>
+              <br />
+              <h3>Modifier votre profil</h3>
+            </>
+          )}
+        </section>
         <GetUserLogements />
         <br />
         <section>

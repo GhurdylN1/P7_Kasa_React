@@ -4,8 +4,10 @@ import { useParams } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import Error404 from '../Error404/Error404'
-import lodgingsService from '../../services/lodgingsService'
-import usersService from '../../services/usersService'
+import uselodgingsService from '../../services/lodgingsService'
+// import lodgingsService from '../../services/lodgingsService'
+import useUsersService from '../../services/usersService'
+// import usersService from '../../services/usersService'
 import CssLodgings from './Lodgings.module.css'
 import Slideshow from '../../components/Slideshow/Slideshow'
 import Collapse from '../../components/Collapse/Collapse'
@@ -14,6 +16,10 @@ import defaultPicture from '../../assets/defaultProfilePict.png'
 
 function Lodging() {
   const urlId = useParams().id // récupération de l'id dans l'url
+
+  const lodgingsService = uselodgingsService() // pour test interceptor axios
+  const usersService = useUsersService() // pour test interceptor axios
+
   const [loading, setLoading] = useState(true)
   const [error404, setError404] = useState(false)
   const [dataLodging, setdataLodging] = useState({
@@ -54,7 +60,7 @@ function Lodging() {
       }
     }
     pushDataLodging()
-  }, [urlId])
+  }, []) // array vide sinon boucle infinie
 
   const idUser = dataLodging.userId // on récupere l'id de l'hébergeur
   const [dataUser, setdataUser] = useState({
@@ -84,7 +90,7 @@ function Lodging() {
       }
     }
     pushDataUser()
-  }, [idUser])
+  }, [idUser]) // array sans "usersService" sinon boucle infinie
 
   if (error404 && !loading) {
     // on retourne la page Error404 si l'id de l'url ne se trouve pas dans les données de l'api

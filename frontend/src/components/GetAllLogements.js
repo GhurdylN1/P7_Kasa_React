@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import CssCard from '../components/Cards/Cards.module.css'
-import lodgingsService from '../services/lodgingsService'
+import uselodgingsService from '../services/lodgingsService'
+// import lodgingsService from '../services/lodgingsService'
 import Card from './Card/Card'
 
 function GetAllLogements() {
   const [logements, setLogements] = useState([])
+
+  const lodgingsService = uselodgingsService() // pour test interceptor axios
 
   useEffect(() => {
     const GetLogements = async () => {
@@ -19,13 +22,13 @@ function GetAllLogements() {
           console.log(err.response.status)
           console.log(err.response.headers)
         } else {
-          console.log(`Error: ceci est une erreur`)
+          console.log(JSON.stringify(err))
         }
       }
     }
 
     GetLogements()
-  }, [])
+  }, []) // array vide sinon boucle infinie
 
   return (
     <div className={CssCard.cardBackground}>
