@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const logementsSchema = mongoose.Schema({ 
     userId: { type: String, required: true },
     title: { type: String, required: true },
-    cover: { type: String, required: true },
+    cover: { type: String },
     pictures : { type: [String], },
     description: { type: String, required: true },
     // note moyenne

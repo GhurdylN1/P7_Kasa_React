@@ -25,6 +25,12 @@ const FormLogement = () => {
 
   const [location, setLocation] = useState('')
 
+  const [equipements, setEquipements] = useState([])
+  const [equipementsFocus, setEquipementsFocus] = useState(false)
+
+  const [tags, setTags] = useState([])
+  const [tagsFocus, setTagsFocus] = useState(false)
+
   const [errMsg, setErrMsg] = useState('')
   const [success, setSuccess] = useState(false)
 
@@ -40,9 +46,15 @@ const FormLogement = () => {
     e.preventDefault()
     let formData = new FormData()
     let cover = document.getElementById('image').files[0]
+    // let pictures = [document.getElementById('pictures').files]
     console.log(cover)
+    // console.log(pictures)
 
     formData.append('image', cover)
+
+    // for (let i = 0; i < pictures.length; i++) {
+    //   formData.append('pictures', pictures[i])
+    // }
 
     formData.append('logement', [
       JSON.stringify({
@@ -50,6 +62,8 @@ const FormLogement = () => {
         title,
         description,
         location,
+        equipements,
+        tags,
       }),
     ])
     try {
@@ -102,7 +116,7 @@ const FormLogement = () => {
               </p>
               <h1>Créer un logement</h1>
               <form onSubmit={handleSubmit}>
-                <label htmlFor="text">Titre du logement :</label>
+                <label htmlFor="text">Titre :</label>
                 <input
                   type="text"
                   id="title"
@@ -111,20 +125,8 @@ const FormLogement = () => {
                   onChange={(e) => setTitle(e.target.value)}
                   value={title}
                   required
-                  aria-describedby="uidnote"
                 />
-                <label htmlFor="text">Description du logement :</label>
-                <input
-                  type="text"
-                  id="description"
-                  ref={userRef}
-                  autoComplete="off"
-                  onChange={(e) => setDescription(e.target.value)}
-                  value={description}
-                  required
-                  aria-describedby="uidnote"
-                />
-                <label htmlFor="text">Lieu du logement :</label>
+                <label htmlFor="text">Lieu :</label>
                 <input
                   type="text"
                   id="location"
@@ -133,19 +135,83 @@ const FormLogement = () => {
                   onChange={(e) => setLocation(e.target.value)}
                   value={location}
                   required
-                  aria-describedby="uidnote"
                 />
+                <label htmlFor="text">Description :</label>
+                <input
+                  type="text"
+                  id="description"
+                  ref={userRef}
+                  autoComplete="off"
+                  onChange={(e) => setDescription(e.target.value)}
+                  value={description}
+                  required
+                />
+                <label htmlFor="text">Équipements :</label>
+                <input
+                  type="text"
+                  id="équipements"
+                  ref={userRef}
+                  autoComplete="off"
+                  onChange={(e) => setEquipements(e.target.value.split(','))}
+                  value={equipements}
+                  required
+                  aria-describedby="uidnote"
+                  onFocus={() => setTagsFocus(true)}
+                  onBlur={() => setTagsFocus(false)}
+                />
+                <p
+                  id="uidnote"
+                  className={
+                    tagsFocus && tags
+                      ? SignUpCSS.instructions
+                      : SignUpCSS.offscreen
+                  }
+                >
+                  ⚠ Merci de séparer les differents équipements par des virgules
+                </p>
+                <label htmlFor="text">Tags :</label>
+                <input
+                  type="text"
+                  id="tags"
+                  ref={userRef}
+                  autoComplete="off"
+                  onChange={(e) => setTags(e.target.value.split(','))}
+                  value={tags}
+                  required
+                  aria-describedby="uidnote"
+                  onFocus={() => setEquipementsFocus(true)}
+                  onBlur={() => setEquipementsFocus(false)}
+                />
+                <p
+                  id="uidnote"
+                  className={
+                    equipementsFocus && equipements
+                      ? SignUpCSS.instructions
+                      : SignUpCSS.offscreen
+                  }
+                >
+                  ⚠ Merci de séparer les differents tags par des virgules
+                </p>
                 <label htmlFor="image">Image de présentation:</label>
                 <input
                   accept="image/png, image/jpeg, image/jpg"
-                  multiple
                   name="image"
                   type="file"
                   id="image"
                   ref={userRef}
                   required
-                  aria-describedby="uidnote"
                 />
+                {/* <label htmlFor="image">Photos de votre logement:</label>
+                <input
+                  accept="image/png, image/jpeg, image/jpg"
+                  multiple
+                  encType="multipart/form-data"
+                  name="pictures"
+                  type="file"
+                  id="pictures"
+                  ref={userRef}
+                  required
+                /> */}
                 <button>Valider</button>
               </form>
             </div>

@@ -12,7 +12,8 @@ exports.createLogement = (req, res, next) => {
   const logement = new Logement ({
     ...logementObject,
     userId: req.auth.userId,
-    cover: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    cover: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    // pictures: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` // pour l'upload des images dans l'array pictures
   });
 
   logement.save()
