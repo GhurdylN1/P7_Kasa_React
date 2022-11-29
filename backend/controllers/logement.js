@@ -5,15 +5,19 @@ const sanitize = require('mongo-sanitize'); // se proteger des injections divers
 // création des logements
 
 exports.createLogement = (req, res, next) => {
-  console.log(req.body.logement)
+  // console.log(req.body.logement)
+  console.log(req.files)
   const logementObject = JSON.parse(sanitize(req.body.logement)); // exemple d'utilisation de sanitize
   delete logementObject._id;
   delete logementObject._userId;
   const logement = new Logement ({
     ...logementObject,
     userId: req.auth.userId,
-    cover: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-    // pictures: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` // pour l'upload des images dans l'array pictures
+    cover: `${req.protocol}://${req.get('host')}/images/${req.files.image[0].filename}`,
+    pictures: req.files.pictures.map(file => `${req.protocol}://${req.get('host')}/images/${file.filename}`)
+    // cover: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    // pictures: req.files.pictures.map(file => "/images/" + file.filename)
+    // pictures: req.files.map(file => "/images/" + file.filename)
   });
 
   logement.save()

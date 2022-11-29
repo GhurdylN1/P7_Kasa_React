@@ -46,15 +46,15 @@ const FormLogement = () => {
     e.preventDefault()
     let formData = new FormData()
     let cover = document.getElementById('image').files[0]
-    // let pictures = [document.getElementById('pictures').files]
     console.log(cover)
-    // console.log(pictures)
+    let pictures = document.getElementById('pictures').files
+    console.log(pictures)
 
     formData.append('image', cover)
 
-    // for (let i = 0; i < pictures.length; i++) {
-    //   formData.append('pictures', pictures[i])
-    // }
+    for (let i = 0; i < pictures.length; i++) {
+      formData.append('pictures', pictures[i])
+    }
 
     formData.append('logement', [
       JSON.stringify({
@@ -201,17 +201,16 @@ const FormLogement = () => {
                   ref={userRef}
                   required
                 />
-                {/* <label htmlFor="image">Photos de votre logement:</label>
+                <label htmlFor="image">Photos de votre logement:</label>
                 <input
                   accept="image/png, image/jpeg, image/jpg"
                   multiple
-                  encType="multipart/form-data"
                   name="pictures"
                   type="file"
                   id="pictures"
                   ref={userRef}
                   required
-                /> */}
+                />
                 <button>Valider</button>
               </form>
             </div>

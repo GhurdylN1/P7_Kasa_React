@@ -34,6 +34,5 @@ const uploadImg = multer({
     },
 })
 
-module.exports = uploadImg.single('image')
-// test pour le multi upload d'images mais ça ne fonctionne pas encore
-// module.exports = uploadImg.single('image'), uploadImg.array('pictures', 10)
+module.exports = uploadImg
+// module.exports = uploadImg.single('image')

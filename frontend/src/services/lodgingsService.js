@@ -58,6 +58,13 @@ const useLodgingsService = () => {
 
 export default useLodgingsService
 
+// function mapperTransformUrlBackend(response) {
+//   response.pictures = response.pictures.map(
+//     (picture) => 'http://localhost:5000' + picture
+//   )
+//   return response
+// }
+
 // avant test interceptor axios
 // const lodgingsService = {
 //   getAll: async () => {

@@ -117,9 +117,9 @@ function Lodging() {
                   {dataLodging.location}
                 </div>
                 <div className={CssLodgings.tagsContainer}>
-                  {dataLodging.tags.map((tags) => (
-                    <div className={CssLodgings.tag} key={tags + urlId}>
-                      {tags}
+                  {dataLodging.tags.map((tag, index) => (
+                    <div className={CssLodgings.tag} key={index}>
+                      {tag}
                     </div>
                   ))}
                 </div>
