@@ -28,22 +28,44 @@ exports.createLogement = (req, res, next) => {
 // modification des logements
 
   exports.modifyLogement = (req, res, next) => {
-    if (req.file) {
+    if (req.files) {
       Logement.findOne({_id: req.params.id})
       .then((logement) => {
         // récupération de l'image a supprimer si modification
         const filename = logement.cover.split('/images/')[1];
+        const picturesArray = logement.pictures
+        // picturesArray.forEach((element) => {
+        //   const picturesFilenames = element.split('http://localhost:5000/images/')[1];
+        //   console.log(picturesFilenames)
+        // })        
+        // for (const element of picturesArray) {
+        //   const picturesFilenames = element.split('http://localhost:5000/images/')[1];
+        //   console.log(picturesFilenames)
+        // }
+        // console.log(" ")
+        // console.log(filename)
+        // console.log(picturesArray)
+
         // suppression de l'ancienne image
         fs.unlink(`images/${filename}`, (error) => {
           if(error) throw error;
         })
+
+        // suppression des "pictures"
+        for (const element of picturesArray) {
+          fs.unlink(`images/${element.split('http://localhost:5000/images/')[1]}`, (error) => {
+            if(error) throw error;
+          })
+        }
       })
       .catch((error) => res.status(404).json({ error }))
     }
     // mise a jour de la DB: utilisation d'un opérateur ternaire : qui permet de simplifier une condition if else
-    const logementObject = req.file ? {
+    const logementObject = req.files ? {
       ...JSON.parse(sanitize(req.body.logement)),
-      cover: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      cover: `${req.protocol}://${req.get('host')}/images/${req.files.image[0].filename}`,
+      pictures: req.files.pictures.map(file => `${req.protocol}://${req.get('host')}/images/${file.filename}`)
+      // cover: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
 
     delete logementObject._userId;

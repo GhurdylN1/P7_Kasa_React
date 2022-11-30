@@ -125,7 +125,9 @@ function UserProfile() {
                 <h3>Créer un logement</h3>
               </Link>
               <br />
-              <h3>Modifier votre profil</h3>
+              <Link to="/P7_Kasa_React/formprofile">
+                <h3>Modifier votre profil</h3>
+              </Link>
             </>
           )}
         </section>

@@ -29,7 +29,8 @@ function Header() {
       (location === '/about' && auth.token && auth.userId) ||
       (location === `/profile/${urlId}` && auth.token && auth.userId) ||
       (location === `/lodgings/${urlId}` && auth.token && auth.userId) ||
-      (location === '/formlogement' && auth.token && auth.userId) ? (
+      (location === '/formlogement' && auth.token && auth.userId) ||
+      (location === '/formprofile' && auth.token && auth.userId) ? (
         <>
           <nav className={CssHeader.navHeader}>
             <Link
