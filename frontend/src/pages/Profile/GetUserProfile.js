@@ -124,10 +124,10 @@ function UserProfile() {
               <Link to="/P7_Kasa_React/formlogement">
                 <h3>Créer un logement</h3>
               </Link>
-              <br />
-              <Link to="/P7_Kasa_React/formprofile">
-                <h3>Modifier votre profil</h3>
-              </Link>
+              {/* <br />
+              <Link to={`/P7_Kasa_React/formprofile/${auth.userId}`}>
+                <h3>Éditer votre profil</h3>
+              </Link> */}
             </>
           )}
         </section>

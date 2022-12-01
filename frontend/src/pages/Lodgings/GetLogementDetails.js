@@ -14,8 +14,14 @@ import Collapse from '../../components/Collapse/Collapse'
 import { Link } from 'react-router-dom'
 import defaultPicture from '../../assets/defaultProfilePict.png'
 
+import AuthContext from '../../context/AuthProvider'
+import { useContext } from 'react'
+
 function Lodging() {
   const urlId = useParams().id // récupération de l'id dans l'url
+
+  const { auth } = useContext(AuthContext)
+  console.log(auth.userId, auth.token)
 
   const lodgingsService = uselodgingsService() // pour test interceptor axios
   const usersService = useUsersService() // pour test interceptor axios
@@ -107,6 +113,16 @@ function Lodging() {
     <div className="mainContainer">
       <div className="container">
         <Header />
+        <section>
+          {auth.userId === idUser && (
+            <>
+              <Link to={`/P7_Kasa_React/updateformlogement/${urlId}`}>
+                <h3>Modifier le logement</h3>
+              </Link>
+            </>
+          )}
+        </section>
+        <br />
         {dataLodging && (
           <section>
             <Slideshow data={dataLodging.pictures} />
