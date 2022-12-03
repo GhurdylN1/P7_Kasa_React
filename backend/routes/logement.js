@@ -7,7 +7,7 @@ const multer = require('../middleware/multer-config');
 const logementCtrl = require('../controllers/logement');
 
 router.post('/', auth, multer.fields([{name:'image', maxCount: 1},{name:'pictures', maxCount: 8}]), logementCtrl.createLogement);
-// router.post("/:id/like", auth, logementCtrl.voteLogement);
+router.post('/:id/rating', auth, logementCtrl.voteLogement);
 router.put('/:id', auth, multer.fields([{name:'image', maxCount: 1},{name:'pictures', maxCount: 8}]), logementCtrl.modifyLogement);
 router.delete('/:id', auth, logementCtrl.deleteLogement);
 // router.get('/:id', auth, logementCtrl.getOneLogement);

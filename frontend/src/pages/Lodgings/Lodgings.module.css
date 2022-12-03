@@ -91,7 +91,15 @@
   width: 30px;
   height: 30px;
   padding: 5px;
-  animation: appear 2.5s;
+  /* animation: appear 2.5s; */
+}
+
+.starList {
+  list-style: none;
+}
+
+.starListItem {
+  display: inline;
 }
 
 .collapseHostContainer {

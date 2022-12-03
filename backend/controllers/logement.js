@@ -28,45 +28,49 @@ exports.createLogement = (req, res, next) => {
 // modification des logements
 
   exports.modifyLogement = (req, res, next) => {
-    if (req.files) {
-      Logement.findOne({_id: req.params.id})
-      .then((logement) => {
-        // récupération de l'image a supprimer si modification
-        const filename = logement.cover.split('/images/')[1];
-        const picturesArray = logement.pictures
-        // picturesArray.forEach((element) => {
-        //   const picturesFilenames = element.split('http://localhost:5000/images/')[1];
-        //   console.log(picturesFilenames)
-        // })        
-        // for (const element of picturesArray) {
-        //   const picturesFilenames = element.split('http://localhost:5000/images/')[1];
-        //   console.log(picturesFilenames)
-        // }
-        // console.log(" ")
-        // console.log(filename)
-        // console.log(picturesArray)
-
-        // suppression de l'ancienne image
-        fs.unlink(`images/${filename}`, (error) => {
-          if(error) throw error;
-        })
-
-        // suppression des "pictures"
-        for (const element of picturesArray) {
-          fs.unlink(`images/${element.split('http://localhost:5000/images/')[1]}`, (error) => {
-            if(error) throw error;
-          })
-        }
-      })
-      .catch((error) => res.status(404).json({ error }))
-    }
-    // mise a jour de la DB: utilisation d'un opérateur ternaire : qui permet de simplifier une condition if else
+    // mise a jour de la DB
     const logementObject = req.files ? {
       ...JSON.parse(sanitize(req.body.logement)),
       cover: `${req.protocol}://${req.get('host')}/images/${req.files.image[0].filename}`,
       pictures: req.files.pictures.map(file => `${req.protocol}://${req.get('host')}/images/${file.filename}`)
       // cover: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
+
+    //puis on demande de supprimer les anciennes images s'il y en avait déjà
+    if (req.files) {
+      Logement.findOne({_id: req.params.id})
+      .then((logement) => {
+        if(logement.cover && logement.pictures) {
+          // récupération de l'image a supprimer si modification
+          const filename = logement.cover.split('/images/')[1];
+          const picturesArray = logement.pictures
+          // picturesArray.forEach((element) => {
+          //   const picturesFilenames = element.split('http://localhost:5000/images/')[1];
+          //   console.log(picturesFilenames)
+          // })        
+          // for (const element of picturesArray) {
+          //   const picturesFilenames = element.split('http://localhost:5000/images/')[1];
+          //   console.log(picturesFilenames)
+          // }
+          // console.log(" ")
+          // console.log(filename)
+          // console.log(picturesArray)
+  
+          // suppression de l'ancienne image
+          fs.unlink(`images/${filename}`, (error) => {
+            if(error) throw error;
+          })
+  
+          // suppression des "pictures"
+          for (const element of picturesArray) {
+            fs.unlink(`images/${element.split('http://localhost:5000/images/')[1]}`, (error) => {
+              if(error) throw error;
+            })
+          }
+        }
+      })
+      .catch((error) => res.status(404).json({ error }))
+    }
 
     delete logementObject._userId;
     Logement.findOne({_id: req.params.id})
@@ -124,6 +128,25 @@ exports.createLogement = (req, res, next) => {
     .then(logements => res.status(200).json(logements))
     .catch(error => res.status(400).json({ error }));
     };
+
+
+
+// test systeme de vote par étoiles WORK IN PROGRESS
+exports.voteLogement = (req, res, next) => {
+  Logement.findOne({_id: req.params.id})
+  .then((logement) => {
+    const rating = logement.averageRating
+    console.log(rating)
+  
+  if (rating === 0) {
+    Logement.updateOne({_id: req.params.id}, {
+      $push: { averageRating: req.body.averageRating }
+    })
+    .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
+    .catch((error) => res.status(401).json({ error }));
+  }
+})
+}
 
 
 // Fonctionalité Likes et Dislikes (à modifier pour le systeme de notation a étoiles)
