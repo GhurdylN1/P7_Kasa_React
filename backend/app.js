@@ -41,8 +41,8 @@ app.use('/api/users', userRoutes); // test axios
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use((error, req, res, next) => {
-  console.log('This is the rejected field ->', error.field);
-});
+// app.use((error, req, res, next) => {
+//   console.log('This is the rejected field ->', error.field);
+// });
 
 module.exports = app;

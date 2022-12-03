@@ -12,14 +12,9 @@ import { useParams } from 'react-router-dom'
 
 const UpdateFormLogement = () => {
   const { auth } = useContext(AuthContext)
-  console.log(' ')
-  console.log(auth.userId)
-  console.log(auth.token)
 
   const urlId = useParams().id
   const LOGEMENT_PUT_URL = `/api/logements/${urlId}`
-  console.log(' ')
-  console.log(urlId)
 
   const userId = auth.userId
 

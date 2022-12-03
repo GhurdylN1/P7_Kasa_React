@@ -20,6 +20,7 @@ const FormProfile = () => {
   const userRef = useRef()
   const errRef = useRef()
 
+  // const [fullName, setFullName] = useState('')
   const [hostDescription, setHostDescription] = useState('')
 
   const [errMsg, setErrMsg] = useState('')
@@ -45,6 +46,7 @@ const FormProfile = () => {
 
     formData.append('user', [
       JSON.stringify({
+        // fullName,
         hostDescription,
       }),
     ])
@@ -77,7 +79,7 @@ const FormProfile = () => {
             {success ? (
               <div className={SignUpCSS.bgSection}>
                 <div className={SignUpCSS.sectionSignUp}>
-                  <h1> Logement modifié ! </h1>
+                  <h1> Profil Edité ! </h1>
                   <p>
                     <Link
                       className={SignUpCSS.aReg}
@@ -101,22 +103,23 @@ const FormProfile = () => {
                   </p>
                   <h1>Éditer votre profil</h1>
                   <form onSubmit={handleSubmit}>
-                    {/* <form onSubmit={handleSubmit}> */}
                     {/* <label htmlFor="text">Nom d'utilisateur :</label>
-              <input
-                readOnly
-                placeholder="Nom d'utilisateur"
-                type="text"
-                id="fullName"
-                ref={userRef}
-                autoComplete="off"
-                onChange={(e) => setFullName(e.target.value)}
-                value={fullName}
-                required
-              /> */}
+                    <input
+                      // readOnly
+                      // placeholder="Nom d'utilisateur"
+                      type="text"
+                      name="fullName"
+                      id="fullName"
+                      ref={userRef}
+                      autoComplete="off"
+                      onChange={(e) => setFullName(e.target.value)}
+                      value={fullName}
+                      required
+                    /> */}
                     <label htmlFor="text"> Message de présentation :</label>
                     <input
                       type="text"
+                      name="hostDescription"
                       id="hostDescription"
                       ref={userRef}
                       autoComplete="off"
