@@ -39,7 +39,7 @@ function Lodging() {
 
   const [hoverIndex, setHoverIndex] = useState(0)
   const [rating, setRating] = useState(0)
-  console.log(rating)
+  // console.log(rating)
 
   const [loading, setLoading] = useState(true)
   const [error404, setError404] = useState(false)
@@ -148,21 +148,31 @@ function Lodging() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    let formData = new FormData()
+    // let formData = new FormData()
 
     const averageRating = rating
 
-    formData.append('logement', [
-      JSON.stringify({
-        averageRating,
-      }),
-    ])
+    // formData.append('logement', [
+    //   JSON.stringify({
+    //     averageRating: averageRating,
+    //   }),
+    // ])
+    // try {
+    //   const response = await axios.post(LOGEMENT_POST_URL, formData, {
+    //     headers: {
+    //       Authorization: `Bearer ${auth.token}`,
+    //     },
+    //   })
     try {
-      const response = await axios.post(LOGEMENT_POST_URL, formData, {
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-        },
-      })
+      const response = await axios.post(
+        LOGEMENT_POST_URL,
+        { averageRating },
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        }
+      )
 
       console.log(response.data)
       // console.log(JSON.stringify(response))
@@ -196,16 +206,18 @@ function Lodging() {
             <Slideshow data={dataLodging.pictures} />
             <div className={CssLodgings.hostContainer}>
               <div className={CssLodgings.leftContainer}>
-                <div className={CssLodgings.starsContainer}>
-                  {rateStar.map((stars, index) => (
-                    <img
-                      key={stars + urlId + index}
-                      className={CssLodgings.starPicture}
-                      src={stars ? StarFull : StarEmpty}
-                      alt={stars ? 'red star' : 'grey star'}
-                    />
-                  ))}
-                </div>
+                {auth.userId !== undefined && auth.token !== undefined && (
+                  <div className={CssLodgings.starsContainer}>
+                    {rateStar.map((stars, index) => (
+                      <img
+                        key={stars + urlId + index}
+                        className={CssLodgings.starPicture}
+                        src={stars ? StarFull : StarEmpty}
+                        alt={stars ? 'red star' : 'grey star'}
+                      />
+                    ))}
+                  </div>
+                )}
                 <div className={CssLodgings.title}>{dataLodging.title}</div>
                 <div className={CssLodgings.location}>
                   {dataLodging.location}
@@ -234,25 +246,44 @@ function Lodging() {
                     />
                   </div>
                 </Link>
-                <div className={CssLodgings.starsContainer}>
-                  <ul className={CssLodgings.starList}>
-                    {[1, 2, 3, 4, 5].map((index) => {
-                      return (
-                        <li
-                          className={CssLodgings.starListItem}
-                          onMouseEnter={() => setHoverIndex(index)}
-                          onMouseLeave={() => setHoverIndex(0)}
-                          onClick={() => setRating(index)}
-                        >
-                          <Star full={index <= hoverIndex || index <= rating} />
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-                <form onSubmit={handleSubmit}>
-                  <button>Valider la note</button>
-                </form>
+                {auth.userId !== undefined && auth.token !== undefined ? (
+                  <>
+                    <div className={CssLodgings.starsContainer}>
+                      <ul className={CssLodgings.starList}>
+                        {[1, 2, 3, 4, 5].map((index) => {
+                          return (
+                            <li
+                              className={CssLodgings.starListItem}
+                              onMouseEnter={() => setHoverIndex(index)}
+                              onMouseLeave={() => setHoverIndex(0)}
+                              onClick={() => setRating(index)}
+                            >
+                              <Star
+                                full={index <= hoverIndex || index <= rating}
+                              />
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                      <button className={CssLodgings.starBtn}>
+                        Valider la note
+                      </button>
+                    </form>
+                  </>
+                ) : (
+                  <div className={CssLodgings.starsContainer}>
+                    {rateStar.map((stars, index) => (
+                      <img
+                        key={stars + urlId + index}
+                        className={CssLodgings.starPicture}
+                        src={stars ? StarFull : StarEmpty}
+                        alt={stars ? 'red star' : 'grey star'}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
             <div className={CssLodgings.collapseHostContainer}>

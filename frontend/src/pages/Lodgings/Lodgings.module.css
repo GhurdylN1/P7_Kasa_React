@@ -102,6 +102,19 @@
   display: inline;
 }
 
+.starBtn {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-family: 'Montserrat';
+  font-size: 12px;
+  min-width: 108px;
+  max-width: 120px;
+  max-height: 25px;
+  color: white;
+  background-color: #ff6060;
+}
+
 .collapseHostContainer {
   margin-top: 32px;
   display: flex;

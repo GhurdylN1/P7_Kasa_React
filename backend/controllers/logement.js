@@ -131,20 +131,16 @@ exports.createLogement = (req, res, next) => {
 
 
 
-// test systeme de vote par étoiles WORK IN PROGRESS
+// test systeme de vote par étoiles (pour l'instant on update "averageRating" => tests ok)
 exports.voteLogement = (req, res, next) => {
   Logement.findOne({_id: req.params.id})
-  .then((logement) => {
-    const rating = logement.averageRating
-    console.log(rating)
-  
-  if (rating === 0) {
-    Logement.updateOne({_id: req.params.id}, {
-      $push: { averageRating: req.body.averageRating }
+  .then(() => { 
+    Logement.updateOne({_id: req.params.id},
+      {
+      $set: { averageRating: req.body.averageRating }
     })
     .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
     .catch((error) => res.status(401).json({ error }));
-  }
 })
 }
 

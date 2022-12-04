@@ -24,19 +24,4 @@ const logementsSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model('Logement', logementsSchema);
-
-// schema d'apres le ficher logements.json
-// host est déplacé dans le model profile
-// pour pictures, equipements et tags, ce sera un array de string
-// pour rating la note sera par defaut à 0
-// id: { type: String, required: true }
-// title: { type: String, required: true }
-// cover: { type: String, required: true }
-// pictures: { type: [String], }
-// description: { type: String, required: true }
-// rating: { type: Number, default: 0 }
-// location : { type: String, required: true }
-// equipements: { type: [String], }
-// tags: { type: [String], }
-
  
