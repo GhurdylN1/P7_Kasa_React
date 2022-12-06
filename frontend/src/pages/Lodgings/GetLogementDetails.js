@@ -55,7 +55,7 @@ function Lodging() {
     location: '',
     equipements: [],
     tags: [],
-    userRatings: [],
+    usersRatings: [],
   })
 
   // donnéees du logement
@@ -150,7 +150,7 @@ function Lodging() {
 
     // let formData = new FormData()
 
-    const averageRating = rating
+    const userId = auth.userId
 
     // formData.append('logement', [
     //   JSON.stringify({
@@ -166,7 +166,9 @@ function Lodging() {
     try {
       const response = await axios.post(
         LOGEMENT_POST_URL,
-        { averageRating },
+        {
+          usersRatings: { userId: userId, userRating: rating },
+        },
         {
           headers: {
             Authorization: `Bearer ${auth.token}`,
@@ -253,6 +255,7 @@ function Lodging() {
                         {[1, 2, 3, 4, 5].map((index) => {
                           return (
                             <li
+                              key={index}
                               className={CssLodgings.starListItem}
                               onMouseEnter={() => setHoverIndex(index)}
                               onMouseLeave={() => setHoverIndex(0)}

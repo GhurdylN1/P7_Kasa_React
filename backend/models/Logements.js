@@ -9,9 +9,9 @@ const logementsSchema = mongoose.Schema({
     // note moyenne
     averageRating: { type: Number, default: 0 },
     // note par utilisateur
-    userRatings: [{
+    usersRatings: [{
         userId: { type: String, required: true },
-        rating: { type: Number, required: true },
+        userRating: { type: Number, required: true },
      }],
     location : { type: String, required: true },
     equipements: { type: [String], },

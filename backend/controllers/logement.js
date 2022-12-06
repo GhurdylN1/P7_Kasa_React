@@ -2,6 +2,8 @@ const Logement = require('../models/Logements');
 const fs = require('fs'); // filesystem permet d'acceder aux fichiers (utilisé ici pour gérer le remplacement et suppression des images)
 const sanitize = require('mongo-sanitize'); // se proteger des injections diverses
 
+const { meanBy } = require('lodash');
+
 // création des logements
 
 exports.createLogement = (req, res, next) => {
@@ -132,70 +134,73 @@ exports.createLogement = (req, res, next) => {
 
 
 // test systeme de vote par étoiles (pour l'instant on update "averageRating" => tests ok)
+// exports.voteLogement = (req, res, next) => {
+//   Logement.findOne({_id: req.params.id})
+//   .then(() => { 
+//     Logement.updateOne({_id: req.params.id},
+//       {
+//       $set: { averageRating: req.body.averageRating }
+//     })
+//     .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
+//     .catch((error) => res.status(401).json({ error }));
+// })
+// }
+
+// test notation v2
 exports.voteLogement = (req, res, next) => {
   Logement.findOne({_id: req.params.id})
-  .then(() => { 
-    Logement.updateOne({_id: req.params.id},
+  .then((logement) => { 
+
+    // id de l'utilisateur qui vote
+    const votingUserId = req.body.usersRatings.userId
+    // console.log(votingUserId)
+
+    // array des utilisateurs ayants voté
+    const usersRatings = logement.usersRatings
+    // console.log(usersRatings)
+
+    // ObjectIds des votes
+    const ratedsIds = logement.usersRatings.map(function (e) {return e.userRating});
+    console.log(ratedsIds)
+
+    // On compare les userId pour metre à jour le vote d'un user qui avait déjà voté soit ajouter un nouveau vote user. 
+    const findUserId = (users, userId) => users.find(user => user.userId === userId)
+    const users = logement.usersRatings
+    const userRatedId = findUserId(users, votingUserId)
+
+    // si l'utilisateur à déjà voté, alors on update son vote et on met a jour la note moyenne
+    if (userRatedId) {
+      userRatedId.userRating = req.body.usersRatings.userRating
+      Logement.updateOne({_id: req.params.id}, 
       {
-      $set: { averageRating: req.body.averageRating }
+      $set: { usersRatings : [...usersRatings], averageRating : meanBy(usersRatings, "userRating")}
     })
     .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
     .catch((error) => res.status(401).json({ error }));
+    // si l'utilisateur n'as pas encore voté, on ajoute son vote et (on met a jour la note moyenne) mais ça plante si on veut mettre a jour averageRating ici...
+    } else {
+      Logement.updateOne({_id: req.params.id},
+        {  
+        $push: { usersRatings : {
+          userId : req.body.usersRatings.userId, 
+          userRating : req.body.usersRatings.userRating
+        }
+      },
+      })
+    .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
+    .catch((error) => res.status(401).json({ error }));
+    }
+    
+
+    // test avec lodash et la fonction meanBy
+    // {averageRating : meanBy(usersRatings, "userRating")}
+
+    // Mise à jour de la note moyenne
+    // Logement.updateOne({_id: req.params.id},
+    //         {
+    //         $set: { averageRating: {/* somme des notes utilisateurs/nombres de votes*/} }
+    //       })
+    //       .then(() => res.status(200).json({ message: "Note moyenne mise à jour"}))
+    //       .catch((error) => res.status(401).json({ error }));
 })
 }
-
-
-// Fonctionalité Likes et Dislikes (à modifier pour le systeme de notation a étoiles)
-
-// exports.voteLogement = (req, res, next) => {
-//   Logement.findOne({_id: req.params.id})
-//   .then((logement) => {
-//     // constantes like et dislike
-//     const voteLike = logement.usersLiked.includes(req.body.userId)
-//     const voteDislike = logement.usersDisliked.includes(req.body.userId)
-
-//     // Un utilisateur veut liker un logement
-//     if (req.body.like === 1 && !voteLike) {
-//       //on ajoute un like et l'id de l'utilisateur dans la liste des Likers , on va utiliser $inc et $push pour cela. 
-//       Logement.updateOne({_id: req.params.id}, {
-//         $inc: { likes: 1 },
-//         $push: { usersLiked: req.body.userId }
-//       })
-//       .then(() => res.status(200).json({ message: "user's Like added"}))
-//       .catch((error) => res.status(401).json({ error }));
-//     }
-
-//     // Un utilisateur veut disliker un logement
-//     else if (req.body.like === -1 && !voteDislike) {
-//       //on ajoute un dislike et l'id de l'utilisateur dans la liste des Dislikers , on va utiliser $inc et $push pour cela.
-//       Logement.updateOne({ _id: req.params.id}, {
-//         $inc: { dislikes: 1 },
-//         $push: { usersDisliked: req.body.userId }
-//       })
-//       .then(() => res.status(200).json({ message: "user's Dislike added"}))
-//       .catch((error) => res.status(401).json({ error }));
-//     }
-
-//     // Si l'utilisateur veut retirer son like ou dislike
-//     else if (req.body.like === 0) {
-//       if (voteLike) {
-//          //on retire un like et l'id de l'utilisateur dans la liste des Likers , on va utiliser $inc et $pull ici.
-//           Logement.updateOne({ _id: req.params.id }, {
-//               $inc: { likes: -1 },
-//               $pull: { usersLiked: req.body.userId, }
-//           }).then(() => { res.status(200).json({ message: "user's Like removed" }) })
-//               .catch(error => res.status(401).json({ error }));
-//       }
-//       else if (voteDislike) {
-//           Logement.updateOne({ _id: req.params.id }, {
-//               $inc: { dislikes: -1 },
-//               $pull: { usersDisliked: req.body.userId, }
-//           }).then(() => { res.status(200).json({ message: "user's Dislike removed'" }) })
-//               .catch(error => res.status(401).json({ error }));
-//       }
-//   }
-// })
-// .catch((error) => {
-//   res.status(400).json({ error });
-//   });
-// }
