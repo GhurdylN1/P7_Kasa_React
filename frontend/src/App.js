@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 import FormLogement from './pages/FormLogement'
 import UpdateFormLogement from './pages/UpdateFormLogement'
+import DeleteFormLogement from './pages/DeleteFormLogement'
 import FormProfile from './pages/Profile/FormProfile'
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
         <Route
           path="/P7_Kasa_React/updateformlogement/:id"
           element={<UpdateFormLogement />}
+        />
+        <Route
+          path="/P7_Kasa_React/deleteformlogement/:id"
+          element={<DeleteFormLogement />}
         />
         <Route
           path="/P7_Kasa_React/formprofile/:id"

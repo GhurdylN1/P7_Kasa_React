@@ -33,6 +33,9 @@ function Header() {
       (location === `/updateformlogement/${urlId}` &&
         auth.token &&
         auth.userId) ||
+      (location === `/deleteformlogement/${urlId}` &&
+        auth.token &&
+        auth.userId) ||
       (location === `/formprofile/${urlId}` && auth.token && auth.userId) ? (
         <>
           <nav className={CssHeader.navHeader}>

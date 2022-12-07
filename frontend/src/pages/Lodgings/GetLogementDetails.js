@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
@@ -194,16 +194,6 @@ function Lodging() {
     <div className="mainContainer">
       <div className="container">
         <Header />
-        <section>
-          {auth.userId === idUser && (
-            <>
-              <Link to={`/P7_Kasa_React/updateformlogement/${urlId}`}>
-                <h3>Modifier le logement</h3>
-              </Link>
-            </>
-          )}
-        </section>
-        <br />
         {dataLodging && (
           <section>
             <Slideshow data={dataLodging.pictures} />
@@ -299,6 +289,19 @@ function Lodging() {
                 ))}
               />
             </div>
+            <section>
+              {auth.userId === idUser && (
+                <>
+                  <Link to={`/P7_Kasa_React/updateformlogement/${urlId}`}>
+                    <p>Modifier le logement</p>
+                  </Link>
+                  <br />
+                  <Link to={`/P7_Kasa_React/deleteformlogement/${urlId}`}>
+                    <p>Supprimer le logement</p>
+                  </Link>
+                </>
+              )}
+            </section>
           </section>
         )}
       </div>

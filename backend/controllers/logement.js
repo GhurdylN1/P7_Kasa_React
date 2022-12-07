@@ -88,7 +88,7 @@ exports.createLogement = (req, res, next) => {
     })
   };
 
-// suppression des logements
+// suppression des logements => ok ! 
 
   exports.deleteLogement = (req, res, next) => {
     Logement.findOne({ _id: req.params.id})
@@ -97,6 +97,12 @@ exports.createLogement = (req, res, next) => {
                 res.status(401).json({message: 'Not authorized'});
             } else {
                 const filename = logement.cover.split('/images/')[1];
+                const picturesArray = logement.pictures
+                for (const element of picturesArray) {
+                  fs.unlink(`images/${element.split('http://localhost:5000/images/')[1]}`, (error) => {
+                    if(error) throw error;
+                  })
+                }
                 fs.unlink(`images/${filename}`, () => {
                     Logement.deleteOne({_id: req.params.id})
                         .then(() => { res.status(200).json({message: 'Logement supprimée !'})})

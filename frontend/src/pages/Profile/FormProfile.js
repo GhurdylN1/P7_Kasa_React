@@ -126,7 +126,8 @@ const FormProfile = () => {
                       required
                     /> */}
                     <label htmlFor="text"> Message de présentation :</label>
-                    <input
+                    <textarea
+                      className={SignUpCSS.textAreaSize}
                       type="text"
                       name="hostDescription"
                       id="hostDescription"
