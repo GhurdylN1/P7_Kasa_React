@@ -121,6 +121,15 @@ const UpdateFormLogement = () => {
                     {errMsg}
                   </p>
                   <h1>Modifier un logement</h1>
+                  <p>
+                    <Link
+                      className={SignUpCSS.aReg}
+                      to={`/P7_Kasa_React/lodgings/${urlId}`}
+                    >
+                      {' '}
+                      Revenir au logement{' '}
+                    </Link>
+                  </p>
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="text">Titre :</label>
                     <input

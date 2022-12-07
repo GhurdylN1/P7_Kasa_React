@@ -26,10 +26,10 @@ function Lodging() {
   const urlId = useParams().id // récupération de l'id dans l'url
   const LOGEMENT_POST_URL = `/api/logements/${urlId}/rating`
 
-  const [setErrMsg] = useState('')
+  // const [setErrMsg] = useState('')
   const [setSuccess] = useState(false)
 
-  const errRef = useRef()
+  // const errRef = useRef()
 
   const { auth } = useContext(AuthContext)
   // console.log(auth.userId, auth.token)
@@ -179,13 +179,14 @@ function Lodging() {
       console.log(response.data)
       // console.log(JSON.stringify(response))
       setSuccess(true)
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg('Le serveur ne réponds pas')
-      } else {
-        setErrMsg('Notation échoué')
-      }
-      errRef.current.focus()
+    } catch (error) {
+      // envoie une erreur "setErrMsg n'est pas une fonction"
+      // if (!err?.response) {
+      //   setErrMsg('Le serveur ne réponds pas')
+      // } else {
+      //   setErrMsg('Notation échoué')
+      // }
+      // errRef.current.focus()
     }
   }
 

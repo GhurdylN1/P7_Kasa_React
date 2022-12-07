@@ -2,8 +2,6 @@ const Logement = require('../models/Logements');
 const fs = require('fs'); // filesystem permet d'acceder aux fichiers (utilisé ici pour gérer le remplacement et suppression des images)
 const sanitize = require('mongo-sanitize'); // se proteger des injections diverses
 
-const { meanBy } = require('lodash');
-
 // création des logements
 
 exports.createLogement = (req, res, next) => {
@@ -155,50 +153,74 @@ exports.voteLogement = (req, res, next) => {
     const votingUserId = req.body.usersRatings.userId
     // console.log(votingUserId)
 
+    // note de l'utilisateur qui vote
+    const userRatingValue = req.body.usersRatings.userRating
+    // console.log(userRatingValue)
+
     // array des utilisateurs ayants voté
     const usersRatings = logement.usersRatings
     // console.log(usersRatings)
 
     // ObjectIds des votes
-    const ratedsIds = logement.usersRatings.map(function (e) {return e.userRating});
-    console.log(ratedsIds)
+    const ratedsIds = usersRatings.map(function (rId) {return rId._id});
+    // console.log(ratedsIds)
 
-    // On compare les userId pour metre à jour le vote d'un user qui avait déjà voté soit ajouter un nouveau vote user. 
+    // On compare les userId pour metre à jour le vote d'un user qui avait déjà voté ou ajouter un nouveau vote user. 
     const findUserId = (users, userId) => users.find(user => user.userId === userId)
     const users = logement.usersRatings
-    const userRatedId = findUserId(users, votingUserId)
+    const userRated = findUserId(users, votingUserId)
+    // console.log(userRated.userId)
 
-    // si l'utilisateur à déjà voté, alors on update son vote et on met a jour la note moyenne
-    if (userRatedId) {
-      userRatedId.userRating = req.body.usersRatings.userRating
+    // récupération de toutes les notes d'un logement pour ensuite calculer la note moyenne
+    const findAllLogementRatings = usersRatings.map(function (ratings) {return ratings.userRating})
+    const AllRatings = findAllLogementRatings
+    console.log(AllRatings)
+    
+    // Somme de toutes les notes
+    // const sum = AllRatings.reduce((accumulator, value) => {
+    //   return accumulator + value;
+    // }, 0);
+    // console.log(sum);
+
+    // calcul de la note moyenne (il faudrait pouvoir faire en sorte que le calcul soit dynamique, cad en prenant en compte le vote de l'user pour le push/set)
+    const averageNote = AllRatings.reduce((accumulator, value) => accumulator + value, 0) / AllRatings.length;
+    console.log(averageNote);
+
+
+    // si l'utilisateur à déjà voté, alors on update son vote et on met a jour la note moyenne (qui sera mise a jour au vote suivant...)
+    if (userRated) {
+      userRated.userRating = userRatingValue
       Logement.updateOne({_id: req.params.id}, 
       {
-      $set: { usersRatings : [...usersRatings], averageRating : meanBy(usersRatings, "userRating")}
+      $set: { usersRatings : [...usersRatings], averageRating : averageNote}
     })
     .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
     .catch((error) => res.status(401).json({ error }));
-    // si l'utilisateur n'as pas encore voté, on ajoute son vote et (on met a jour la note moyenne) mais ça plante si on veut mettre a jour averageRating ici...
+    // si l'utilisateur n'as pas encore voté, on ajoute son vote et (on veut mettre a jour la note moyenne)
     } else {
-      Logement.updateOne({_id: req.params.id},
-        {  
-        $push: { usersRatings : {
-          userId : req.body.usersRatings.userId, 
-          userRating : req.body.usersRatings.userRating
-        }
-      },
-      })
+      Logement.updateOne({_id: req.params.id}, 
+        {
+          $push: { 
+            usersRatings : 
+            {
+               userId : votingUserId,
+               userRating : userRatingValue,
+            },
+          },
+          // ici ça plante erreur "Cast to Number failed for value "NaN" (type number) at path "averageRating", normal car on obtien NaN au lieu de 0. 
+          // $set : {
+          //   averageRating : averageNote,
+          // }
+       }
+      )
     .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
     .catch((error) => res.status(401).json({ error }));
     }
-    
 
-    // test avec lodash et la fonction meanBy
-    // {averageRating : meanBy(usersRatings, "userRating")}
-
-    // Mise à jour de la note moyenne
+    // Et si on le met ici, on a une erreur "Error: Can't set headers after they are sent."
     // Logement.updateOne({_id: req.params.id},
     //         {
-    //         $set: { averageRating: {/* somme des notes utilisateurs/nombres de votes*/} }
+    //         $set: { averageRating: averageNote }
     //       })
     //       .then(() => res.status(200).json({ message: "Note moyenne mise à jour"}))
     //       .catch((error) => res.status(401).json({ error }));

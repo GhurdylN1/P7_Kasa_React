@@ -102,6 +102,15 @@ const FormProfile = () => {
                     {errMsg}
                   </p>
                   <h1>Éditer votre profil</h1>
+                  <p>
+                    <Link
+                      className={SignUpCSS.aReg}
+                      to={`/P7_Kasa_React/profile/${auth.userId}`}
+                    >
+                      {' '}
+                      Revenir au profil{' '}
+                    </Link>
+                  </p>
                   <form onSubmit={handleSubmit}>
                     {/* <label htmlFor="text">Nom d'utilisateur :</label>
                     <input

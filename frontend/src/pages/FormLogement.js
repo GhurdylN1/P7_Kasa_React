@@ -115,6 +115,15 @@ const FormLogement = () => {
                 {errMsg}
               </p>
               <h1>Créer un logement</h1>
+              <p>
+                <Link
+                  className={SignUpCSS.aReg}
+                  to={`/P7_Kasa_React/profile/${auth.userId}`}
+                >
+                  {' '}
+                  Revenir au profil{' '}
+                </Link>
+              </p>
               <form onSubmit={handleSubmit}>
                 <label htmlFor="text">Titre :</label>
                 <input
