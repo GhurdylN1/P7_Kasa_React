@@ -16,11 +16,6 @@ const logementsSchema = mongoose.Schema({
     location : { type: String, required: true },
     equipements: { type: [String], },
     tags: { type: [String], }
-    // il faudra adapter le systeme de likes avec la notation par étoiles
-    // likes: { type: Number, default: 0, },
-    // dislikes: { type: Number, default: 0, },
-    // usersLiked: { type: [String], },
-    // usersDisliked: { type: [String], },
 });
 
 module.exports = mongoose.model('Logement', logementsSchema);

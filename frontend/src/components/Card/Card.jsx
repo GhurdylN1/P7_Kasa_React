@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import React from 'react'
 
-function Card({ id, cover, title, rating }) {
+function Card({ id, cover, title, averageRating }) {
   return (
     <Link
       className={CssCard.linkCard}
@@ -13,7 +13,7 @@ function Card({ id, cover, title, rating }) {
       <div key={id} className={CssCard.card}>
         <img src={cover} alt={title} className={CssCard.cover} />
         <div className={CssCard.title}>{title}</div>
-        {rating > 3 && ( // affichage du tag "meilleur choix" uniquement sur les logements notés 4 et 5 étoiles
+        {averageRating >= 4 && ( // affichage du tag "meilleur choix" uniquement sur les logements notés 4 ou plus
           <div className={CssCard.topHost}>✔ Meilleur Choix</div>
         )}
       </div>

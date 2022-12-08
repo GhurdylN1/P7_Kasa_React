@@ -15,9 +15,6 @@ exports.createLogement = (req, res, next) => {
     userId: req.auth.userId,
     cover: `${req.protocol}://${req.get('host')}/images/${req.files.image[0].filename}`,
     pictures: req.files.pictures.map(file => `${req.protocol}://${req.get('host')}/images/${file.filename}`)
-    // cover: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-    // pictures: req.files.pictures.map(file => "/images/" + file.filename)
-    // pictures: req.files.map(file => "/images/" + file.filename)
   });
 
   logement.save()
@@ -33,7 +30,6 @@ exports.createLogement = (req, res, next) => {
       ...JSON.parse(sanitize(req.body.logement)),
       cover: `${req.protocol}://${req.get('host')}/images/${req.files.image[0].filename}`,
       pictures: req.files.pictures.map(file => `${req.protocol}://${req.get('host')}/images/${file.filename}`)
-      // cover: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
 
     //puis on demande de supprimer les anciennes images s'il y en avait déjà
@@ -44,17 +40,6 @@ exports.createLogement = (req, res, next) => {
           // récupération de l'image a supprimer si modification
           const filename = logement.cover.split('/images/')[1];
           const picturesArray = logement.pictures
-          // picturesArray.forEach((element) => {
-          //   const picturesFilenames = element.split('http://localhost:5000/images/')[1];
-          //   console.log(picturesFilenames)
-          // })        
-          // for (const element of picturesArray) {
-          //   const picturesFilenames = element.split('http://localhost:5000/images/')[1];
-          //   console.log(picturesFilenames)
-          // }
-          // console.log(" ")
-          // console.log(filename)
-          // console.log(picturesArray)
   
           // suppression de l'ancienne image
           fs.unlink(`images/${filename}`, (error) => {
@@ -79,7 +64,7 @@ exports.createLogement = (req, res, next) => {
         res.status(401).json({ message : 'Not authorized' });
       } else {
         Logement.updateOne({ _id: req.params.id}, { ...logementObject, _id: req.params.id})
-        .then(() => res.status(200).json({message : 'Logement modifiée!'}))
+        .then(() => res.status(200).json({message : 'Logement modifié !'}))
         .catch(error => res.status(401).json({ error }));
       }
     })
@@ -105,7 +90,7 @@ exports.createLogement = (req, res, next) => {
                 }
                 fs.unlink(`images/${filename}`, () => {
                     Logement.deleteOne({_id: req.params.id})
-                        .then(() => { res.status(200).json({message: 'Logement supprimée !'})})
+                        .then(() => { res.status(200).json({message: 'Logement supprimé !'})})
                         .catch(error => res.status(401).json({ error }));
                 });
             }
@@ -135,25 +120,12 @@ exports.createLogement = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
     };
 
-
-
-// test systeme de vote par étoiles (pour l'instant on update "averageRating" => tests ok)
-// exports.voteLogement = (req, res, next) => {
-//   Logement.findOne({_id: req.params.id})
-//   .then(() => { 
-//     Logement.updateOne({_id: req.params.id},
-//       {
-//       $set: { averageRating: req.body.averageRating }
-//     })
-//     .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
-//     .catch((error) => res.status(401).json({ error }));
-// })
-// }
-
-// test notation v2
+// syteme de notation par étoiles
 exports.voteLogement = (req, res, next) => {
   Logement.findOne({_id: req.params.id})
   .then((logement) => { 
+    
+    let promise;
 
     // id de l'utilisateur qui vote
     const votingUserId = req.body.usersRatings.userId
@@ -178,9 +150,9 @@ exports.voteLogement = (req, res, next) => {
     // console.log(userRated.userId)
 
     // récupération de toutes les notes d'un logement pour ensuite calculer la note moyenne
-    const findAllLogementRatings = usersRatings.map(function (ratings) {return ratings.userRating})
-    const AllRatings = findAllLogementRatings
-    console.log(AllRatings)
+    // const findAllLogementRatings = usersRatings.map(function (ratings) {return ratings.userRating})
+    // const AllRatings = findAllLogementRatings
+    // console.log(AllRatings)
     
     // Somme de toutes les notes
     // const sum = AllRatings.reduce((accumulator, value) => {
@@ -188,23 +160,24 @@ exports.voteLogement = (req, res, next) => {
     // }, 0);
     // console.log(sum);
 
-    // calcul de la note moyenne (il faudrait pouvoir faire en sorte que le calcul soit dynamique, cad en prenant en compte le vote de l'user pour le push/set)
-    const averageNote = AllRatings.reduce((accumulator, value) => accumulator + value, 0) / AllRatings.length;
-    console.log(averageNote);
+    // calcul de la note moyenne
+    // const averageNote = AllRatings.reduce((accumulator, value) => accumulator + value, 0) / AllRatings.length;
+    // console.log(averageNote);
 
 
-    // si l'utilisateur à déjà voté, alors on update son vote et on met a jour la note moyenne (qui sera mise a jour au vote suivant...)
+    // si l'utilisateur à déjà voté, alors on update son vote
     if (userRated) {
       userRated.userRating = userRatingValue
-      Logement.updateOne({_id: req.params.id}, 
+      promise = Logement.updateOne({_id: req.params.id}, 
       {
-      $set: { usersRatings : [...usersRatings], averageRating : averageNote}
+      $set: { usersRatings : [...usersRatings]}
     })
-    .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
-    .catch((error) => res.status(401).json({ error }));
-    // si l'utilisateur n'as pas encore voté, on ajoute son vote et (on veut mettre a jour la note moyenne)
+    // .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
+    // .catch((error) => res.status(401).json({ error }));
+
+    // si l'utilisateur n'as pas encore voté, on ajoute son vote
     } else {
-      Logement.updateOne({_id: req.params.id}, 
+      promise = Logement.updateOne({_id: req.params.id}, 
         {
           $push: { 
             usersRatings : 
@@ -213,22 +186,23 @@ exports.voteLogement = (req, res, next) => {
                userRating : userRatingValue,
             },
           },
-          // ici ça plante erreur "Cast to Number failed for value "NaN" (type number) at path "averageRating", normal car on obtien NaN au lieu de 0. 
-          // $set : {
-          //   averageRating : averageNote,
-          // }
        }
       )
-    .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
-    .catch((error) => res.status(401).json({ error }));
-    }
+    // Et en dernier on veut mettre a jour la note moyenne en prenant en compte bien sur la nouvelle note
+    } 
+    promise.then(() => {
+      Logement.findOne({_id: req.params.id})
+      .then((logementUpdated) => {
+        const findAllLogementRatings = logementUpdated.usersRatings.map(function (ratings) {return ratings.userRating})
+        const averageNote = findAllLogementRatings.reduce((accumulator, value) => accumulator + value, 0) /findAllLogementRatings.length;
+        Logement.updateOne({_id: req.params.id},
+          {
+          $set: { averageRating: averageNote }
+        })
+        .then(() => res.status(200).json({ message: "Vote utilisateur enregistré et note moyenne mise a jour"}))
+      })
 
-    // Et si on le met ici, on a une erreur "Error: Can't set headers after they are sent."
-    // Logement.updateOne({_id: req.params.id},
-    //         {
-    //         $set: { averageRating: averageNote }
-    //       })
-    //       .then(() => res.status(200).json({ message: "Note moyenne mise à jour"}))
-    //       .catch((error) => res.status(401).json({ error }));
+    })
+    .catch((error) => res.status(401).json({ error }));
 })
 }

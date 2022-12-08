@@ -32,8 +32,14 @@ function GetAllLogements() {
 
   return (
     <div className={CssCard.cardBackground}>
-      {logements.map(({ _id, cover, title }) => (
-        <Card key={_id} id={_id} cover={cover} title={title} />
+      {logements.map(({ _id, cover, title, averageRating }) => (
+        <Card
+          key={_id}
+          id={_id}
+          cover={cover}
+          title={title}
+          averageRating={averageRating}
+        />
       ))}
     </div>
   )

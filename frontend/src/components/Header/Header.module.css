@@ -70,10 +70,9 @@
 
   .burgerBtn {
     display: block;
-    position: fixed;
     z-index: 2;
-    top: 1rem;
-    right: 1rem;
+    margin-top: 0;
+    margin-right: 10px;
   }
 
   .burgerBtn:hover {

@@ -58,29 +58,30 @@ function Lodging() {
     usersRatings: [],
   })
 
-  // donnéees du logement
-  useEffect(() => {
-    // obervation des données du state
-    const pushDataLodging = async () => {
-      try {
-        // const response = await api.get(`/api/logements/${urlId}`)
-        const response = await lodgingsService.getByLodgingId(urlId)
-        setLoading(false)
-        setdataLodging(response)
-      } catch (err) {
-        setLoading(false)
-        setError404(true)
-        if (err.response) {
-          // not in the 200 response range
-          console.log(err.response.data)
-          console.log(err.response.status)
-          console.log(err.response.headers)
-        } else {
-          console.log(`Error: ceci est une erreur`)
-        }
+  // fonction pour récuperer les données du logement
+  const getDataLodging = async () => {
+    try {
+      // const response = await api.get(`/api/logements/${urlId}`)
+      const response = await lodgingsService.getByLodgingId(urlId)
+      setLoading(false)
+      setdataLodging(response)
+    } catch (err) {
+      setLoading(false)
+      setError404(true)
+      if (err.response) {
+        // not in the 200 response range
+        console.log(err.response.data)
+        console.log(err.response.status)
+        console.log(err.response.headers)
+      } else {
+        console.log(`Error: ceci est une erreur`)
       }
     }
-    pushDataLodging()
+  }
+
+  // donnéees du logement au chargement de la page
+  useEffect(() => {
+    getDataLodging()
   }, []) // array vide sinon boucle infinie
 
   const idUser = dataLodging.userId // on récupere l'id de l'hébergeur
@@ -145,6 +146,7 @@ function Lodging() {
     )
   }
 
+  // vote de l'utilisateur puis on veut mettre a jour la note moyenne une fois le vote effectué
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -164,17 +166,19 @@ function Lodging() {
     //     },
     //   })
     try {
-      const response = await axios.post(
-        LOGEMENT_POST_URL,
-        {
-          usersRatings: { userId: userId, userRating: rating },
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
+      const response = await axios
+        .post(
+          LOGEMENT_POST_URL,
+          {
+            usersRatings: { userId: userId, userRating: rating },
           },
-        }
-      )
+          {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }
+        )
+        .then(() => getDataLodging())
 
       console.log(response.data)
       // console.log(JSON.stringify(response))
