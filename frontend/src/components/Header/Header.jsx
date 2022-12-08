@@ -8,6 +8,8 @@ import { useContext } from 'react'
 
 import { useParams } from 'react-router-dom'
 
+import { useState } from 'react'
+
 function Header() {
   const { auth, setAuth } = useContext(AuthContext) // on va l'utiliser pour savoir si l'utilisateur est connecté ou
 
@@ -21,6 +23,12 @@ function Header() {
 
   const path = useLocation().pathname // on utilise ce hook pour savoir ou l'on se trouve
   const location = path.split('/P7_Kasa_React')[1]
+
+  const [showBurger, setShowBurger] = useState(false)
+
+  const handleShowBurger = () => {
+    setShowBurger(!showBurger)
+  }
 
   return (
     <header className={CssHeader.header}>
@@ -38,7 +46,32 @@ function Header() {
         auth.userId) ||
       (location === `/formprofile/${urlId}` && auth.token && auth.userId) ? (
         <>
-          <nav className={CssHeader.navHeader}>
+          <nav
+            className={`${CssHeader.navHeader} ${
+              showBurger ? CssHeader.showBurger : CssHeader.hideNav
+            }`}
+          >
+            <Link
+              to="/P7_Kasa_React/home"
+              className={CssHeader.navHome}
+              onClick={handleShowBurger}
+            >
+              Accueil
+            </Link>
+            <Link
+              to="/P7_Kasa_React/about"
+              className={CssHeader.navAbout}
+              onClick={handleShowBurger}
+            >
+              À propos
+            </Link>
+            <Link
+              to={`/P7_Kasa_React/profile/${auth.userId}`}
+              className={CssHeader.navHome}
+              onClick={handleShowBurger}
+            >
+              Mon profil
+            </Link>
             <Link
               to="/P7_Kasa_React"
               className={CssHeader.navHome}
@@ -47,41 +80,76 @@ function Header() {
               Se deconnecter
             </Link>
           </nav>
-          <nav className={CssHeader.navHeader}>
-            <Link to="/P7_Kasa_React/home" className={CssHeader.navHome}>
-              Accueil
-            </Link>
-            <Link to="/P7_Kasa_React/about" className={CssHeader.navAbout}>
-              À propos
-            </Link>
-          </nav>
+          <button className={CssHeader.burgerBtn} onClick={handleShowBurger}>
+            <span
+              className={`${CssHeader.burgerBar} ${
+                showBurger ? CssHeader.showBurger : CssHeader.hideNav
+              }`}
+            ></span>
+          </button>
         </>
       ) : location === '' || location === '/' ? (
         <>
-          <nav className={CssHeader.navHeader}>
-            <Link to="/P7_Kasa_React/home" className={CssHeader.navHome}>
+          <nav
+            className={`${CssHeader.navHeader} ${
+              showBurger ? CssHeader.showBurger : CssHeader.hideNav
+            }`}
+          >
+            <Link
+              to="/P7_Kasa_React/home"
+              className={CssHeader.navHome}
+              onClick={handleShowBurger}
+            >
               Accueil
             </Link>
-            <Link to="/P7_Kasa_React/about" className={CssHeader.navAbout}>
+            <Link
+              to="/P7_Kasa_React/about"
+              className={CssHeader.navAbout}
+              onClick={handleShowBurger}
+            >
               À propos
             </Link>
           </nav>
+          <button className={CssHeader.burgerBtn} onClick={handleShowBurger}>
+            <span
+              className={`${CssHeader.burgerBar} ${
+                showBurger ? CssHeader.showBurger : CssHeader.hideNav
+              }`}
+            ></span>
+          </button>
         </>
       ) : (
         <>
-          <nav className={CssHeader.navHeader}>
+          <nav
+            className={`${CssHeader.navHeader} ${
+              showBurger ? CssHeader.showBurger : CssHeader.hideNav
+            }`}
+          >
             <Link to="/P7_Kasa_React" className={CssHeader.navHome}>
               Se connecter
             </Link>
-          </nav>
-          <nav className={CssHeader.navHeader}>
-            <Link to="/P7_Kasa_React/home" className={CssHeader.navHome}>
+            <Link
+              to="/P7_Kasa_React/home"
+              className={CssHeader.navHome}
+              onClick={handleShowBurger}
+            >
               Accueil
             </Link>
-            <Link to="/P7_Kasa_React/about" className={CssHeader.navAbout}>
+            <Link
+              to="/P7_Kasa_React/about"
+              className={CssHeader.navAbout}
+              onClick={handleShowBurger}
+            >
               À propos
             </Link>
           </nav>
+          <button className={CssHeader.burgerBtn} onClick={handleShowBurger}>
+            <span
+              className={`${CssHeader.burgerBar} ${
+                showBurger ? CssHeader.showBurger : CssHeader.hideNav
+              }`}
+            ></span>
+          </button>
         </>
       )}
     </header>
