@@ -5,8 +5,7 @@ const sanitize = require('mongo-sanitize'); // se proteger des injections divers
 // création des logements
 
 exports.createLogement = (req, res, next) => {
-  // console.log(req.body.logement)
-  console.log(req.files)
+  // console.log(req.files)
   const logementObject = JSON.parse(sanitize(req.body.logement)); // exemple d'utilisation de sanitize
   delete logementObject._id;
   delete logementObject._userId;
@@ -73,7 +72,7 @@ exports.createLogement = (req, res, next) => {
     })
   };
 
-// suppression des logements => ok ! 
+// suppression du logement
 
   exports.deleteLogement = (req, res, next) => {
     Logement.findOne({ _id: req.params.id})
@@ -172,9 +171,6 @@ exports.voteLogement = (req, res, next) => {
       {
       $set: { usersRatings : [...usersRatings]}
     })
-    // .then(() => res.status(200).json({ message: "Vote utilisateur enregistré"}))
-    // .catch((error) => res.status(401).json({ error }));
-
     // si l'utilisateur n'as pas encore voté, on ajoute son vote
     } else {
       promise = Logement.updateOne({_id: req.params.id}, 

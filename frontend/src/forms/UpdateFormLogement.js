@@ -12,6 +12,8 @@ import { useParams } from 'react-router-dom'
 
 import uselodgingsService from '../services/lodgingsService'
 
+import Error404 from '../pages/Error404/Error404'
+
 const UpdateFormLogement = () => {
   const { auth } = useContext(AuthContext)
 
@@ -132,7 +134,7 @@ const UpdateFormLogement = () => {
     <div className="mainContainer">
       <div className="container">
         <Header />
-        {auth.userId && auth.token && (
+        {auth.userId && auth.token ? (
           <>
             {success ? (
               <div className={UpdateLogCSS.bgSection}>
@@ -280,6 +282,10 @@ const UpdateFormLogement = () => {
                 </div>
               </div>
             )}
+          </>
+        ) : (
+          <>
+            <Error404 />
           </>
         )}
       </div>

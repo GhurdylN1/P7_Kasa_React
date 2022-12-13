@@ -39,8 +39,8 @@ const Login = () => {
           headers: { 'Content-Type': 'application/json' },
         }
       )
-      console.log('-------> userId et token')
-      console.log(response?.data)
+      // console.log('-------> userId et token')
+      // console.log(response?.data)
 
       const token = response?.data?.token
       const userId = response?.data?.userId

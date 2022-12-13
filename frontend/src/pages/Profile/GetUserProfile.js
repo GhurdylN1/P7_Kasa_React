@@ -72,7 +72,7 @@ function UserProfile() {
       ? `${dataUser.profilePict}`
       : defaultUserPicture
 
-  console.log(auth.userId, auth.token)
+  // console.log(auth.userId, auth.token)
 
   return (
     <div className="mainContainer">

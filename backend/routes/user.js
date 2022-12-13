@@ -11,7 +11,7 @@ const multer = require('../middleware/multer-config');
 router.post('/signup',checkEmail, password, userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.put('/:id', auth, multer.single('image'), userCtrl.upateUserProfile);
-router.get('/:id', userCtrl.getOneUser); // test axios
-router.get('/', userCtrl.getAllUsers); // test axios
+router.get('/:id', userCtrl.getOneUser);
+router.get('/', userCtrl.getAllUsers);
 
 module.exports = router;

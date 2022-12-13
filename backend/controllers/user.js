@@ -12,7 +12,7 @@ exports.signup = (req, res, next) => {
         .then(hash => {
             const user = new User({
                 email: req.body.email,
-                fullName : req.body.fullName, // pour le test nouveau signUp
+                fullName : req.body.fullName, 
                 password: hash
         });
         user.save()
@@ -91,7 +91,7 @@ exports.upateUserProfile = (req, res, next) => {
     })
   };
 
-// affichage des users pour test axios
+// affichage des users
 
 exports.getOneUser = (req, res, next) => {
     User.findOne({ _id : req.params.id })
