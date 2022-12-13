@@ -1,7 +1,6 @@
 import api from '../api/ApiKasaMongoDB'
-// import Lodgings from '../data/logements.json'
 
-// test interceptor axios qui fonctionne mais useEffect en boucle infinie si on ne laisse pas un array vide [] (et dans les autres composants)
+// interceptor concernant les logements pour les calls axios nécessitant le token
 
 import { useContext, useEffect } from 'react'
 import AuthContext from '../context/AuthProvider'
@@ -12,7 +11,6 @@ const useLodgingsService = () => {
   useEffect(() => {
     const requestIntercept = api.interceptors.request.use(
       (config) => {
-        // console.log('auth.token', auth.token)
         if (auth.token) {
           config.headers['Authorization'] = `Bearer ${auth.token}`
         }
@@ -37,7 +35,7 @@ const useLodgingsService = () => {
       api.interceptors.request.eject(requestIntercept)
       api.interceptors.response.eject(responseIntercept)
     }
-  }, [])
+  }, []) //array vide sinon boucle infinie (warning esLint)
 
   const lodgingsService = {
     getAll: async () => {
@@ -57,42 +55,3 @@ const useLodgingsService = () => {
 }
 
 export default useLodgingsService
-
-// function mapperTransformUrlBackend(response) {
-//   response.pictures = response.pictures.map(
-//     (picture) => 'http://localhost:5000' + picture
-//   )
-//   return response
-// }
-
-// avant test interceptor axios
-// const lodgingsService = {
-//   getAll: async () => {
-//     return (await api.get('/api/logements')).data
-//   },
-
-//   getByUserID: async (userId) => {
-//     return (await api.get(`api/logements/byUserId/${userId}`)).data
-//   },
-
-//   getByLodgingId: async (_id) => {
-//     return (await api.get(`api/logements/${_id}`)).data
-//   },
-// }
-
-// export default lodgingsService
-
-// avant le backend
-// const lodgingsService = {
-//   getAll: () => {
-//     return Lodgings
-//   },
-//   getByUserName: (userName) => {
-//     return Lodgings.filter((Lodgings) => Lodgings.host.name === userName)
-//   },
-//   getById: (lodgingId) => {
-//     return Lodgings.filter((Lodgings) => Lodgings.id === lodgingId)
-//   },
-// }
-
-// export default lodgingsService

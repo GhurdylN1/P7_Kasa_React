@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import React from 'react'
-import SignUpCSS from './Sign.module.css'
+import SignUpCSS from './Form.module.css'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import { Link } from 'react-router-dom'
@@ -78,9 +78,7 @@ const SignUp = () => {
         }
       )
       console.log(response.data)
-      // console.log(JSON.stringify(response))
       setSuccess(true)
-      // effacer le formulaire
     } catch (err) {
       if (!err?.response) {
         setErrMsg('Le serveur ne réponds pas')

@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useContext } from 'react'
 import AuthContext from '../context/AuthProvider'
 import axios from '../api/ApiKasaMongoDB'
 import React from 'react'
-import LoginCSS from './Sign.module.css'
+import LoginCSS from './Form.module.css'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import { Link } from 'react-router-dom'
@@ -36,7 +36,7 @@ const Login = () => {
         LOGIN_URL,
         JSON.stringify({ email, password }),
         {
-          headers: { 'Content-Type': 'application/json' }, // le rajouter a l'intercepteur
+          headers: { 'Content-Type': 'application/json' },
         }
       )
       console.log('-------> userId et token')

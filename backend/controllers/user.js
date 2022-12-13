@@ -91,27 +91,6 @@ exports.upateUserProfile = (req, res, next) => {
     })
   };
 
-// module.exports.editUserProfile = async (req, res, next) => {
-//     if (req.file)
-//       return res.status(400).send("ID unknown : " + req.params.id);
-  
-//     try {
-//       await User.findOneAndUpdate(
-//         { _id: req.params.id },
-//         {
-//           $set: {
-//             hostDescription: req.body.hostDescription,
-//             profilePict : `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-//           },
-//         },
-//         { new: true, upsert: true, setDefaultsOnInsert: true })
-//         .then((data) => res.send(data))
-//         .catch((err) => res.status(500).send({ message: err }));
-//     } catch (err) {
-//       return res.status(500).json({ message: err });
-//     }
-//   };
-
 // affichage des users pour test axios
 
 exports.getOneUser = (req, res, next) => {

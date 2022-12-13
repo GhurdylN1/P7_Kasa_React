@@ -1,18 +1,17 @@
 // routes
 import { Routes, Route } from 'react-router-dom'
+
 import Home from './pages/Home/Home'
-import Lodging from './pages/Lodgings/GetLogementDetails' // test axios
-// import Lodging from './pages/Lodgings/Lodgings'
+import Lodging from './pages/Lodgings/GetLogementDetails'
 import About from './pages/About/About'
 import Error404 from './pages/Error404/Error404'
-import Profile from './pages/Profile/GetUserProfile' // test axios
-// import Profile from './pages/Profile/Profile'
-import SignUp from './pages/SignUp'
-import Login from './pages/Login'
-import FormLogement from './pages/FormLogement'
-import UpdateFormLogement from './pages/UpdateFormLogement'
-import DeleteFormLogement from './pages/DeleteFormLogement'
-import FormProfile from './pages/Profile/FormProfile'
+import Profile from './pages/Profile/GetUserProfile'
+import SignUp from './forms/SignUp'
+import Login from './forms/Login'
+import FormLogement from './forms/FormLogement'
+import UpdateFormLogement from './forms/UpdateFormLogement'
+import DeleteFormLogement from './forms/DeleteFormLogement'
+import FormProfile from './forms/FormProfile'
 
 function App() {
   return (
@@ -35,9 +34,7 @@ function App() {
         <Route path="/P7_Kasa_React/" element={<Login />} />
         <Route path="/P7_Kasa_React/home" element={<Home />} />
         <Route path="/P7_Kasa_React/lodgings/:id" element={<Lodging />} />
-        <Route path="/P7_Kasa_React/profile/:id" element={<Profile />} />{' '}
-        {/* test axios*/}
-        {/* <Route path="/P7_Kasa_React/profile/:name" element={<Profile />} /> */}
+        <Route path="/P7_Kasa_React/profile/:id" element={<Profile />} />
         <Route path="/P7_Kasa_React/about" element={<About />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>

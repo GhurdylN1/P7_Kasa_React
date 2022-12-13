@@ -1,7 +1,7 @@
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import React from 'react'
-import SignUpCSS from './Sign.module.css'
+import UpdateLogCSS from './Form.module.css'
 import { useRef, useState, useEffect } from 'react'
 import axios from '../api/ApiKasaMongoDB'
 import { Link } from 'react-router-dom'
@@ -9,6 +9,8 @@ import AuthContext from '../context/AuthProvider'
 import { useContext } from 'react'
 
 import { useParams } from 'react-router-dom'
+
+import uselodgingsService from '../services/lodgingsService'
 
 const UpdateFormLogement = () => {
   const { auth } = useContext(AuthContext)
@@ -35,6 +37,44 @@ const UpdateFormLogement = () => {
 
   const [errMsg, setErrMsg] = useState('')
   const [success, setSuccess] = useState(false)
+
+  const lodgingsService = uselodgingsService()
+  const [dataLodging, setdataLodging] = useState({
+    // state des données que l'on voudra observer et afficher
+    _id: '',
+    userId: '',
+    title: '',
+    cover: '',
+    pictures: [],
+    description: '',
+    averageRating: '',
+    location: '',
+    equipements: [],
+    tags: [],
+    usersRatings: [],
+  })
+
+  // fonction pour récuperer les données du logement
+  const getDataLodging = async () => {
+    try {
+      const response = await lodgingsService.getByLodgingId(urlId)
+      setdataLodging(response)
+    } catch (err) {
+      if (err.response) {
+        // not in the 200 response range
+        console.log(err.response.data)
+        console.log(err.response.status)
+        console.log(err.response.headers)
+      } else {
+        console.log(`Error: ceci est une erreur`)
+      }
+    }
+  }
+
+  // donnéees du logement au chargement de la page
+  useEffect(() => {
+    getDataLodging()
+  }, []) // array vide sinon boucle infinie (warnin esLint)
 
   useEffect(() => {
     userRef.current.focus()
@@ -78,7 +118,6 @@ const UpdateFormLogement = () => {
       })
 
       console.log(response.data)
-      // console.log(JSON.stringify(response))
       setSuccess(true)
     } catch (err) {
       if (!err?.response) {
@@ -96,12 +135,12 @@ const UpdateFormLogement = () => {
         {auth.userId && auth.token && (
           <>
             {success ? (
-              <div className={SignUpCSS.bgSection}>
-                <div className={SignUpCSS.sectionSignUp}>
+              <div className={UpdateLogCSS.bgSection}>
+                <div className={UpdateLogCSS.sectionSignUp}>
                   <h1> Logement modifié ! </h1>
                   <p>
                     <Link
-                      className={SignUpCSS.aReg}
+                      className={UpdateLogCSS.aReg}
                       to={`/P7_Kasa_React/profile/${auth.userId}`}
                     >
                       {' '}
@@ -111,11 +150,13 @@ const UpdateFormLogement = () => {
                 </div>
               </div>
             ) : (
-              <div className={SignUpCSS.bgSection}>
-                <div className={SignUpCSS.sectionSignUp}>
+              <div className={UpdateLogCSS.bgSection}>
+                <div className={UpdateLogCSS.sectionSignUp}>
                   <p
                     ref={errRef}
-                    className={errMsg ? SignUpCSS.errMsg : SignUpCSS.offscreen}
+                    className={
+                      errMsg ? UpdateLogCSS.errMsg : UpdateLogCSS.offscreen
+                    }
                     aria-live="assertive"
                   >
                     {errMsg}
@@ -123,7 +164,7 @@ const UpdateFormLogement = () => {
                   <h1>Modifier un logement</h1>
                   <p>
                     <Link
-                      className={SignUpCSS.aReg}
+                      className={UpdateLogCSS.aReg}
                       to={`/P7_Kasa_React/lodgings/${urlId}`}
                     >
                       {' '}
@@ -133,6 +174,7 @@ const UpdateFormLogement = () => {
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="text">Titre :</label>
                     <input
+                      placeholder={dataLodging.title}
                       type="text"
                       id="title"
                       ref={userRef}
@@ -143,6 +185,7 @@ const UpdateFormLogement = () => {
                     />
                     <label htmlFor="text">Lieu :</label>
                     <input
+                      placeholder={dataLodging.location}
                       type="text"
                       id="location"
                       ref={userRef}
@@ -152,7 +195,8 @@ const UpdateFormLogement = () => {
                       required
                     />
                     <label htmlFor="text">Description :</label>
-                    <input
+                    <textarea
+                      placeholder={dataLodging.description}
                       type="text"
                       id="description"
                       ref={userRef}
@@ -163,6 +207,7 @@ const UpdateFormLogement = () => {
                     />
                     <label htmlFor="text">Équipements :</label>
                     <input
+                      placeholder={dataLodging.equipements}
                       type="text"
                       id="équipements"
                       ref={userRef}
@@ -173,15 +218,15 @@ const UpdateFormLogement = () => {
                       value={equipements}
                       required
                       aria-describedby="uidnote"
-                      onFocus={() => setTagsFocus(true)}
-                      onBlur={() => setTagsFocus(false)}
+                      onFocus={() => setEquipementsFocus(true)}
+                      onBlur={() => setEquipementsFocus(false)}
                     />
                     <p
                       id="uidnote"
                       className={
-                        tagsFocus && tags
-                          ? SignUpCSS.instructions
-                          : SignUpCSS.offscreen
+                        equipementsFocus && equipements
+                          ? UpdateLogCSS.instructions
+                          : UpdateLogCSS.offscreen
                       }
                     >
                       ⚠ Merci de séparer les differents équipements par des
@@ -189,6 +234,7 @@ const UpdateFormLogement = () => {
                     </p>
                     <label htmlFor="text">Tags :</label>
                     <input
+                      placeholder={dataLodging.tags}
                       type="text"
                       id="tags"
                       ref={userRef}
@@ -197,15 +243,15 @@ const UpdateFormLogement = () => {
                       value={tags}
                       required
                       aria-describedby="uidnote"
-                      onFocus={() => setEquipementsFocus(true)}
-                      onBlur={() => setEquipementsFocus(false)}
+                      onFocus={() => setTagsFocus(true)}
+                      onBlur={() => setTagsFocus(false)}
                     />
                     <p
                       id="uidnote"
                       className={
-                        equipementsFocus && equipements
-                          ? SignUpCSS.instructions
-                          : SignUpCSS.offscreen
+                        tagsFocus && tags
+                          ? UpdateLogCSS.instructions
+                          : UpdateLogCSS.offscreen
                       }
                     >
                       ⚠ Merci de séparer les differents tags par des virgules

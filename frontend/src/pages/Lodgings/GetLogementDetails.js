@@ -1,17 +1,22 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import Error404 from '../Error404/Error404'
+
+import axios from '../../api/ApiKasaMongoDB'
 import uselodgingsService from '../../services/lodgingsService'
-// import lodgingsService from '../../services/lodgingsService'
 import useUsersService from '../../services/usersService'
-// import usersService from '../../services/usersService'
+
 import CssLodgings from './Lodgings.module.css'
+
 import Slideshow from '../../components/Slideshow/Slideshow'
 import Collapse from '../../components/Collapse/Collapse'
+
 import { Link } from 'react-router-dom'
+
 import defaultPicture from '../../assets/defaultProfilePict.png'
 
 import AuthContext from '../../context/AuthProvider'
@@ -19,8 +24,6 @@ import { useContext } from 'react'
 
 import StarFull from '../../assets/fullstar.png'
 import StarEmpty from '../../assets/emptystar.png'
-
-import axios from '../../api/ApiKasaMongoDB'
 
 function Lodging() {
   const urlId = useParams().id // récupération de l'id dans l'url
@@ -34,12 +37,11 @@ function Lodging() {
   const { auth } = useContext(AuthContext)
   // console.log(auth.userId, auth.token)
 
-  const lodgingsService = uselodgingsService() // pour test interceptor axios
-  const usersService = useUsersService() // pour test interceptor axios
+  const lodgingsService = uselodgingsService()
+  const usersService = useUsersService()
 
   const [hoverIndex, setHoverIndex] = useState(0)
   const [rating, setRating] = useState(0)
-  // console.log(rating)
 
   const [loading, setLoading] = useState(true)
   const [error404, setError404] = useState(false)
@@ -82,7 +84,7 @@ function Lodging() {
   // donnéees du logement au chargement de la page
   useEffect(() => {
     getDataLodging()
-  }, []) // array vide sinon boucle infinie
+  }, []) // array vide sinon boucle infinie (warning esLint)
 
   const idUser = dataLodging.userId // on récupere l'id de l'hébergeur
   const [dataUser, setdataUser] = useState({
@@ -112,7 +114,7 @@ function Lodging() {
       }
     }
     pushDataUser()
-  }, [idUser]) // array sans "usersService" sinon boucle infinie
+  }, [idUser]) // array sans "usersService" sinon boucle infinie (warning esLint)
 
   if (error404 && !loading) {
     // on retourne la page Error404 si l'id de l'url ne se trouve pas dans les données de l'api
@@ -149,22 +151,7 @@ function Lodging() {
   // vote de l'utilisateur puis on veut mettre a jour la note moyenne une fois le vote effectué
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    // let formData = new FormData()
-
     const userId = auth.userId
-
-    // formData.append('logement', [
-    //   JSON.stringify({
-    //     averageRating: averageRating,
-    //   }),
-    // ])
-    // try {
-    //   const response = await axios.post(LOGEMENT_POST_URL, formData, {
-    //     headers: {
-    //       Authorization: `Bearer ${auth.token}`,
-    //     },
-    //   })
     try {
       const response = await axios
         .post(
@@ -181,7 +168,6 @@ function Lodging() {
         .then(() => getDataLodging())
 
       console.log(response.data)
-      // console.log(JSON.stringify(response))
       setSuccess(true)
     } catch (error) {
       // envoie une erreur "setErrMsg n'est pas une fonction"

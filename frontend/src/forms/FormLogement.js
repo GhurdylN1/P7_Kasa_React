@@ -1,7 +1,7 @@
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import React from 'react'
-import SignUpCSS from './Sign.module.css'
+import LogementCSS from './Form.module.css'
 import { useRef, useState, useEffect } from 'react'
 import axios from '../api/ApiKasaMongoDB'
 import { Link } from 'react-router-dom'
@@ -12,7 +12,7 @@ const LOGEMENT_POST_URL = '/api/logements'
 
 const FormLogement = () => {
   const { auth } = useContext(AuthContext)
-  console.log(auth.userId, auth.token)
+  // console.log(auth.userId, auth.token)
 
   const userId = auth.userId
 
@@ -74,7 +74,6 @@ const FormLogement = () => {
       })
 
       console.log(response.data)
-      // console.log(JSON.stringify(response))
       setSuccess(true)
     } catch (err) {
       if (!err?.response) {
@@ -90,12 +89,12 @@ const FormLogement = () => {
       <div className="container">
         <Header />
         {success ? (
-          <div className={SignUpCSS.bgSection}>
-            <div className={SignUpCSS.sectionSignUp}>
+          <div className={LogementCSS.bgSection}>
+            <div className={LogementCSS.sectionSignUp}>
               <h1> Logement créé ! </h1>
               <p>
                 <Link
-                  className={SignUpCSS.aReg}
+                  className={LogementCSS.aReg}
                   to={`/P7_Kasa_React/profile/${auth.userId}`}
                 >
                   {' '}
@@ -105,11 +104,11 @@ const FormLogement = () => {
             </div>
           </div>
         ) : (
-          <div className={SignUpCSS.bgSection}>
-            <div className={SignUpCSS.sectionSignUp}>
+          <div className={LogementCSS.bgSection}>
+            <div className={LogementCSS.sectionSignUp}>
               <p
                 ref={errRef}
-                className={errMsg ? SignUpCSS.errMsg : SignUpCSS.offscreen}
+                className={errMsg ? LogementCSS.errMsg : LogementCSS.offscreen}
                 aria-live="assertive"
               >
                 {errMsg}
@@ -117,7 +116,7 @@ const FormLogement = () => {
               <h1>Créer un logement</h1>
               <p>
                 <Link
-                  className={SignUpCSS.aReg}
+                  className={LogementCSS.aReg}
                   to={`/P7_Kasa_React/profile/${auth.userId}`}
                 >
                   {' '}
@@ -146,7 +145,7 @@ const FormLogement = () => {
                   required
                 />
                 <label htmlFor="text">Description :</label>
-                <input
+                <textarea
                   type="text"
                   id="description"
                   ref={userRef}
@@ -172,8 +171,8 @@ const FormLogement = () => {
                   id="uidnote"
                   className={
                     tagsFocus && tags
-                      ? SignUpCSS.instructions
-                      : SignUpCSS.offscreen
+                      ? LogementCSS.instructions
+                      : LogementCSS.offscreen
                   }
                 >
                   ⚠ Merci de séparer les differents équipements par des virgules
@@ -195,8 +194,8 @@ const FormLogement = () => {
                   id="uidnote"
                   className={
                     equipementsFocus && equipements
-                      ? SignUpCSS.instructions
-                      : SignUpCSS.offscreen
+                      ? LogementCSS.instructions
+                      : LogementCSS.offscreen
                   }
                 >
                   ⚠ Merci de séparer les differents tags par des virgules

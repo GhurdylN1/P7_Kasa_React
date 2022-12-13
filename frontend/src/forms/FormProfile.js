@@ -1,18 +1,20 @@
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
+import Header from '../components/Header/Header'
+import Footer from '../components/Footer/Footer'
 import React from 'react'
-import SignUpCSS from '../../pages/Sign.module.css'
+import ProfileCSS from './Form.module.css'
 import { useRef, useState, useEffect } from 'react'
-import axios from '../../api/ApiKasaMongoDB'
+import axios from '../api/ApiKasaMongoDB'
 import { Link } from 'react-router-dom'
-import AuthContext from '../../context/AuthProvider'
+import AuthContext from '../context/AuthProvider'
 import { useContext } from 'react'
 
 import { useParams } from 'react-router-dom'
 
+import useUsersService from '../services/usersService'
+
 const FormProfile = () => {
   const { auth } = useContext(AuthContext)
-  console.log(auth.userId, auth.token)
+  // console.log(auth.userId, auth.token)
 
   const userId = useParams().id
   const PROFILE_PUT_URL = `/api/users/${userId}`
@@ -20,11 +22,41 @@ const FormProfile = () => {
   const userRef = useRef()
   const errRef = useRef()
 
-  // const [fullName, setFullName] = useState('')
+  const [fullName, setFullName] = useState('')
   const [hostDescription, setHostDescription] = useState('')
 
   const [errMsg, setErrMsg] = useState('')
   const [success, setSuccess] = useState(false)
+
+  const usersService = useUsersService()
+
+  const [dataUser, setdataUser] = useState({
+    _id: '',
+    email: '',
+    fullName: '',
+    profilePict: '',
+    hostDescription: '',
+  })
+
+  // données de l'hébergeur
+  useEffect(() => {
+    const pushDataUser = async () => {
+      try {
+        const response = await usersService.getUserById(userId)
+        setdataUser(response)
+      } catch (err) {
+        if (err.response) {
+          // not in the 200 response range
+          console.log(err.response.data)
+          console.log(err.response.status)
+          console.log(err.response.headers)
+        } else {
+          console.log(`Error: ceci est une erreur`)
+        }
+      }
+    }
+    pushDataUser()
+  }, []) // array vide sinon boucle infinie (warning esLint)
 
   useEffect(() => {
     userRef.current.focus()
@@ -46,7 +78,7 @@ const FormProfile = () => {
 
     formData.append('user', [
       JSON.stringify({
-        // fullName,
+        fullName,
         hostDescription,
       }),
     ])
@@ -58,7 +90,6 @@ const FormProfile = () => {
       })
 
       console.log(response.data)
-      // console.log(JSON.stringify(response))
       setSuccess(true)
     } catch (err) {
       if (!err?.response) {
@@ -77,12 +108,12 @@ const FormProfile = () => {
         {auth.userId && auth.token && (
           <>
             {success ? (
-              <div className={SignUpCSS.bgSection}>
-                <div className={SignUpCSS.sectionSignUp}>
+              <div className={ProfileCSS.bgSection}>
+                <div className={ProfileCSS.sectionSignUp}>
                   <h1> Profil Edité ! </h1>
                   <p>
                     <Link
-                      className={SignUpCSS.aReg}
+                      className={ProfileCSS.aReg}
                       to={`/P7_Kasa_React/profile/${auth.userId}`}
                     >
                       {' '}
@@ -92,11 +123,13 @@ const FormProfile = () => {
                 </div>
               </div>
             ) : (
-              <div className={SignUpCSS.bgSection}>
-                <div className={SignUpCSS.sectionSignUp}>
+              <div className={ProfileCSS.bgSection}>
+                <div className={ProfileCSS.sectionSignUp}>
                   <p
                     ref={errRef}
-                    className={errMsg ? SignUpCSS.errMsg : SignUpCSS.offscreen}
+                    className={
+                      errMsg ? ProfileCSS.errMsg : ProfileCSS.offscreen
+                    }
                     aria-live="assertive"
                   >
                     {errMsg}
@@ -104,7 +137,7 @@ const FormProfile = () => {
                   <h1>Éditer votre profil</h1>
                   <p>
                     <Link
-                      className={SignUpCSS.aReg}
+                      className={ProfileCSS.aReg}
                       to={`/P7_Kasa_React/profile/${auth.userId}`}
                     >
                       {' '}
@@ -112,29 +145,30 @@ const FormProfile = () => {
                     </Link>
                   </p>
                   <form onSubmit={handleSubmit}>
-                    {/* <label htmlFor="text">Nom d'utilisateur :</label>
+                    <label htmlFor="text">Nom d'utilisateur :</label>
                     <input
-                      // readOnly
-                      // placeholder="Nom d'utilisateur"
+                      // readOnly (si on ne veut pas que l'user change son nom)
+                      placeholder={dataUser.fullName}
                       type="text"
                       name="fullName"
                       id="fullName"
                       ref={userRef}
                       autoComplete="off"
-                      onChange={(e) => setFullName(e.target.value)}
                       value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
                       required
-                    /> */}
+                    />
                     <label htmlFor="text"> Message de présentation :</label>
                     <textarea
-                      className={SignUpCSS.textAreaSize}
+                      className={ProfileCSS.textAreaSize}
+                      placeholder={dataUser.hostDescription}
                       type="text"
                       name="hostDescription"
                       id="hostDescription"
                       ref={userRef}
                       autoComplete="off"
-                      onChange={(e) => setHostDescription(e.target.value)}
                       value={hostDescription}
+                      onChange={(e) => setHostDescription(e.target.value)}
                       required
                     />
                     <label htmlFor="image"> Photo de profil :</label>

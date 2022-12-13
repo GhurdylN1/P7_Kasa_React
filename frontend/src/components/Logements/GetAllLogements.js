@@ -1,14 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import CssCard from '../components/Cards/Cards.module.css'
-import uselodgingsService from '../services/lodgingsService'
-// import lodgingsService from '../services/lodgingsService'
-import Card from './Card/Card'
+import CssCard from '../../components/Cards/Cards.module.css'
+import uselodgingsService from '../../services/lodgingsService'
+import Card from '../Card/Card'
 
 function GetAllLogements() {
   const [logements, setLogements] = useState([])
 
-  const lodgingsService = uselodgingsService() // pour test interceptor axios
+  const lodgingsService = uselodgingsService()
 
   useEffect(() => {
     const GetLogements = async () => {
@@ -28,7 +27,7 @@ function GetAllLogements() {
     }
 
     GetLogements()
-  }, []) // array vide sinon boucle infinie
+  }, []) // array vide sinon boucle infinie (warning esLint)
 
   return (
     <div className={CssCard.cardBackground}>

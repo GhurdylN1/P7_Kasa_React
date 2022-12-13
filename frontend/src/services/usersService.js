@@ -1,6 +1,6 @@
 import api from '../api/ApiKasaMongoDB'
 
-// test interceptor axios qui fonctionne mais useEffect en boucle infinie si on ne laisse pas un array vide [] (et dans les autres composants)
+// interceptor concernant les users pour les calls axios nécessitant le token
 
 import { useContext, useEffect } from 'react'
 import AuthContext from '../context/AuthProvider'
@@ -11,7 +11,6 @@ const useUsersService = () => {
   useEffect(() => {
     const requestIntercept = api.interceptors.request.use(
       (config) => {
-        // console.log('auth.token', auth.token)
         if (auth.token) {
           config.headers['Authorization'] = `Bearer ${auth.token}`
         }
@@ -36,7 +35,7 @@ const useUsersService = () => {
       api.interceptors.request.eject(requestIntercept)
       api.interceptors.response.eject(responseIntercept)
     }
-  }, [])
+  }, []) //array vide sinon boucle infinie (warning esLint)
 
   const usersService = {
     getUserById: async (_id) => {
