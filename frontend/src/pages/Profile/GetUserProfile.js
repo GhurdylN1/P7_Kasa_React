@@ -27,7 +27,7 @@ function UserProfile() {
   const urlUserId = useParams().id
   const [loading, setLoading] = useState(true)
   const [error404, setError404] = useState(false)
-  const [dataUser, setdataUser] = useState({
+  const [dataUser, setDataUser] = useState({
     _id: '',
     email: '',
     fullName: '',
@@ -37,11 +37,11 @@ function UserProfile() {
 
   // données de l'hébergeur
   useEffect(() => {
-    const pushDataUser = async () => {
+    const getDataUser = async () => {
       try {
         const response = await usersService.getUserById(urlUserId)
         setLoading(false)
-        setdataUser(response)
+        setDataUser(response)
       } catch (err) {
         setLoading(false)
         setError404(true)
@@ -55,8 +55,8 @@ function UserProfile() {
         }
       }
     }
-    pushDataUser()
-  }, []) // array vide sinon boucle infinie (warning esLint)
+    getDataUser()
+  }, [urlUserId]) // array sans usersService sinon boucle infinie (warning esLint)
 
   if (error404 && !loading) {
     // on retourne la page Error404 si les données son incorrectes

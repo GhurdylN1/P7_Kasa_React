@@ -31,7 +31,7 @@ function GetUserLogements() {
     }
 
     UserLogements()
-  }, []) // array vide sinon boucle infinie (warning esLint)
+  }, [urlUserId]) // array sans lodgingsService sinon boucle infinie (warning esLint)
 
   return (
     <div className={CssCard.cardBackground}>

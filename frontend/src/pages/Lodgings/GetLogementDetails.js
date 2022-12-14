@@ -1,5 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+// import { useRef } from 'react'
+
 import { useParams } from 'react-router-dom'
 
 import Footer from '../../components/Footer/Footer'
@@ -30,7 +32,7 @@ function Lodging() {
   const LOGEMENT_POST_URL = `/api/logements/${urlId}/rating`
 
   // const [setErrMsg] = useState('')
-  const [setSuccess] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   // const errRef = useRef()
 
@@ -42,6 +44,8 @@ function Lodging() {
 
   const [hoverIndex, setHoverIndex] = useState(0)
   const [rating, setRating] = useState(0)
+
+  const [review, setReview] = useState('')
 
   const [loading, setLoading] = useState(true)
   const [error404, setError404] = useState(false)
@@ -157,7 +161,11 @@ function Lodging() {
         .post(
           LOGEMENT_POST_URL,
           {
-            usersRatings: { userId: userId, userRating: rating },
+            usersRatings: {
+              userId: userId,
+              userRating: rating,
+              userReview: review,
+            },
           },
           {
             headers: {
@@ -165,11 +173,10 @@ function Lodging() {
             },
           }
         )
-        .then(() => getDataLodging())
+        .then(() => getDataLodging(), setSuccess(true))
 
       console.log(response.data)
-      setSuccess(true)
-    } catch (error) {
+    } catch (err) {
       // envoie une erreur "setErrMsg n'est pas une fonction"
       // if (!err?.response) {
       //   setErrMsg('Le serveur ne réponds pas')
@@ -189,18 +196,6 @@ function Lodging() {
             <Slideshow data={dataLodging.pictures} />
             <div className={CssLodgings.hostContainer}>
               <div className={CssLodgings.leftContainer}>
-                {auth.userId !== undefined && auth.token !== undefined && (
-                  <div className={CssLodgings.starsContainer}>
-                    {rateStar.map((stars, index) => (
-                      <img
-                        key={stars + urlId + index}
-                        className={CssLodgings.starPicture}
-                        src={stars ? StarFull : StarEmpty}
-                        alt={stars ? 'red star' : 'grey star'}
-                      />
-                    ))}
-                  </div>
-                )}
                 <div className={CssLodgings.title}>{dataLodging.title}</div>
                 <div className={CssLodgings.location}>
                   {dataLodging.location}
@@ -229,8 +224,39 @@ function Lodging() {
                     />
                   </div>
                 </Link>
-                {auth.userId !== undefined && auth.token !== undefined ? (
+                <div className={CssLodgings.starsContainer}>
+                  {rateStar.map((stars, index) => (
+                    <img
+                      key={stars + urlId + index}
+                      className={CssLodgings.starPicture}
+                      src={stars ? StarFull : StarEmpty}
+                      alt={stars ? 'red star' : 'grey star'}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className={CssLodgings.collapseHostContainer}>
+              <Collapse title="Description" text={dataLodging.description} />
+              <Collapse
+                title="Équipements"
+                text={dataLodging.equipements.map((equipement, index) => (
+                  <div key={index}>{equipement}</div>
+                ))}
+              />
+            </div>
+            <br />
+            {auth.userId !== undefined && auth.token !== undefined && (
+              <>
+                {success ? (
+                  <div className={CssLodgings.location}>
+                    Merci d'avoir donné votre avis.
+                  </div>
+                ) : (
                   <>
+                    <div className={CssLodgings.location}>
+                      Notez ce logement :
+                    </div>
                     <div className={CssLodgings.starsContainer}>
                       <ul className={CssLodgings.starList}>
                         {[1, 2, 3, 4, 5].map((index) => {
@@ -251,33 +277,58 @@ function Lodging() {
                       </ul>
                     </div>
                     <form onSubmit={handleSubmit}>
+                      <label htmlFor="text" className={CssLodgings.location}>
+                        {' '}
+                        Laissez votre avis :
+                      </label>
+                      <textarea
+                        placeholder="Merci de rester courtois dans vos propos."
+                        type="text"
+                        name="userReview"
+                        id="userReview"
+                        autoComplete="off"
+                        value={review}
+                        onChange={(e) => setReview(e.target.value)}
+                        required
+                      />
                       <button className={CssLodgings.starBtn}>
                         Valider la note
                       </button>
                     </form>
                   </>
-                ) : (
-                  <div className={CssLodgings.starsContainer}>
-                    {rateStar.map((stars, index) => (
-                      <img
-                        key={stars + urlId + index}
-                        className={CssLodgings.starPicture}
-                        src={stars ? StarFull : StarEmpty}
-                        alt={stars ? 'red star' : 'grey star'}
-                      />
-                    ))}
-                  </div>
                 )}
-              </div>
-            </div>
-            <div className={CssLodgings.collapseHostContainer}>
-              <Collapse title="Description" text={dataLodging.description} />
-              <Collapse
-                title="Équipements"
-                text={dataLodging.equipements.map((equipement, index) => (
-                  <div key={index}>{equipement}</div>
-                ))}
-              />
+              </>
+            )}
+            {/* Test pour une section d'affichage des avis clients, on affiche un message de remerciement une fois l'avis pris en compte*/}
+            <br />
+            <div>
+              <div className={CssLodgings.title}>Avis clients:</div>
+              <br />
+              {dataLodging.usersRatings.map((review, index) => (
+                <div key={index}>
+                  {[...Array(review.userRating)].map((star, index) => {
+                    return (
+                      <img
+                        key={index}
+                        className={CssLodgings.starPicture}
+                        src={StarFull}
+                        alt="red star"
+                      ></img>
+                    )
+                  })}
+                  <div className={CssLodgings.location}>
+                    {review.userId}
+                    <h5>
+                      (afficher le nom de l'user et son image de profil au lieu
+                      de son userId)
+                    </h5>
+                  </div>
+                  <div className={CssLodgings.location}>
+                    {review.userReview}
+                  </div>
+                  <br />
+                </div>
+              ))}
             </div>
             <section>
               {auth.userId === idUser && (

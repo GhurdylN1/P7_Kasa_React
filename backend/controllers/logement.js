@@ -134,6 +134,10 @@ exports.voteLogement = (req, res, next) => {
     const userRatingValue = req.body.usersRatings.userRating
     // console.log(userRatingValue)
 
+    // commentaire de l'utilisateur qui vote
+    const userReviewValue = req.body.usersRatings.userReview
+    // console.log(userReviewValue)
+
     // array des utilisateurs ayants voté
     const usersRatings = logement.usersRatings
     // console.log(usersRatings)
@@ -167,6 +171,7 @@ exports.voteLogement = (req, res, next) => {
     // si l'utilisateur à déjà voté, alors on update son vote
     if (userRated) {
       userRated.userRating = userRatingValue
+      userRated.userReview = userReviewValue
       promise = Logement.updateOne({_id: req.params.id}, 
       {
       $set: { usersRatings : [...usersRatings]}
@@ -180,6 +185,7 @@ exports.voteLogement = (req, res, next) => {
             {
                userId : votingUserId,
                userRating : userRatingValue,
+               userReview : userReviewValue,
             },
           },
        }

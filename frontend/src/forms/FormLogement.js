@@ -209,7 +209,7 @@ const FormLogement = () => {
                   ref={userRef}
                   required
                 />
-                <label htmlFor="image">Photos de votre logement:</label>
+                <label htmlFor="image">Photos de votre logement (8 max):</label>
                 <input
                   accept="image/png, image/jpeg, image/jpg"
                   multiple

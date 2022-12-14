@@ -12,6 +12,7 @@ const logementsSchema = mongoose.Schema({
     usersRatings: [{
         userId: { type: String, required: true },
         userRating: { type: Number, required: true },
+        userReview: { type: String, required: true },
      }],
     location : { type: String, required: true },
     equipements: { type: [String], },
