@@ -126,11 +126,11 @@ function UserProfile() {
             <>
               <br />
               <Link to="/P7_Kasa_React/formlogement">
-                <p>Créer un logement</p>
+                <p className={CssProfile.updateLinks}>Créer un logement</p>
               </Link>
               <br />
               <Link to={`/P7_Kasa_React/formprofile/${auth.userId}`}>
-                <p>Éditer votre profil</p>
+                <p className={CssProfile.updateLinks}>Éditer votre profil</p>
               </Link>
             </>
           )}
@@ -140,7 +140,13 @@ function UserProfile() {
         <section>
           <div className={CssProfile.email}>
             Pour contacter {name[0]} :{' '}
-            <a href={`mailto:${dataUser.email}`}> envoyer un email </a>
+            <a
+              href={`mailto:${dataUser.email}`}
+              className={CssProfile.updateLinks}
+            >
+              {' '}
+              envoyer un email{' '}
+            </a>
           </div>
         </section>
       </div>

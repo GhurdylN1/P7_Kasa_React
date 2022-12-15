@@ -40,10 +40,12 @@ const FormProfile = () => {
 
   // données de l'hébergeur
   useEffect(() => {
-    const pushDataUser = async () => {
+    const getDataUser = async () => {
       try {
-        const response = await usersService.getUserById(userId)
-        setdataUser(response)
+        const user = await usersService.getUserById(userId)
+        setdataUser(user)
+        setFullName(user.fullName)
+        setHostDescription(user.hostDescription)
       } catch (err) {
         if (err.response) {
           // not in the 200 response range
@@ -55,7 +57,7 @@ const FormProfile = () => {
         }
       }
     }
-    pushDataUser()
+    getDataUser()
   }, []) // array vide sinon boucle infinie (warning esLint)
 
   useEffect(() => {
@@ -148,7 +150,6 @@ const FormProfile = () => {
                     <label htmlFor="text">Nom d'utilisateur :</label>
                     <input
                       // readOnly (si on ne veut pas que l'user change son nom)
-                      placeholder={dataUser.fullName}
                       type="text"
                       name="fullName"
                       id="fullName"
@@ -161,7 +162,6 @@ const FormProfile = () => {
                     <label htmlFor="text"> Message de présentation :</label>
                     <textarea
                       className={ProfileCSS.textAreaSize}
-                      placeholder={dataUser.hostDescription}
                       type="text"
                       name="hostDescription"
                       id="hostDescription"

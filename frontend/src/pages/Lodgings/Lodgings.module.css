@@ -129,6 +129,35 @@
   width: auto;
 }
 
+.updateLogement {
+  display: flex;
+  gap: 10px;
+}
+
+.userReviewContainer {
+  display: flex;
+  align-items: center;
+}
+
+.pictReviewContainer {
+  background: #c4c4c4;
+  width: 42px;
+  height: 42px;
+  border-radius: 90%;
+}
+.reviewHostPicture {
+  width: 42px;
+  height: 42px;
+  border-radius: 90%;
+  object-fit: cover;
+}
+.reviewUserLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 5px;
+}
+
 @keyframes appear {
   from {
     opacity: 0;
@@ -136,6 +165,18 @@
 
   to {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .updateLinks {
+    font-size: 12px;
+  }
+
+  .pictReviewContainer,
+  .reviewHostPicture {
+    width: 32px;
+    height: 32px;
   }
 }
 

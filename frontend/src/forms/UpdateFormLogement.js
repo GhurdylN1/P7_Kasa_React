@@ -59,8 +59,13 @@ const UpdateFormLogement = () => {
   // fonction pour récuperer les données du logement
   const getDataLodging = async () => {
     try {
-      const response = await lodgingsService.getByLodgingId(urlId)
-      setdataLodging(response)
+      const logement = await lodgingsService.getByLodgingId(urlId)
+      setdataLodging(logement)
+      setTitle(logement.title)
+      setLocation(logement.location)
+      setDescription(logement.description)
+      setEquipements(logement.equipements)
+      setTags(logement.tags)
     } catch (err) {
       if (err.response) {
         // not in the 200 response range
@@ -176,7 +181,6 @@ const UpdateFormLogement = () => {
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="text">Titre :</label>
                     <input
-                      placeholder={dataLodging.title}
                       type="text"
                       id="title"
                       ref={userRef}
@@ -187,7 +191,6 @@ const UpdateFormLogement = () => {
                     />
                     <label htmlFor="text">Lieu :</label>
                     <input
-                      placeholder={dataLodging.location}
                       type="text"
                       id="location"
                       ref={userRef}
@@ -198,7 +201,6 @@ const UpdateFormLogement = () => {
                     />
                     <label htmlFor="text">Description :</label>
                     <textarea
-                      placeholder={dataLodging.description}
                       type="text"
                       id="description"
                       ref={userRef}
@@ -209,7 +211,6 @@ const UpdateFormLogement = () => {
                     />
                     <label htmlFor="text">Équipements :</label>
                     <input
-                      placeholder={dataLodging.equipements}
                       type="text"
                       id="équipements"
                       ref={userRef}
@@ -236,7 +237,6 @@ const UpdateFormLogement = () => {
                     </p>
                     <label htmlFor="text">Tags :</label>
                     <input
-                      placeholder={dataLodging.tags}
                       type="text"
                       id="tags"
                       ref={userRef}
@@ -258,7 +258,7 @@ const UpdateFormLogement = () => {
                     >
                       ⚠ Merci de séparer les differents tags par des virgules
                     </p>
-                    <label htmlFor="image">Image de présentation:</label>
+                    <label htmlFor="image">Image de présentation&nbsp;:</label>
                     <input
                       accept="image/png, image/jpeg, image/jpg"
                       name="image"
@@ -268,7 +268,7 @@ const UpdateFormLogement = () => {
                       required
                     />
                     <label htmlFor="image">
-                      Photos de votre logement (8 max):
+                      Photos de votre logement (8 max) :
                     </label>
                     <input
                       accept="image/png, image/jpeg, image/jpg"

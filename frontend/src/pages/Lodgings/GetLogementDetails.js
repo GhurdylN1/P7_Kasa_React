@@ -68,9 +68,21 @@ function Lodging() {
   const getDataLodging = async () => {
     try {
       // const response = await api.get(`/api/logements/${urlId}`)
-      const response = await lodgingsService.getByLodgingId(urlId)
+      const logement = await lodgingsService.getByLodgingId(urlId)
+      for (let userRatingIndex in logement.usersRatings) {
+        console.log(userRatingIndex)
+        console.log(logement.usersRatings)
+        let user = await usersService.getUserById(
+          logement.usersRatings[userRatingIndex].userId
+        )
+        logement.usersRatings[userRatingIndex].fullName = user.fullName
+        logement.usersRatings[userRatingIndex].profilePict = user.profilePict
+        console.log('---------')
+        console.log(user.profilePict)
+        console.log(logement)
+      }
       setLoading(false)
-      setdataLodging(response)
+      setdataLodging(logement)
     } catch (err) {
       setLoading(false)
       setError404(true)
@@ -90,7 +102,9 @@ function Lodging() {
     getDataLodging()
   }, []) // array vide sinon boucle infinie (warning esLint)
 
-  const idUser = dataLodging.userId // on récupere l'id de l'hébergeur
+  // on récupere l'id de l'hébergeur
+  const idUser = dataLodging.userId
+
   const [dataUser, setdataUser] = useState({
     _id: '',
     email: '',
@@ -99,26 +113,28 @@ function Lodging() {
     hostDescription: '',
   })
 
-  // données de l'hébergeur
-  useEffect(() => {
-    const pushDataUser = async () => {
-      try {
-        // const response = await api.get(`/api/users/${idUser}`)
-        const response = await usersService.getUserById(idUser)
-        setdataUser(response)
-      } catch (err) {
-        if (err.response) {
-          // not in the 200 response range
-          console.log(err.response.data)
-          console.log(err.response.status)
-          console.log(err.response.headers)
-        } else {
-          console.log(`Error: ceci est une erreur`)
-        }
+  // fonction pour récuperer les données de l'hébergeur
+  const getDataUser = async () => {
+    try {
+      // const response = await api.get(`/api/users/${idUser}`)
+      const response = await usersService.getUserById(idUser)
+      setdataUser(response)
+    } catch (err) {
+      if (err.response) {
+        // not in the 200 response range
+        console.log(err.response.data)
+        console.log(err.response.status)
+        console.log(err.response.headers)
+      } else {
+        console.log(`Error: ceci est une erreur`)
       }
     }
-    pushDataUser()
-  }, [idUser]) // array sans "usersService" sinon boucle infinie (warning esLint)
+  }
+
+  // données de l'hébergeur au chargement de la page
+  useEffect(() => {
+    getDataUser()
+  }, [idUser]) // array sans "getDataUser" sinon boucle infinie (warning esLint)
 
   if (error404 && !loading) {
     // on retourne la page Error404 si l'id de l'url ne se trouve pas dans les données de l'api
@@ -197,6 +213,23 @@ function Lodging() {
             <div className={CssLodgings.hostContainer}>
               <div className={CssLodgings.leftContainer}>
                 <div className={CssLodgings.title}>{dataLodging.title}</div>
+                <section>
+                  {auth.userId === idUser && (
+                    <div className={CssLodgings.updateLogement}>
+                      <Link to={`/P7_Kasa_React/updateformlogement/${urlId}`}>
+                        <p className={CssLodgings.updateLinks}>
+                          Modifier le logement
+                        </p>
+                      </Link>
+                      <br />
+                      <Link to={`/P7_Kasa_React/deleteformlogement/${urlId}`}>
+                        <p className={CssLodgings.updateLinks}>
+                          Supprimer le logement
+                        </p>
+                      </Link>
+                    </div>
+                  )}
+                </section>
                 <div className={CssLodgings.location}>
                   {dataLodging.location}
                 </div>
@@ -291,18 +324,15 @@ function Lodging() {
                         onChange={(e) => setReview(e.target.value)}
                         required
                       />
-                      <button className={CssLodgings.starBtn}>
-                        Valider la note
-                      </button>
+                      <button className={CssLodgings.starBtn}>Valider</button>
                     </form>
                   </>
                 )}
               </>
             )}
-            {/* Test pour une section d'affichage des avis clients, on affiche un message de remerciement une fois l'avis pris en compte*/}
             <br />
             <div>
-              <div className={CssLodgings.title}>Avis clients:</div>
+              <div className={CssLodgings.title}>Avis clients :</div>
               <br />
               {dataLodging.usersRatings.map((review, index) => (
                 <div key={index}>
@@ -316,12 +346,22 @@ function Lodging() {
                       ></img>
                     )
                   })}
-                  <div className={CssLodgings.location}>
-                    {review.userId}
-                    <h5>
-                      (afficher le nom de l'user et son image de profil au lieu
-                      de son userId)
-                    </h5>
+                  <div className={CssLodgings.userReviewContainer}>
+                    <Link
+                      to={`/P7_Kasa_React/profile/${review.userId}`}
+                      className={CssLodgings.reviewUserLink}
+                    >
+                      <div className={CssLodgings.pictReviewContainer}>
+                        <img
+                          className={CssLodgings.reviewHostPicture}
+                          src={review.profilePict}
+                          alt="user"
+                        />
+                      </div>
+                      <div className={CssLodgings.location}>
+                        {review.fullName}
+                      </div>
+                    </Link>
                   </div>
                   <div className={CssLodgings.location}>
                     {review.userReview}
@@ -330,19 +370,6 @@ function Lodging() {
                 </div>
               ))}
             </div>
-            <section>
-              {auth.userId === idUser && (
-                <>
-                  <Link to={`/P7_Kasa_React/updateformlogement/${urlId}`}>
-                    <p>Modifier le logement</p>
-                  </Link>
-                  <br />
-                  <Link to={`/P7_Kasa_React/deleteformlogement/${urlId}`}>
-                    <p>Supprimer le logement</p>
-                  </Link>
-                </>
-              )}
-            </section>
           </section>
         )}
       </div>
