@@ -72,7 +72,6 @@ const FormProfile = () => {
     e.preventDefault()
     let formData = new FormData()
     let profilePict = document.getElementById('image').files[0]
-    console.log(profilePict)
 
     if (profilePict) {
       formData.append('image', profilePict)
@@ -147,7 +146,7 @@ const FormProfile = () => {
                     </Link>
                   </p>
                   <form onSubmit={handleSubmit}>
-                    <label htmlFor="text">Nom d'utilisateur :</label>
+                    <label htmlFor="text">Nom d'utilisateur&nbsp;:</label>
                     <input
                       // readOnly (si on ne veut pas que l'user change son nom)
                       type="text"
@@ -159,7 +158,10 @@ const FormProfile = () => {
                       onChange={(e) => setFullName(e.target.value)}
                       required
                     />
-                    <label htmlFor="text"> Message de présentation :</label>
+                    <label htmlFor="text">
+                      {' '}
+                      Message de présentation&nbsp;:
+                    </label>
                     <textarea
                       className={ProfileCSS.textAreaSize}
                       type="text"
@@ -171,7 +173,7 @@ const FormProfile = () => {
                       onChange={(e) => setHostDescription(e.target.value)}
                       required
                     />
-                    <label htmlFor="image"> Photo de profil :</label>
+                    <label htmlFor="image"> Photo de profil&nbsp;:</label>
                     <input
                       accept="image/png, image/jpeg, image/jpg"
                       name="image"

@@ -1,3 +1,17 @@
+.cardBackground {
+  margin-top: 22px;
+  padding: 60px;
+  padding-bottom: 30px;
+  gap: 30px;
+  background-color: #f7f7f7;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  color: #ff6060;
+  animation: appear 1.5s;
+}
+
 .card {
   width: 340px;
   height: 340px;
@@ -68,9 +82,19 @@
   }
 }
 
+@media (min-width: 768px) {
+  .cardBackground {
+    margin-top: 44px;
+  }
+}
+
 /*Media queries pour mobiles*/
 
 @media screen and (max-width: 480px) {
+  .cardBackground {
+    padding: 0;
+    background-color: transparent;
+  }
   .card {
     width: 100%;
     max-width: 335px;
@@ -87,6 +111,9 @@
 /*Media queries pour tablettes*/
 
 @media screen and (min-width: 481px) and (max-width: 830px) {
+  .cardBackground {
+    padding: 20px;
+  }
   .card {
     margin-bottom: 0px;
   }

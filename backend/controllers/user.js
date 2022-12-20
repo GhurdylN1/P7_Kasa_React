@@ -49,7 +49,7 @@ exports.login = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-// editiion du profil
+// edition du profil
 exports.upateUserProfile = (req, res, next) => {
     console.log(req.file)
    
@@ -82,7 +82,7 @@ exports.upateUserProfile = (req, res, next) => {
         res.status(401).json({ message : 'Not authorized' });
       } else {
         User.updateOne({ _id: req.params.id}, { ...userObject, _id: req.params.id})
-        .then(() => res.status(200).json({message : 'Logement modifiée!'}))
+        .then(() => res.status(200).json({message : 'Profil modifié!'}))
         .catch(error => res.status(401).json({error}));
       }
     })

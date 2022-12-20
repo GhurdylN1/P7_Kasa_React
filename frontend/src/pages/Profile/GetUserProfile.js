@@ -39,9 +39,9 @@ function UserProfile() {
   useEffect(() => {
     const getDataUser = async () => {
       try {
-        const response = await usersService.getUserById(urlUserId)
+        const userData = await usersService.getUserById(urlUserId)
         setLoading(false)
-        setDataUser(response)
+        setDataUser(userData)
       } catch (err) {
         setLoading(false)
         setError404(true)
@@ -84,14 +84,16 @@ function UserProfile() {
             <div className={CssProfile.hostContainerProfile}>
               <div className={CssProfile.leftContainer}>
                 <div className={CssProfile.title}>
-                  Bonjour, je m'appelle {name[0]} :
+                  Bonjour, je m'appelle {name[0]}&nbsp;:
                 </div>
                 <div className={CssProfile.hostName}>✔ Membre depuis 2022</div>
               </div>
               <div className={CssProfile.rightContainer}>
                 <div className={CssProfile.hostInfos}>
                   <div className={CssProfile.hostName}>
-                    {name[0]} <br></br> {name[1]}
+                    {name[0]}
+                    <br />
+                    {name[1]}
                   </div>
                   <div className={CssProfile.pictContainer}>
                     <img
@@ -117,7 +119,7 @@ function UserProfile() {
             </div>
             <br></br>
             <div className={CssProfile.location}>
-              Voici ce que {name[0]} vous propose :
+              Voici ce que {name[0]} vous propose&nbsp;:
             </div>
           </section>
         )}
@@ -139,7 +141,7 @@ function UserProfile() {
         <br />
         <section>
           <div className={CssProfile.email}>
-            Pour contacter {name[0]} :{' '}
+            Pour contacter {name[0]}&nbsp;:{' '}
             <a
               href={`mailto:${dataUser.email}`}
               className={CssProfile.updateLinks}

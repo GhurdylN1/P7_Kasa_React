@@ -67,19 +67,14 @@ function Lodging() {
   // fonction pour récuperer les données du logement
   const getDataLodging = async () => {
     try {
-      // const response = await api.get(`/api/logements/${urlId}`)
       const logement = await lodgingsService.getByLodgingId(urlId)
+      // boucle pour récuperer le nom et l'avatar des user d'apres leur id pour leur affichage dans la section avis
       for (let userRatingIndex in logement.usersRatings) {
-        console.log(userRatingIndex)
-        console.log(logement.usersRatings)
         let user = await usersService.getUserById(
           logement.usersRatings[userRatingIndex].userId
         )
         logement.usersRatings[userRatingIndex].fullName = user.fullName
         logement.usersRatings[userRatingIndex].profilePict = user.profilePict
-        console.log('---------')
-        console.log(user.profilePict)
-        console.log(logement)
       }
       setLoading(false)
       setdataLodging(logement)
@@ -117,8 +112,8 @@ function Lodging() {
   const getDataUser = async () => {
     try {
       // const response = await api.get(`/api/users/${idUser}`)
-      const response = await usersService.getUserById(idUser)
-      setdataUser(response)
+      const userData = await usersService.getUserById(idUser)
+      setdataUser(userData)
     } catch (err) {
       if (err.response) {
         // not in the 200 response range
@@ -173,7 +168,7 @@ function Lodging() {
     e.preventDefault()
     const userId = auth.userId
     try {
-      const response = await axios
+      const postUserReview = await axios
         .post(
           LOGEMENT_POST_URL,
           {
@@ -191,7 +186,7 @@ function Lodging() {
         )
         .then(() => getDataLodging(), setSuccess(true))
 
-      console.log(response.data)
+      console.log(postUserReview.data)
     } catch (err) {
       // envoie une erreur "setErrMsg n'est pas une fonction"
       // if (!err?.response) {
@@ -288,7 +283,7 @@ function Lodging() {
                 ) : (
                   <>
                     <div className={CssLodgings.location}>
-                      Notez ce logement :
+                      Notez ce logement&nbsp;:
                     </div>
                     <div className={CssLodgings.starsContainer}>
                       <ul className={CssLodgings.starList}>
@@ -312,7 +307,7 @@ function Lodging() {
                     <form onSubmit={handleSubmit}>
                       <label htmlFor="text" className={CssLodgings.location}>
                         {' '}
-                        Laissez votre avis :
+                        Laissez votre avis&nbsp;:
                       </label>
                       <textarea
                         placeholder="Merci de rester courtois dans vos propos."
@@ -332,7 +327,7 @@ function Lodging() {
             )}
             <br />
             <div>
-              <div className={CssLodgings.title}>Avis clients :</div>
+              <div className={CssLodgings.title}>Avis clients&nbsp;:</div>
               <br />
               {dataLodging.usersRatings.map((review, index) => (
                 <div key={index}>

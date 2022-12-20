@@ -8,7 +8,7 @@ const logementsSchema = mongoose.Schema({
     description: { type: String, required: true },
     // note moyenne
     averageRating: { type: Number, default: 0 },
-    // note par utilisateur
+    // note et avis par utilisateur
     usersRatings: [{
         userId: { type: String, required: true },
         userRating: { type: Number, required: true },

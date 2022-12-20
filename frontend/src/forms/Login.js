@@ -39,8 +39,6 @@ const Login = () => {
           headers: { 'Content-Type': 'application/json' },
         }
       )
-      // console.log('-------> userId et token')
-      // console.log(response?.data)
 
       const token = response?.data?.token
       const userId = response?.data?.userId
@@ -92,7 +90,7 @@ const Login = () => {
               </p>
               <h1>Se Connecter</h1>
               <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email :</label>
+                <label htmlFor="email">Email&nbsp;:</label>
                 <input
                   type="text"
                   id="email"
@@ -102,7 +100,7 @@ const Login = () => {
                   value={email}
                   required
                 />
-                <label htmlFor="password">Mot de passe :</label>
+                <label htmlFor="password">Mot de passe&nbsp;:</label>
                 <input
                   type="password"
                   id="password"

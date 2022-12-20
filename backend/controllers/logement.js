@@ -142,10 +142,6 @@ exports.voteLogement = (req, res, next) => {
     const usersRatings = logement.usersRatings
     // console.log(usersRatings)
 
-    // ObjectIds des votes
-    const ratedsIds = usersRatings.map(function (rId) {return rId._id});
-    // console.log(ratedsIds)
-
     // On compare les userId pour metre à jour le vote d'un user qui avait déjà voté ou ajouter un nouveau vote user. 
     const findUserId = (users, userId) => users.find(user => user.userId === userId)
     const users = logement.usersRatings
@@ -190,7 +186,7 @@ exports.voteLogement = (req, res, next) => {
           },
        }
       )
-    // Et en dernier on veut mettre a jour la note moyenne en prenant en compte bien sur la nouvelle note
+    // Et en dernier on veut mettre a jour la note moyenne en prenant en compte la nouvelle note
     } 
     promise.then(() => {
       Logement.findOne({_id: req.params.id})

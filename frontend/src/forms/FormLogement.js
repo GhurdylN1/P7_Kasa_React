@@ -12,7 +12,6 @@ const LOGEMENT_POST_URL = '/api/logements'
 
 const FormLogement = () => {
   const { auth } = useContext(AuthContext)
-  // console.log(auth.userId, auth.token)
 
   const userId = auth.userId
 
@@ -46,9 +45,7 @@ const FormLogement = () => {
     e.preventDefault()
     let formData = new FormData()
     let cover = document.getElementById('image').files[0]
-    console.log(cover)
     let pictures = document.getElementById('pictures').files
-    console.log(pictures)
 
     formData.append('image', cover)
 
@@ -124,7 +121,7 @@ const FormLogement = () => {
                 </Link>
               </p>
               <form onSubmit={handleSubmit}>
-                <label htmlFor="text">Titre :</label>
+                <label htmlFor="text">Titre&nbsp;:</label>
                 <input
                   type="text"
                   id="title"
@@ -134,7 +131,7 @@ const FormLogement = () => {
                   value={title}
                   required
                 />
-                <label htmlFor="text">Lieu :</label>
+                <label htmlFor="text">Lieu&nbsp;:</label>
                 <input
                   type="text"
                   id="location"
@@ -144,7 +141,7 @@ const FormLogement = () => {
                   value={location}
                   required
                 />
-                <label htmlFor="text">Description :</label>
+                <label htmlFor="text">Description&nbsp;:</label>
                 <textarea
                   type="text"
                   id="description"
@@ -154,7 +151,7 @@ const FormLogement = () => {
                   value={description}
                   required
                 />
-                <label htmlFor="text">Équipements :</label>
+                <label htmlFor="text">Équipements&nbsp;:</label>
                 <input
                   type="text"
                   id="équipements"
@@ -177,7 +174,7 @@ const FormLogement = () => {
                 >
                   ⚠ Merci de séparer les differents équipements par des virgules
                 </p>
-                <label htmlFor="text">Tags :</label>
+                <label htmlFor="text">Tags&nbsp;:</label>
                 <input
                   type="text"
                   id="tags"
@@ -200,7 +197,7 @@ const FormLogement = () => {
                 >
                   ⚠ Merci de séparer les differents tags par des virgules
                 </p>
-                <label htmlFor="image">Image de présentation:</label>
+                <label htmlFor="image">Image de présentation&nbsp;:</label>
                 <input
                   accept="image/png, image/jpeg, image/jpg"
                   name="image"
@@ -209,7 +206,9 @@ const FormLogement = () => {
                   ref={userRef}
                   required
                 />
-                <label htmlFor="image">Photos de votre logement (8 max):</label>
+                <label htmlFor="image">
+                  Photos de votre logement (8 max)&nbsp;:
+                </label>
                 <input
                   accept="image/png, image/jpeg, image/jpg"
                   multiple

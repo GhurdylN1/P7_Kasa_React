@@ -95,9 +95,7 @@ const UpdateFormLogement = () => {
     e.preventDefault()
     let formData = new FormData()
     let cover = document.getElementById('image').files[0]
-    console.log(cover)
     let pictures = document.getElementById('pictures').files
-    console.log(pictures)
 
     if (cover) {
       formData.append('image', cover)
@@ -179,7 +177,7 @@ const UpdateFormLogement = () => {
                     </Link>
                   </p>
                   <form onSubmit={handleSubmit}>
-                    <label htmlFor="text">Titre :</label>
+                    <label htmlFor="text">Titre&nbsp;:</label>
                     <input
                       type="text"
                       id="title"
@@ -189,7 +187,7 @@ const UpdateFormLogement = () => {
                       value={title}
                       required
                     />
-                    <label htmlFor="text">Lieu :</label>
+                    <label htmlFor="text">Lieu&nbsp;:</label>
                     <input
                       type="text"
                       id="location"
@@ -199,7 +197,7 @@ const UpdateFormLogement = () => {
                       value={location}
                       required
                     />
-                    <label htmlFor="text">Description :</label>
+                    <label htmlFor="text">Description&nbsp;:</label>
                     <textarea
                       type="text"
                       id="description"
@@ -209,7 +207,7 @@ const UpdateFormLogement = () => {
                       value={description}
                       required
                     />
-                    <label htmlFor="text">Équipements :</label>
+                    <label htmlFor="text">Équipements&nbsp;:</label>
                     <input
                       type="text"
                       id="équipements"
@@ -235,7 +233,7 @@ const UpdateFormLogement = () => {
                       ⚠ Merci de séparer les differents équipements par des
                       virgules
                     </p>
-                    <label htmlFor="text">Tags :</label>
+                    <label htmlFor="text">Tags&nbsp;:</label>
                     <input
                       type="text"
                       id="tags"
@@ -268,7 +266,7 @@ const UpdateFormLogement = () => {
                       required
                     />
                     <label htmlFor="image">
-                      Photos de votre logement (8 max) :
+                      Photos de votre logement (8 max)&nbsp;:
                     </label>
                     <input
                       accept="image/png, image/jpeg, image/jpg"

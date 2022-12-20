@@ -120,7 +120,7 @@ const SignUp = () => {
               <h1>Créer un compte</h1>
               <form onSubmit={handleSubmit}>
                 <label htmlFor="email">
-                  Email :
+                  Email&nbsp;:
                   <span
                     className={validEMail ? SignUpCSS.valid : SignUpCSS.hide}
                   >
@@ -159,7 +159,7 @@ const SignUp = () => {
                 </p>
 
                 <label htmlFor="username">
-                  Nom d'utilisateur :
+                  Nom d'utilisateur&nbsp;:
                   <span
                     className={
                       valideUserName ? SignUpCSS.valid : SignUpCSS.hide
@@ -209,7 +209,7 @@ const SignUp = () => {
                 </p>
 
                 <label htmlFor="password">
-                  Mot de passe :
+                  Mot de passe&nbsp;:
                   <span
                     className={validPassword ? SignUpCSS.valid : SignUpCSS.hide}
                   >
@@ -259,7 +259,7 @@ const SignUp = () => {
                 </p>
 
                 <label htmlFor="confirm_password">
-                  Confirmer le mot de passe :
+                  Confirmer le mot de passe&nbsp;:
                   <span
                     className={
                       validMatch && matchPassword

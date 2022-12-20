@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import uselodgingsService from '../../services/lodgingsService'
-import CssCard from '../../components/Cards/Cards.module.css'
+import CssCard from '../../components/Card/Card.module.css'
 import Card from '../Card/Card'
 
 function GetUserLogements() {
@@ -16,8 +16,8 @@ function GetUserLogements() {
     const UserLogements = async () => {
       try {
         // const response = await api.get('/api/logements')
-        const response = await lodgingsService.getByUserID(urlUserId)
-        setUserLogements(response)
+        const logementUser = await lodgingsService.getByUserID(urlUserId)
+        setUserLogements(logementUser)
       } catch (err) {
         if (err.response) {
           // not in the 200 response range
