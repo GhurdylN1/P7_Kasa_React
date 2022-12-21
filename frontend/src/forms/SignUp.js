@@ -311,7 +311,7 @@ const SignUp = () => {
               <p>
                 Vous avez déjà un compte ?<br />
                 <span className={SignUpCSS.line}>
-                  <Link className={SignUpCSS.aReg} to="/P7_Kasa_React/">
+                  <Link className={SignUpCSS.aReg} to="/">
                     {' '}
                     Se connecter{' '}
                   </Link>

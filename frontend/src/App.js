@@ -17,25 +17,22 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/P7_Kasa_React/signup/" element={<SignUp />} />
-        <Route path="/P7_Kasa_React/formlogement" element={<FormLogement />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/signup/" element={<SignUp />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/lodgings/:id" element={<Lodging />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/formprofile/:id" element={<FormProfile />} />
+        <Route path="/formlogement" element={<FormLogement />} />
         <Route
-          path="/P7_Kasa_React/updateformlogement/:id"
+          path="/updateformlogement/:id"
           element={<UpdateFormLogement />}
         />
         <Route
-          path="/P7_Kasa_React/deleteformlogement/:id"
+          path="/deleteformlogement/:id"
           element={<DeleteFormLogement />}
         />
-        <Route
-          path="/P7_Kasa_React/formprofile/:id"
-          element={<FormProfile />}
-        />
-        <Route path="/P7_Kasa_React/" element={<Login />} />
-        <Route path="/P7_Kasa_React/home" element={<Home />} />
-        <Route path="/P7_Kasa_React/lodgings/:id" element={<Lodging />} />
-        <Route path="/P7_Kasa_React/profile/:id" element={<Profile />} />
-        <Route path="/P7_Kasa_React/about" element={<About />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
     </div>

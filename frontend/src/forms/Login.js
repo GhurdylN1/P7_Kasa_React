@@ -69,10 +69,7 @@ const Login = () => {
             <div className={LoginCSS.sectionSignUp}>
               <h1>Connexion réussie !</h1>
               <p>
-                <Link
-                  className={LoginCSS.aReg}
-                  to={`/P7_Kasa_React/profile/${userId}`}
-                >
+                <Link className={LoginCSS.aReg} to={`/profile/${userId}`}>
                   Aller sur votre profil
                 </Link>
               </p>
@@ -113,7 +110,7 @@ const Login = () => {
               <p>
                 Vous n'avez pas encore de compte ?<br />
                 <span className={LoginCSS.line}>
-                  <Link className={LoginCSS.aReg} to="/P7_Kasa_React/signup/">
+                  <Link className={LoginCSS.aReg} to="/signup/">
                     {' '}
                     Créer un compte{' '}
                   </Link>

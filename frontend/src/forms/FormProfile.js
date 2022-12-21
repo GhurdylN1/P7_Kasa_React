@@ -115,7 +115,7 @@ const FormProfile = () => {
                   <p>
                     <Link
                       className={ProfileCSS.aReg}
-                      to={`/P7_Kasa_React/profile/${auth.userId}`}
+                      to={`/profile/${auth.userId}`}
                     >
                       {' '}
                       Revenir au profil{' '}
@@ -139,7 +139,7 @@ const FormProfile = () => {
                   <p>
                     <Link
                       className={ProfileCSS.aReg}
-                      to={`/P7_Kasa_React/profile/${auth.userId}`}
+                      to={`/profile/${auth.userId}`}
                     >
                       {' '}
                       Revenir au profil{' '}

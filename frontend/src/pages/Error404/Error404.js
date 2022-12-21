@@ -14,7 +14,7 @@ const NotFound = () => {
           <p className={Css404.p404}>
             Oups ! La page que vous demandez n'existe pas.
           </p>
-          <Link to="/P7_Kasa_React/" className={Css404.a404}>
+          <Link to="/home" className={Css404.a404}>
             Retourner sur la page d'accueil
           </Link>
         </div>

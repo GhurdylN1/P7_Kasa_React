@@ -211,13 +211,13 @@ function Lodging() {
                 <section>
                   {auth.userId === idUser && (
                     <div className={CssLodgings.updateLogement}>
-                      <Link to={`/P7_Kasa_React/updateformlogement/${urlId}`}>
+                      <Link to={`/updateformlogement/${urlId}`}>
                         <p className={CssLodgings.updateLinks}>
                           Modifier le logement
                         </p>
                       </Link>
                       <br />
-                      <Link to={`/P7_Kasa_React/deleteformlogement/${urlId}`}>
+                      <Link to={`/deleteformlogement/${urlId}`}>
                         <p className={CssLodgings.updateLinks}>
                           Supprimer le logement
                         </p>
@@ -238,7 +238,7 @@ function Lodging() {
               </div>
               <div className={CssLodgings.rightContainer}>
                 <Link
-                  to={`/P7_Kasa_React/profile/${dataUser._id}`}
+                  to={`/profile/${dataUser._id}`}
                   className={CssLodgings.hostInfos}
                 >
                   <div className={CssLodgings.hostName}>
@@ -343,7 +343,7 @@ function Lodging() {
                   })}
                   <div className={CssLodgings.userReviewContainer}>
                     <Link
-                      to={`/P7_Kasa_React/profile/${review.userId}`}
+                      to={`/profile/${review.userId}`}
                       className={CssLodgings.reviewUserLink}
                     >
                       <div className={CssLodgings.pictReviewContainer}>

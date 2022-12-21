@@ -22,7 +22,7 @@ function Header() {
   const urlId = useParams().id // récupération de l'id dans l'url
 
   const path = useLocation().pathname // on utilise ce hook pour savoir ou l'on se trouve
-  const location = path.split('/P7_Kasa_React')[1]
+  const location = path
 
   const [showBurger, setShowBurger] = useState(false)
 
@@ -52,31 +52,27 @@ function Header() {
             }`}
           >
             <Link
-              to="/P7_Kasa_React/home"
+              to="/home"
               className={CssHeader.navHome}
               onClick={handleShowBurger}
             >
               Accueil
             </Link>
             <Link
-              to="/P7_Kasa_React/about"
+              to="/about"
               className={CssHeader.navAbout}
               onClick={handleShowBurger}
             >
               À propos
             </Link>
             <Link
-              to={`/P7_Kasa_React/profile/${auth.userId}`}
+              to={`/profile/${auth.userId}`}
               className={CssHeader.navHome}
               onClick={handleShowBurger}
             >
               Mon profil
             </Link>
-            <Link
-              to="/P7_Kasa_React"
-              className={CssHeader.navHome}
-              onClick={signOut}
-            >
+            <Link to="/" className={CssHeader.navHome} onClick={signOut}>
               Se deconnecter
             </Link>
           </nav>
@@ -96,14 +92,14 @@ function Header() {
             }`}
           >
             <Link
-              to="/P7_Kasa_React/home"
+              to="/home"
               className={CssHeader.navHome}
               onClick={handleShowBurger}
             >
               Accueil
             </Link>
             <Link
-              to="/P7_Kasa_React/about"
+              to="/about"
               className={CssHeader.navAbout}
               onClick={handleShowBurger}
             >
@@ -125,18 +121,18 @@ function Header() {
               showBurger ? CssHeader.showBurger : CssHeader.hideNav
             }`}
           >
-            <Link to="/P7_Kasa_React" className={CssHeader.navHome}>
+            <Link to="/" className={CssHeader.navHome}>
               Se connecter
             </Link>
             <Link
-              to="/P7_Kasa_React/home"
+              to="/home"
               className={CssHeader.navHome}
               onClick={handleShowBurger}
             >
               Accueil
             </Link>
             <Link
-              to="/P7_Kasa_React/about"
+              to="/about"
               className={CssHeader.navAbout}
               onClick={handleShowBurger}
             >

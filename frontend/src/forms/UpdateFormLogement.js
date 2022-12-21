@@ -146,7 +146,7 @@ const UpdateFormLogement = () => {
                   <p>
                     <Link
                       className={UpdateLogCSS.aReg}
-                      to={`/P7_Kasa_React/profile/${auth.userId}`}
+                      to={`/profile/${auth.userId}`}
                     >
                       {' '}
                       Revenir au profil{' '}
@@ -170,7 +170,7 @@ const UpdateFormLogement = () => {
                   <p>
                     <Link
                       className={UpdateLogCSS.aReg}
-                      to={`/P7_Kasa_React/lodgings/${urlId}`}
+                      to={`/lodgings/${urlId}`}
                     >
                       {' '}
                       Revenir au logement{' '}

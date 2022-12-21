@@ -127,11 +127,11 @@ function UserProfile() {
           {urlUserId === auth.userId && (
             <>
               <br />
-              <Link to="/P7_Kasa_React/formlogement">
+              <Link to="/formlogement">
                 <p className={CssProfile.updateLinks}>Créer un logement</p>
               </Link>
               <br />
-              <Link to={`/P7_Kasa_React/formprofile/${auth.userId}`}>
+              <Link to={`/formprofile/${auth.userId}`}>
                 <p className={CssProfile.updateLinks}>Éditer votre profil</p>
               </Link>
             </>
