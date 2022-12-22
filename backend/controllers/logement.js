@@ -42,13 +42,13 @@ exports.createLogement = (req, res, next) => {
   
           // suppression de l'ancienne image
           fs.unlink(`images/${filename}`, (error) => {
-            if(error) throw error;
+            // if(error) throw error;
           })
   
           // suppression des "pictures"
           for (const element of picturesArray) {
-            fs.unlink(`images/${element.split('http://localhost:5000/images/')[1]}`, (error) => {
-              if(error) throw error;
+            fs.unlink(`images/${element.split('https://marasco-antony-kasa-api.onrender.com/images/')[1]}`, (error) => {
+              // if(error) throw error;
             })
           }
         }
@@ -83,8 +83,8 @@ exports.createLogement = (req, res, next) => {
                 const filename = logement.cover.split('/images/')[1];
                 const picturesArray = logement.pictures
                 for (const element of picturesArray) {
-                  fs.unlink(`images/${element.split('http://localhost:5000/images/')[1]}`, (error) => {
-                    if(error) throw error;
+                  fs.unlink(`images/${element.split('https://marasco-antony-kasa-api.onrender.com/images/')[1]}`, (error) => {
+                    // if(error) throw error;
                   })
                 }
                 fs.unlink(`images/${filename}`, () => {

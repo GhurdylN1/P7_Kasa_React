@@ -85,7 +85,7 @@ const Login = () => {
               >
                 {errMsg}
               </p>
-              <h1>Se Connecter</h1>
+              <h1>Se connecter</h1>
               <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email&nbsp;:</label>
                 <input
