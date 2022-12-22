@@ -21,7 +21,7 @@ const path = require('path');
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 const corsOptions ={
-  origin:'http://localhost:3000', 
+  origin:'https://marasco-antony-kasa.onrender.com/', 
   credentials:true,
   optionSuccessStatus:200
 }
