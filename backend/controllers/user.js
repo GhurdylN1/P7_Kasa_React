@@ -69,7 +69,7 @@ exports.upateUserProfile = (req, res, next) => {
     
           // suppression de l'ancienne image
           fs.unlink(`images/${filename}`, (error) => {
-            if(error) throw error;
+            // if(error) throw error;
           })
           }
         })
