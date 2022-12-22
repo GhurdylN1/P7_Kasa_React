@@ -20,25 +20,25 @@ const path = require('path');
 
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
-// const corsOptions ={
-//   origin:'https://marasco-antony-kasa.onrender.com/', 
-//   credentials:true,
-//   optionSuccessStatus:200
-// }
-// app.use(cors(corsOptions));
+const corsOptions ={
+  origin:'http://localhost:3000', 
+  credentials:true,
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://marasco-antony-kasa.onrender.com');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
-  });
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', 'https://marasco-antony-kasa.onrender.com');
+//     res.setHeader('Access-Control-Allow-Credentials', true);
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+//     next();
+//   });
 
 app.use(express.json());
 
 app.use('/api/logements', logementRoutes);
-app.use('/api/users', userRoutes); // test axios
+app.use('/api/users', userRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
